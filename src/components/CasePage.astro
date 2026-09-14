@@ -1,0 +1,820 @@
+---
+import { projects, type Project, type Language } from '../data/projects';
+import { Image } from 'astro:assets';
+
+interface Props {
+  project: Project;
+  lang?: Language;
+}
+const { project, lang = 'es' } = Astro.props;
+const en = lang === 'en';
+const next = projects[(projects.findIndex((entry) => entry.slug === project.slug) + 1) % projects.length];
+const workRoot = en ? '/en/work/' : '/proyectos/';
+const contactPath = en ? '/en/contact/' : '/contacto/';
+const homeWorkPath = en ? '/en/#proyectos' : '/#proyectos';
+---
+
+<article class:list={['case-page', `case-${project.slug}`]}>
+  <header class="case-heading">
+    <a class="back-link" href={homeWorkPath}>
+      <span aria-hidden="true">↖</span>
+      {en ? 'Selected work' : 'Proyectos seleccionados'}
+    </a>
+    <div class="case-meta">
+      <span>{project.sector[lang]}</span>
+      <span class="case-status">
+        <i aria-hidden="true"></i>
+        {project.status[lang]}
+      </span>
+    </div>
+    <h1>
+      {project.title}
+      <span class="title-dot" aria-hidden="true">
+        .
+      </span>
+    </h1>
+    <div class="case-intro-row">
+      <p class="case-tagline">{project.summary[lang]}</p>
+      <p class="case-intro">{project.intro[lang]}</p>
+    </div>
+  </header>
+
+  <figure class="case-cover" data-reveal>
+    <div class="browser-frame">
+      <div class="browser-bar" aria-hidden="true">
+        <span class="browser-dots">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+        <span>{project.client}</span>
+        <span class="browser-symbol">↗</span>
+      </div>
+      <div class="cover-image">
+        <Image
+          src={project.image}
+          alt={
+            en
+              ? `${project.client} website, desktop design`
+              : `Diseño de la web de ${project.client} en escritorio`
+          }
+          widths={[720, 1080, 1440]}
+          sizes="96vw"
+          fetchpriority="high"
+          data-case-image
+        />
+      </div>
+    </div>
+    <figcaption>
+      <span>{en ? 'Design & development / Thexify' : 'Diseño y desarrollo / Thexify'}</span>
+      <span>{en ? 'Actual project interface' : 'Interfaz real del proyecto'}</span>
+    </figcaption>
+  </figure>
+
+  <section class="case-story" aria-labelledby="case-context" data-reveal>
+    <div class="story-label">
+      <span>01 /</span>
+      <h2 id="case-context">{en ? 'The starting point' : 'El punto de partida'}</h2>
+    </div>
+    <div class="story-copy">
+      <p>{project.context[lang]}</p>
+    </div>
+  </section>
+
+  <section class="case-story solution-story" aria-labelledby="case-solution" data-reveal>
+    <div class="story-label">
+      <span>02 /</span>
+      <h2 id="case-solution">{en ? 'The approach' : 'La propuesta'}</h2>
+    </div>
+    <div class="story-copy">
+      <p>{project.solution[lang]}</p>
+    </div>
+  </section>
+
+  {project.mobileImage && (
+    <section class="mobile-study" aria-labelledby="mobile-title">
+      <div class="mobile-study-copy" data-reveal>
+        <p class="small-label">{en ? 'The experience, in your hands' : 'La experiencia, en tus manos'}</p>
+        <h2 id="mobile-title">{en ? 'Every detail.\nEvery screen.' : 'Cada detalle.\nCada pantalla.'}</h2>
+        <p>
+          {en
+            ? 'The same sense of place, in a different format. Photography, itineraries and contact designed to travel with you.'
+            : 'La misma sensación de estar ahí, en otro formato. Fotografía, itinerarios y contacto pensados para acompañarte.'}
+        </p>
+      </div>
+      <div class="mobile-composition" data-reveal>
+        <span class="mobile-orbit" aria-hidden="true"></span>
+        <div class="phone-frame">
+          <div class="phone-camera" aria-hidden="true"></div>
+          <Image
+            src={project.mobileImage}
+            alt={en ? `${project.client} mobile website` : `Web de ${project.client} en un teléfono móvil`}
+            widths={[232, 390]}
+            sizes="255px"
+            loading="lazy"
+          />
+        </div>
+        <span class="device-caption" aria-hidden="true">
+          {en ? 'Made to explore' : 'Hecha para explorar'}
+          <span>↗</span>
+        </span>
+      </div>
+    </section>
+  )}
+
+  <section class="case-deliverables" aria-labelledby="case-scope" data-reveal>
+    <div class="story-label">
+      <span>03 /</span>
+      <h2 id="case-scope">{en ? 'What we worked on' : 'Qué trabajamos'}</h2>
+    </div>
+    <div class="deliverables-content">
+      <ul>
+        {project.deliverables[lang].map((item, index) => (
+          <li>
+            <span class="deliverable-number">{String(index + 1).padStart(2, '0')}</span>
+            <span>{item}</span>
+            <span class="deliverable-check" aria-hidden="true">
+              ↗
+            </span>
+          </li>
+        ))}
+      </ul>
+      {project.url ? (
+        <a class="case-external-link" href={project.url} target="_blank" rel="noopener noreferrer">
+          {en ? 'Visit the website' : 'Visitar el sitio web'}
+          <span aria-hidden="true">↗</span>
+          <span class="sr-only">{en ? ' (opens in a new tab)' : ' (abre en una pestaña nueva)'}</span>
+        </a>
+      ) : (
+        <p class="development-note">
+          <span aria-hidden="true"></span>
+          {en
+            ? 'This project is in development. The screens shown document the current design.'
+            : 'Este proyecto está en desarrollo. Las pantallas muestran el diseño actual.'}
+        </p>
+      )}
+    </div>
+  </section>
+
+  <section class="case-contact" aria-labelledby="case-contact-title">
+    <p>{en ? 'Your business has a story of its own.' : 'Tu negocio tiene su propia historia.'}</p>
+    <a href={contactPath}>
+      <h2 id="case-contact-title">{en ? 'Let’s build yours.' : 'Construyamos la tuya.'}</h2>
+      <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+
+  <a
+    class="next-case"
+    href={`${workRoot}${next.slug}/`}
+    aria-label={en ? `Next project: ${next.title}` : `Siguiente proyecto: ${next.title}`}
+  >
+    <div class="next-case-info">
+      <span class="small-label">{en ? 'Next project' : 'Siguiente proyecto'}</span>
+      <span class="next-title">
+        {next.title}
+        <span aria-hidden="true">↗</span>
+      </span>
+      <span class="next-sector">{next.sector[lang]}</span>
+    </div>
+    <div class="next-image">
+      <Image
+        src={next.image}
+        alt=""
+        widths={[480, 640, 900]}
+        sizes="(max-width: 640px) 100vw, 43vw"
+        loading="lazy"
+      />
+    </div>
+  </a>
+</article>
+
+<style>
+  .case-page {
+    color: var(--paper);
+    padding-top: 130px;
+  }
+  .case-heading,
+  .case-story,
+  .case-deliverables,
+  .case-contact,
+  .next-case {
+    margin-left: 4.4vw;
+    margin-right: 4.4vw;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    padding: 12px 0;
+    transition: color 0.2s;
+  }
+  .back-link:hover {
+    color: var(--green);
+  }
+  .back-link > span {
+    font-size: 21px;
+  }
+  .case-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    margin-top: 58px;
+    font-size: 11px;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+  .case-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--muted);
+  }
+  .case-status > i {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+  h1 {
+    font-size: clamp(67px, 10.6vw, 165px);
+    line-height: 1.02;
+    font-weight: 500;
+    letter-spacing: -0.07em;
+    margin: 25px 0 42px;
+    max-width: 1400px;
+  }
+  .title-dot {
+    color: var(--green);
+  }
+  .case-intro-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10vw;
+    padding-bottom: 72px;
+  }
+  .case-tagline {
+    margin: 0;
+    font-size: clamp(20px, 2vw, 28px);
+    max-width: 400px;
+    line-height: 1.4;
+    letter-spacing: -0.04em;
+  }
+  .case-intro {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin: 0;
+    max-width: 550px;
+  }
+  .case-cover {
+    margin: 0 2vw;
+    padding: 5vw 6vw 24px;
+    background: #b6beb2;
+    overflow: hidden;
+  }
+  .case-sunsu-cleaning .case-cover {
+    background: #e5b5bc;
+  }
+  .browser-frame {
+    border-radius: 7px 7px 0 0;
+    background: #f4f4ee;
+    overflow: hidden;
+    box-shadow: 0 28px 80px rgba(9, 19, 14, 0.18);
+  }
+  .browser-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 13px 20px;
+    font-size: 11px;
+    color: #626660;
+  }
+  .browser-dots {
+    display: flex;
+    gap: 5px;
+  }
+  .browser-dots i {
+    background: #c6c9c1;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+  .browser-symbol {
+    justify-self: end;
+    font-size: 13px;
+  }
+  .cover-image {
+    overflow: hidden;
+  }
+  .cover-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 25px;
+    color: #364332;
+    text-transform: uppercase;
+    letter-spacing: 0.065em;
+    font-size: 11px;
+  }
+  .case-sunsu-cleaning figcaption {
+    color: #67454a;
+  }
+  .case-story,
+  .case-deliverables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10vw;
+  }
+  .case-story {
+    padding-top: 90px;
+    padding-bottom: 60px;
+  }
+  .solution-story {
+    padding-top: 50px;
+    border-top: 1px solid var(--line);
+    padding-bottom: 110px;
+  }
+  .story-label {
+    display: flex;
+    align-items: baseline;
+    gap: 26px;
+  }
+  .story-label > span {
+    color: var(--green);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .story-label h2 {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 0;
+  }
+  .story-copy p {
+    font-size: clamp(20px, 1.9vw, 28px);
+    margin: 0;
+    letter-spacing: -0.025em;
+    line-height: 1.6;
+    max-width: 670px;
+  }
+  .mobile-study {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5vw;
+    background: #dfe3d8;
+    color: #17251b;
+    padding: 90px 10vw;
+    align-items: center;
+    overflow: hidden;
+  }
+  .small-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    line-height: 1.7;
+  }
+  .mobile-study-copy h2 {
+    white-space: pre-line;
+    font-size: clamp(45px, 5.3vw, 80px);
+    line-height: 1.07;
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    margin: 28px 0;
+  }
+  .mobile-study-copy > p:last-child {
+    max-width: 340px;
+    line-height: 1.75;
+    font-size: 15px;
+    color: #52614f;
+  }
+  .mobile-composition {
+    min-width: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 625px;
+  }
+  .phone-frame {
+    position: relative;
+    width: 255px;
+    max-width: 80%;
+    background: #20221d;
+    padding: 7px;
+    border-radius: 39px;
+    border: 1px solid #454d40;
+    box-shadow:
+      15px 32px 50px rgba(27, 46, 28, 0.2),
+      inset 0 0 0 2px #606859;
+    transform: rotate(6deg);
+    overflow: hidden;
+  }
+  .phone-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 32px;
+  }
+  .phone-camera {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 15px;
+    width: 75px;
+    height: 20px;
+    border-radius: 30px;
+    background: #20221d;
+    z-index: 1;
+  }
+  .mobile-orbit {
+    position: absolute;
+    width: 440px;
+    height: 440px;
+    border: 1px solid #a0ad97;
+    border-radius: 50%;
+    transform: rotate(-23deg) scaleX(1.25);
+  }
+  .device-caption {
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .device-caption > span {
+    font-size: 28px;
+  }
+  .case-deliverables {
+    padding-top: 100px;
+    padding-bottom: 110px;
+  }
+  .deliverables-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  .deliverables-content li {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 23px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+  .deliverable-number {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+  .deliverable-check {
+    margin-left: auto;
+    font-size: 19px;
+    color: var(--green);
+  }
+  .case-external-link {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 48px;
+    border-radius: var(--radius-pill);
+    background: var(--green);
+    color: var(--ink);
+    padding: 18px 24px;
+    text-decoration: none;
+    margin-top: 38px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .case-external-link:hover {
+    background: var(--paper);
+  }
+  .case-external-link > span:first-child {
+    font-size: 23px;
+  }
+  .development-note {
+    display: flex;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 30px 0 0;
+    max-width: 430px;
+  }
+  .development-note > span {
+    background: var(--green);
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+  .case-contact {
+    border-top: 1px solid var(--line);
+    padding: 65px 0 85px;
+  }
+  .case-contact > p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 26px;
+  }
+  .case-contact > a {
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    text-decoration: none;
+  }
+  .case-contact h2 {
+    font-size: clamp(37px, 6.2vw, 94px);
+    letter-spacing: -0.06em;
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .case-contact > a > span {
+    font-size: clamp(50px, 7vw, 100px);
+    color: var(--green);
+    line-height: 1;
+    transition: transform 0.25s;
+  }
+  .case-contact > a:hover > span {
+    transform: translate(5px, -5px);
+  }
+  .next-case {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr;
+    gap: 8vw;
+    border-top: 1px solid var(--line);
+    padding: 50px 0 85px;
+    color: var(--paper);
+    text-decoration: none;
+    align-items: center;
+  }
+  .next-case-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .next-case-info > .small-label {
+    color: var(--muted);
+    margin-bottom: 25px;
+  }
+  .next-title {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: clamp(28px, 3.3vw, 52px);
+    line-height: 1.2;
+    letter-spacing: -0.045em;
+  }
+  .next-title > span {
+    color: var(--green);
+  }
+  .next-sector {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 18px;
+  }
+  .next-image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .next-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .next-case:hover .next-image img {
+    transform: scale(1.035);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  @media (min-width: 1800px) {
+    .case-heading,
+    .case-story,
+    .case-deliverables,
+    .case-contact,
+    .next-case {
+      margin-left: max(4.4vw, calc((100vw - 1640px) / 2));
+      margin-right: max(4.4vw, calc((100vw - 1640px) / 2));
+    }
+  }
+  @media (max-width: 1000px) {
+    .mobile-study {
+      padding: 70px 6vw;
+    }
+    .mobile-composition {
+      min-height: 600px;
+    }
+    .mobile-orbit {
+      width: 330px;
+      height: 330px;
+    }
+    .case-story,
+    .case-deliverables,
+    .case-intro-row {
+      gap: 6vw;
+      grid-template-columns: 0.75fr 1.25fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .case-page {
+      padding-top: 105px;
+    }
+    .case-heading,
+    .case-story,
+    .case-deliverables,
+    .case-contact,
+    .next-case {
+      margin-left: 22px;
+      margin-right: 22px;
+    }
+    .case-meta {
+      margin-top: 30px;
+      gap: 16px;
+      align-items: start;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+    .case-status {
+      flex-shrink: 0;
+    }
+    h1 {
+      font-size: clamp(42px, 13.5vw, 86px);
+      margin: 24px 0 30px;
+      line-height: 1.04;
+      letter-spacing: -0.065em;
+      overflow-wrap: normal;
+    }
+    .case-intro-row {
+      grid-template-columns: 1fr;
+      gap: 23px;
+      padding-bottom: 40px;
+    }
+    .case-tagline {
+      font-size: 23px;
+      max-width: 300px;
+    }
+    .case-intro {
+      font-size: 14px;
+    }
+    .case-cover {
+      margin: 0;
+      padding: 30px 18px 19px;
+    }
+    .browser-bar {
+      padding: 9px 12px;
+      font-size: 10px;
+    }
+    .browser-dots {
+      gap: 3px;
+    }
+    .browser-dots i {
+      width: 3px;
+      height: 3px;
+    }
+    figcaption {
+      font-size: 10px;
+      line-height: 1.6;
+      margin-top: 18px;
+      gap: 18px;
+    }
+    figcaption > span {
+      max-width: 46%;
+    }
+    figcaption > span:last-child {
+      text-align: right;
+    }
+    .case-story,
+    .case-deliverables {
+      grid-template-columns: 1fr;
+      gap: 25px;
+      padding-top: 55px;
+      padding-bottom: 45px;
+    }
+    .solution-story {
+      padding-top: 40px;
+      padding-bottom: 60px;
+    }
+    .story-label {
+      gap: 18px;
+    }
+    .story-label h2 {
+      font-size: 13px;
+    }
+    .story-label > span {
+      font-size: 10px;
+    }
+    .story-copy p {
+      font-size: 21px;
+      line-height: 1.6;
+    }
+    .mobile-study {
+      grid-template-columns: 1fr;
+      gap: 25px;
+      padding: 55px 30px 42px;
+    }
+    .mobile-study-copy h2 {
+      font-size: 49px;
+      margin: 20px 0;
+    }
+    .mobile-composition {
+      min-height: 580px;
+      padding: 20px 0 40px;
+    }
+    .phone-frame {
+      width: 232px;
+    }
+    .mobile-orbit {
+      width: 285px;
+      height: 285px;
+    }
+    .device-caption {
+      right: 0;
+      font-size: 10px;
+    }
+    .case-deliverables {
+      padding-top: 60px;
+      padding-bottom: 65px;
+    }
+    .deliverables-content li {
+      font-size: 16px;
+      padding: 21px 0;
+      gap: 16px;
+    }
+    .case-contact {
+      padding: 42px 0 50px;
+    }
+    .case-contact > p {
+      font-size: 11px;
+      margin-bottom: 24px;
+    }
+    .case-contact > a {
+      gap: 20px;
+      align-items: flex-end;
+    }
+    .case-contact h2 {
+      font-size: clamp(30px, 9vw, 43px);
+    }
+    .case-contact > a > span {
+      font-size: 50px;
+    }
+    .next-case {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 40px 0 60px;
+    }
+    .next-title {
+      font-size: clamp(25px, 7vw, 32px);
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .next-case-info > .small-label {
+      margin-bottom: 20px;
+    }
+    .next-sector {
+      margin-top: 12px;
+    }
+    .next-image {
+      aspect-ratio: 16/10;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .back-link,
+    .case-external-link,
+    .case-contact > a > span,
+    .next-image img {
+      transition: none;
+    }
+  }
+</style>

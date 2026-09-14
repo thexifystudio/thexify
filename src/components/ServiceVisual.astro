@@ -1,0 +1,83 @@
+---
+import Mark from './Mark.astro';
+import GraphicIcon from './GraphicIcon.astro';
+import type { ServiceKey } from '../data/pricing';
+import { Image } from 'astro:assets';
+import cananguenoSmall from '../assets/canangueno-small.webp';
+
+interface Props {
+  kind: ServiceKey;
+  lang: 'es' | 'en';
+}
+const { kind, lang } = Astro.props;
+const en = lang === 'en';
+---
+
+<div class:list={['service-visual', `service-visual--${kind}`]} data-graphic>
+  <div class="visual-grid" aria-hidden="true"></div>
+  {kind === 'website' ? (
+    <>
+      <div class="visual-window real-site" data-graphic-layer>
+        <div class="visual-toolbar">
+          <span>canangueno lodge</span>
+          <span aria-hidden="true">↗</span>
+        </div>
+        <Image
+          src={cananguenoSmall}
+          widths={[360, 520, 720]}
+          sizes="(max-width: 900px) 80vw, 29vw"
+          loading="lazy"
+          alt={
+            en ? 'Thexify website design for Canangueno Lodge' : 'Diseño web de Thexify para Canangueno Lodge'
+          }
+        />
+      </div>
+      <span class="visual-caption">{en ? 'A real Thexify project' : 'Un proyecto real de Thexify'}</span>
+    </>
+  ) : kind === 'webapp' ? (
+    <>
+      <div class="visual-window panel-demo" data-graphic-layer aria-hidden="true">
+        <div class="visual-toolbar">
+          <Mark />
+          <span>{en ? 'Your workspace' : 'Tu espacio de trabajo'}</span>
+        </div>
+        <div class="panel-content">
+          <div class="panel-nav">
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+          <div class="panel-rows">
+            <strong>{en ? 'Content' : 'Contenido'}</strong>
+            {(en ? ['Pages', 'Catalog', 'Your team'] : ['Páginas', 'Catálogo', 'Tu equipo']).map((label) => (
+              <div data-graphic-item>
+                <span>{label}</span>
+                <GraphicIcon name="check" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <span class="visual-caption">{en ? 'Dashboard concept' : 'Concepto de panel'}</span>
+    </>
+  ) : (
+    <>
+      <div class="visual-window shop-demo" data-graphic-layer aria-hidden="true">
+        <div class="visual-toolbar">
+          <Mark />
+          <span>{en ? 'Your online store' : 'Tu tienda online'}</span>
+        </div>
+        <div class="shop-flow">
+          {(en ? ['Catalog', 'Checkout', 'Orders'] : ['Catálogo', 'Pago', 'Pedidos']).map((label, i) => (
+            <div data-graphic-item>
+              <span class="shop-step">0{i + 1}</span>
+              <strong>{label}</strong>
+              {i < 2 && <span class="shop-connector">↓</span>}
+            </div>
+          ))}
+        </div>
+      </div>
+      <span class="visual-caption">{en ? 'The shopping journey' : 'El recorrido de compra'}</span>
+    </>
+  )}
+</div>

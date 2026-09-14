@@ -1,0 +1,11 @@
+# Thexify
+
+> Estudio independiente de diseño y desarrollo web en Quito, Ecuador. Sitios para empresas y profesionales, sitios con panel de administración y tiendas Shopify. Trabajamos en español e inglés.
+
+- [Inicio](https://thexify.com/): servicios, proyectos y proceso.
+- [English](https://thexify.com/en/): web design and development studio.
+- [Canangueno Lodge](https://thexify.com/proyectos/canangueno-lodge/): rediseño web turístico bilingüe en desarrollo.
+- [SUNSU Cleaning Services](https://thexify.com/proyectos/sunsu-cleaning/): web de servicios de limpieza en Quito.
+- [Contacto](https://thexify.com/contacto/): formulario, correo o WhatsApp.
+
+Correo de empresa: hola@thexify.com. Los precios y plazos se definen según el alcance. No se garantizan posiciones en buscadores, ventas ni citas en asistentes de IA.

@@ -1,0 +1,662 @@
+---
+import type { Language } from '../data/projects';
+import { site, whatsappHref } from '../data/site';
+
+interface Props {
+  lang?: Language;
+}
+const { lang = 'es' } = Astro.props;
+const en = lang === 'en';
+const email = site.email;
+const whatsapp = whatsappHref(
+  en
+    ? 'Hello Thexify, I would like to discuss a project.'
+    : 'Hola Thexify, quisiera conversar sobre un proyecto.',
+);
+const text = en
+  ? {
+      eyebrow: 'A good project starts with a conversation',
+      title: 'Let’s make',
+      accent: 'it happen.',
+      intro:
+        'A new business, a website that needs a fresh start, or an idea you can’t stop thinking about. Tell us what’s next.',
+      direct: 'Prefer to write directly?',
+      note: 'A few details are enough to start. We’ll talk through the scope, timing and a proposal for your project.',
+      name: 'Your name',
+      email: 'Email address',
+      business: 'Business or brand',
+      optional: '(optional)',
+      service: 'What do you have in mind?',
+      description: 'Tell us a little about your project',
+      placeholder:
+        'What do you do, what would you like to build, and what should your website help you achieve?',
+      prepare: 'Send enquiry',
+      sending: 'Sending…',
+      privacy: 'Your details are used only to reply to this enquiry.',
+      ready: 'Thanks. Your enquiry has been sent and we’ll reply as soon as possible.',
+      error: 'We couldn’t send your enquiry. Please try again or write to us directly.',
+      open: 'Write by email',
+      whatsapp: 'Talk on WhatsApp',
+      nojs: 'To start a conversation, email us directly with a few details about your project.',
+    }
+  : {
+      eyebrow: 'Un buen proyecto empieza con una conversación',
+      title: 'Hagamos',
+      accent: 'que pase.',
+      intro:
+        'Un negocio que empieza, una web que necesita un cambio o una idea que no te deja de dar vueltas. Cuéntanos qué viene.',
+      direct: '¿Prefieres escribir directamente?',
+      note: 'Con unos detalles podemos empezar. Conversamos sobre el alcance, los tiempos y una propuesta para tu proyecto.',
+      name: 'Tu nombre',
+      email: 'Correo electrónico',
+      business: 'Empresa o marca',
+      optional: '(opcional)',
+      service: '¿Qué tienes en mente?',
+      description: 'Cuéntanos un poco sobre tu proyecto',
+      placeholder: '¿A qué te dedicas, qué te gustaría construir y qué quieres conseguir con tu web?',
+      prepare: 'Enviar consulta',
+      sending: 'Enviando…',
+      privacy: 'Usaremos tus datos únicamente para responder esta consulta.',
+      ready: 'Gracias. Recibimos tu consulta y te responderemos lo antes posible.',
+      error: 'No pudimos enviar tu consulta. Inténtalo otra vez o escríbenos directamente.',
+      open: 'Escribir por correo',
+      whatsapp: 'Hablar por WhatsApp',
+      nojs: 'Para empezar la conversación, escríbenos directamente con unos detalles de tu proyecto.',
+    };
+---
+
+<section class="contact-page" aria-labelledby="contact-title">
+  <div class="contact-heading">
+    <p class="contact-eyebrow">
+      <span aria-hidden="true"></span>
+      {text.eyebrow}
+    </p>
+    <h1 id="contact-title">
+      {text.title}
+      <br />
+      <span>{text.accent}</span>
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M14 86 86 14M16 14h70v70" />
+      </svg>
+    </h1>
+  </div>
+  <div class="contact-body">
+    <aside class="contact-intro">
+      <p class="contact-lead">{text.intro}</p>
+      <div class="contact-direct">
+        <p>{text.direct}</p>
+        <a href={`mailto:${email}`}>
+          {email}
+          <span aria-hidden="true"> ↗</span>
+        </a>
+        {whatsapp && (
+          <a class="contact-whatsapp" href={whatsapp} target="_blank" rel="noopener noreferrer">
+            {text.whatsapp}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+        )}
+      </div>
+      <p class="contact-note">{text.note}</p>
+    </aside>
+    <form
+      class="project-form"
+      action={`mailto:${email}`}
+      method="post"
+      data-project-form
+      data-lang={lang}
+      data-email={email}
+      data-endpoint={site.contactEndpoint}
+      data-idle={text.prepare}
+      data-sending={text.sending}
+      data-success={text.ready}
+      data-error={text.error}
+    >
+      <label class="form-trap" aria-hidden="true">
+        Website
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </label>
+      <input type="hidden" name="startedAt" value="" data-form-started />
+      <div class="form-pair">
+        <label class="form-field">
+          <span>
+            {text.name}{' '}
+            <span class="required" aria-hidden="true">
+              *
+            </span>
+          </span>
+          <input type="text" name="name" autocomplete="name" required maxlength="100" />
+        </label>
+        <label class="form-field">
+          <span>
+            {text.email}{' '}
+            <span class="required" aria-hidden="true">
+              *
+            </span>
+          </span>
+          <input type="email" name="email" autocomplete="email" required maxlength="160" />
+        </label>
+      </div>
+      <label class="form-field">
+        <span>
+          {text.business} <span class="optional">{text.optional}</span>
+        </span>
+        <input type="text" name="business" autocomplete="organization" maxlength="150" />
+      </label>
+      <label class="form-field select-field">
+        <span>{text.service}</span>
+        <select name="service">
+          <option value="unsure">{en ? 'Let’s figure it out together' : 'Lo definimos juntos'}</option>
+          <option value="website">{en ? 'A website' : 'Un sitio web'}</option>
+          <option value="webapp">
+            {en ? 'A web app or admin dashboard' : 'Una web con panel o sistema'}
+          </option>
+          <option value="shopify">{en ? 'A Shopify store' : 'Una tienda Shopify'}</option>
+        </select>
+        <span class="select-chevron" aria-hidden="true">
+          ⌄
+        </span>
+      </label>
+      <label class="form-field description-field">
+        <span>
+          {text.description}{' '}
+          <span class="required" aria-hidden="true">
+            *
+          </span>
+        </span>
+        <textarea
+          name="description"
+          rows="4"
+          placeholder={text.placeholder}
+          required
+          minlength="15"
+          maxlength="2500"
+        ></textarea>
+      </label>
+      <div class="form-submit">
+        <button type="submit" data-submit>
+          <span data-submit-label>{text.prepare}</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+        <p>{text.privacy}</p>
+      </div>
+      <div class="email-result" data-form-result tabindex="-1" hidden>
+        <p role="status" aria-live="polite" data-result-message></p>
+        <div data-result-fallback hidden>
+          <a data-email-fallback href={`mailto:${email}`}>
+            {text.open}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+          {whatsapp && (
+            <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+              {text.whatsapp}
+              <span aria-hidden="true"> ↗</span>
+            </a>
+          )}
+        </div>
+      </div>
+      <noscript>
+        <p class="no-js-note">
+          {text.nojs} <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      </noscript>
+    </form>
+  </div>
+</section>
+
+<script>
+  let cleanupContact = () => {};
+
+  function setupContact() {
+    cleanupContact();
+    const form = document.querySelector<HTMLFormElement>('[data-project-form]');
+    if (!form) return;
+    const button = form.querySelector<HTMLButtonElement>('[data-submit]');
+    const buttonLabel = form.querySelector<HTMLElement>('[data-submit-label]');
+    const result = form.querySelector<HTMLElement>('[data-form-result]');
+    const resultMessage = form.querySelector<HTMLElement>('[data-result-message]');
+    const fallback = form.querySelector<HTMLElement>('[data-result-fallback]');
+    const emailFallback = form.querySelector<HTMLAnchorElement>('[data-email-fallback]');
+    const startedAt = form.querySelector<HTMLInputElement>('[data-form-started]');
+    const service = form.elements.namedItem('service');
+    const selected = new URLSearchParams(window.location.search).get('service');
+    if (
+      service instanceof HTMLSelectElement &&
+      selected &&
+      ['website', 'webapp', 'shopify'].includes(selected)
+    ) {
+      service.value = selected;
+    }
+    if (!button || !buttonLabel || !result || !resultMessage || !fallback || !emailFallback) return;
+    const english = form.dataset.lang === 'en';
+    if (startedAt) startedAt.value = String(Date.now());
+
+    const copy = {
+      idle: form.dataset.idle ?? '',
+      sending: form.dataset.sending ?? '',
+      success: form.dataset.success ?? '',
+      error: form.dataset.error ?? '',
+    };
+
+    const handleSubmit = async (event: SubmitEvent) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const fields = new FormData(form);
+      const get = (key: string) => String(fields.get(key) ?? '').trim();
+      const selectedLabel =
+        service instanceof HTMLSelectElement ? (service.selectedOptions[0]?.text ?? '') : '';
+      const subject = english
+        ? `New project — ${get('business') || get('name')}`
+        : `Nuevo proyecto — ${get('business') || get('name')}`;
+      const body = english
+        ? `Hello Thexify,\n\nI'd like to talk about a project.\n\nName: ${get('name')}\nEmail: ${get('email')}\nBusiness: ${get('business') || '—'}\nService: ${selectedLabel}\n\nProject details:\n${get('description')}\n`
+        : `Hola Thexify,\n\nMe gustaría conversar sobre un proyecto.\n\nNombre: ${get('name')}\nCorreo: ${get('email')}\nEmpresa: ${get('business') || '—'}\nServicio: ${selectedLabel}\n\nSobre el proyecto:\n${get('description')}\n`;
+      emailFallback.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        window.location.href = emailFallback.href;
+        return;
+      }
+      button.disabled = true;
+      buttonLabel.textContent = copy.sending;
+      result.hidden = true;
+      fallback.hidden = true;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            name: get('name'),
+            email: get('email'),
+            business: get('business'),
+            service: selectedLabel,
+            description: get('description'),
+            website: get('website'),
+            startedAt: Number(get('startedAt')),
+            lang: english ? 'en' : 'es',
+          }),
+        });
+        if (!response.ok) throw new Error(`Contact request failed with ${response.status}`);
+        result.dataset.state = 'success';
+        resultMessage.textContent = copy.success;
+        form.reset();
+        if (startedAt) startedAt.value = String(Date.now());
+      } catch {
+        result.dataset.state = 'error';
+        resultMessage.textContent = copy.error;
+        fallback.hidden = false;
+      } finally {
+        button.disabled = false;
+        buttonLabel.textContent = copy.idle;
+        result.hidden = false;
+        result.focus({ preventScroll: true });
+      }
+    };
+    const handleInput = () => {
+      result.hidden = true;
+      fallback.hidden = true;
+    };
+    form.addEventListener('submit', handleSubmit);
+    form.addEventListener('input', handleInput);
+    cleanupContact = () => {
+      form.removeEventListener('submit', handleSubmit);
+      form.removeEventListener('input', handleInput);
+      cleanupContact = () => {};
+    };
+  }
+
+  setupContact();
+  const disposeContact = () => cleanupContact();
+  document.addEventListener('astro:page-load', setupContact);
+  document.addEventListener('astro:before-swap', disposeContact);
+  if (import.meta.hot) {
+    import.meta.hot.dispose(() => {
+      disposeContact();
+      document.removeEventListener('astro:page-load', setupContact);
+      document.removeEventListener('astro:before-swap', disposeContact);
+    });
+  }
+</script>
+
+<style>
+  .contact-page {
+    padding: 155px 4.4vw 135px;
+    color: var(--paper);
+  }
+  .contact-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 36px;
+    font-size: 11px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+  .contact-eyebrow > span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    flex: 0 0 auto;
+  }
+  h1 {
+    position: relative;
+    margin: 0;
+    max-width: 1050px;
+    font-size: clamp(80px, 10.4vw, 156px);
+    font-weight: 500;
+    line-height: 0.96;
+    letter-spacing: -0.075em;
+  }
+  h1 > span {
+    color: var(--green);
+  }
+  h1 svg {
+    position: absolute;
+    width: clamp(60px, 9vw, 135px);
+    top: 8px;
+    right: 0;
+    fill: none;
+    stroke: var(--paper);
+    stroke-width: 2;
+  }
+  .contact-body {
+    margin-top: 90px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 10vw;
+    border-top: 1px solid var(--line);
+    padding-top: 55px;
+  }
+  .contact-lead {
+    font-size: clamp(22px, 2.15vw, 31px);
+    line-height: 1.5;
+    letter-spacing: -0.035em;
+    margin: 0;
+    max-width: 420px;
+  }
+  .contact-direct {
+    margin-top: 65px;
+  }
+  .contact-direct p {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .contact-direct a {
+    color: var(--paper);
+    text-decoration: none;
+    display: inline-block;
+    font-size: clamp(14px, 1.45vw, 22px);
+    letter-spacing: -0.025em;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+    overflow-wrap: anywhere;
+  }
+  .contact-direct a:hover {
+    color: var(--green);
+  }
+  .contact-direct .contact-whatsapp {
+    display: block;
+    width: fit-content;
+    margin-top: 18px;
+    color: var(--green);
+  }
+  .contact-note {
+    max-width: 320px;
+    margin-top: 32px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .project-form {
+    min-width: 0;
+  }
+  .form-trap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .form-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 36px;
+    min-width: 0;
+  }
+  .form-field > span:first-child {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .required {
+    color: var(--green);
+  }
+  .optional {
+    color: var(--muted);
+    font-size: 11px;
+    margin-left: 4px;
+  }
+  input,
+  textarea,
+  select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px solid rgba(238, 239, 235, 0.25);
+    border-radius: 0;
+    background: transparent;
+    color: var(--paper);
+    padding: 17px 0 14px;
+    font: inherit;
+    font-size: 16px;
+    transition: border-color 0.2s;
+  }
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 1px 0 var(--green);
+  }
+  input:user-invalid,
+  textarea:user-invalid {
+    border-color: #f9a79d;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 126px;
+    line-height: 1.65;
+  }
+  textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.8;
+    font-size: 14px;
+  }
+  .select-field {
+    position: relative;
+  }
+  select {
+    appearance: none;
+    padding-right: 28px;
+    cursor: pointer;
+  }
+  select option {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .select-chevron {
+    position: absolute;
+    right: 3px;
+    bottom: 18px;
+    pointer-events: none;
+  }
+  .form-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  button {
+    cursor: pointer;
+    background: var(--green);
+    border: 1px solid var(--green);
+    border-radius: var(--radius-pill);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    min-height: 62px;
+    padding: 17px 24px;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      opacity 0.2s;
+  }
+  button:hover {
+    background: var(--paper);
+    border-color: var(--paper);
+  }
+  button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+  button span {
+    font-size: 25px;
+    line-height: 1;
+  }
+  .form-submit > p {
+    font-size: 12px;
+    line-height: 1.75;
+    max-width: 410px;
+    color: var(--muted);
+    margin: 0;
+  }
+  .email-result {
+    margin-top: 28px;
+    border-left: 2px solid var(--green);
+    padding: 3px 0 3px 20px;
+  }
+  .email-result:focus {
+    outline: none;
+  }
+  .email-result[data-state='error'] {
+    border-color: #f9a79d;
+  }
+  .email-result p {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .email-result [data-result-fallback] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+  .email-result a,
+  .no-js-note a {
+    color: var(--green);
+    text-underline-offset: 5px;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .no-js-note {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 14px;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  @media (min-width: 1600px) {
+    .contact-page {
+      padding-left: max(4.4vw, calc((100vw - 1600px) / 2));
+      padding-right: max(4.4vw, calc((100vw - 1600px) / 2));
+    }
+  }
+  @media (max-width: 900px) {
+    .contact-page {
+      padding-top: 130px;
+    }
+    .contact-body {
+      gap: 6vw;
+      grid-template-columns: 0.8fr 1.2fr;
+      margin-top: 65px;
+    }
+    .form-pair {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    h1 svg {
+      right: 5%;
+    }
+  }
+  @media (max-width: 640px) {
+    .contact-page {
+      padding: 120px 22px 80px;
+    }
+    .contact-eyebrow {
+      max-width: 250px;
+      font-size: 11px;
+      line-height: 1.8;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: clamp(65px, 16vw, 100px);
+      letter-spacing: -0.07em;
+    }
+    h1 svg {
+      width: 42px;
+      right: 1%;
+      top: 6px;
+    }
+    .contact-body {
+      grid-template-columns: 1fr;
+      gap: 50px;
+      margin-top: 50px;
+      padding-top: 32px;
+    }
+    .contact-lead {
+      font-size: 22px;
+      max-width: 440px;
+    }
+    .contact-direct {
+      margin-top: 32px;
+    }
+    .contact-direct a {
+      font-size: 18px;
+    }
+    .contact-note {
+      margin-top: 22px;
+    }
+    .form-pair {
+      grid-template-columns: 1fr;
+    }
+    .form-field {
+      margin-bottom: 31px;
+    }
+    .form-submit button {
+      width: 100%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    input,
+    textarea,
+    select,
+    button {
+      transition: none;
+    }
+  }
+</style>

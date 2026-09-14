@@ -1,0 +1,150 @@
+---
+import Mark from './Mark.astro';
+import Arrow from './Arrow.astro';
+import HomeSections from './HomeSections.astro';
+import { Image } from 'astro:assets';
+import cananguenoSmall from '../assets/canangueno-small.webp';
+import sunsuSmall from '../assets/sunsu-small.webp';
+import '../styles/hero.css';
+interface Props {
+  lang?: 'es' | 'en';
+}
+const { lang = 'es' } = Astro.props;
+const en = lang === 'en';
+const contact = en ? '/en/contact/' : '/contacto/';
+const workPath = en ? '/en/work/' : '/proyectos/';
+const t = en
+  ? {
+      label: 'Independent digital studio',
+      location: 'Based in Quito. Built for everywhere.',
+      title1: 'Make an impression.',
+      title2: 'Make it digital.',
+      heroCopy: 'We turn what makes your business different into a website worth remembering.',
+      start: 'Tell us your idea',
+      work: 'Explore our work',
+      scroll: 'Scroll to discover',
+      design: 'Design with intention.',
+      engineering: 'Built with precision.',
+      case: 'Explore project',
+    }
+  : {
+      label: 'Estudio digital independiente',
+      location: 'Desde Quito. Para donde quieras.',
+      title1: 'Deja una huella.',
+      title2: 'Hazla digital.',
+      heroCopy: 'Convertimos lo que hace único a tu negocio en una web que vale la pena recordar.',
+      start: 'Cuéntanos tu idea',
+      work: 'Explorar proyectos',
+      scroll: 'Hay más por descubrir',
+      design: 'Diseño con intención.',
+      engineering: 'Código con precisión.',
+      case: 'Explorar proyecto',
+    };
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-eyebrow">
+    <span class="eyebrow">
+      <i class="status-dot"></i>
+      {t.label}
+    </span>
+    <span class="eyebrow hero-location">{t.location}</span>
+  </div>
+  <h1 id="hero-title" class="hero-title">
+    <span>{t.title1}</span>
+    <span class="hero-title-last">
+      {t.title2}
+      <Mark class="hero-star" />
+    </span>
+  </h1>
+  <div class="hero-collage">
+    <div class="hero-aside">
+      <p>{t.heroCopy}</p>
+      <a class="pill-link pill-link--green" href={contact}>
+        {t.start}
+        <Arrow />
+      </a>
+    </div>
+    <a
+      class="hero-shot hero-shot--one"
+      href={`${workPath}canangueno-lodge/`}
+      aria-label={`${t.case}: Canangueno Lodge`}
+    >
+      <div class="browser-chrome">
+        <span class="browser-dots">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+        <span>canangueno lodge</span>
+        <Arrow />
+      </div>
+      <Image
+        src={cananguenoSmall}
+        alt={
+          en
+            ? 'The Canangueno Lodge website designed by Thexify'
+            : 'La web de Canangueno Lodge diseñada por Thexify'
+        }
+        widths={[480, 640, 800]}
+        sizes="(max-width: 600px) 85vw, 48vw"
+        fetchpriority="high"
+      />
+      <span class="shot-caption">01 / CANANGUENO LODGE</span>
+    </a>
+    <a
+      class="hero-shot hero-shot--two"
+      href={`${workPath}sunsu-cleaning/`}
+      aria-label={`${t.case}: SUNSU Cleaning`}
+    >
+      <div class="browser-chrome browser-chrome--light">
+        <span class="browser-dots">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+        <span>sunsu cleaning</span>
+        <Arrow />
+      </div>
+      <Image
+        src={sunsuSmall}
+        alt={
+          en
+            ? 'The SUNSU Cleaning website designed by Thexify'
+            : 'La web de SUNSU Cleaning diseñada por Thexify'
+        }
+        widths={[360, 560, 800]}
+        sizes="(max-width: 600px) 55vw, 29vw"
+      />
+      <span class="shot-caption">02 / SUNSU CLEANING</span>
+    </a>
+    <span class="collage-cross" aria-hidden="true">
+      +
+    </span>
+    <a class="hero-work-link text-link" href="#proyectos">
+      {t.work}
+      <Arrow />
+    </a>
+  </div>
+  <div class="hero-wordmark" aria-hidden="true">
+    thexify<span>✳</span>
+  </div>
+  <div class="hero-bottom eyebrow">
+    <span>
+      {t.design}
+      <br />
+      {t.engineering}
+    </span>
+    <a href="#enfoque">
+      {t.scroll}
+      <span aria-hidden="true">↓</span>
+    </a>
+    <span>
+      EST. ECUADOR
+      <br />
+      DIGITAL, EVERYWHERE.
+    </span>
+  </div>
+</section>
+
+<HomeSections lang={lang} />

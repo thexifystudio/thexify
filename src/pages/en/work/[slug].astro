@@ -1,0 +1,19 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CasePage from '../../../components/CasePage.astro';
+import { projects } from '../../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+const { project } = Astro.props;
+---
+
+<Layout
+  title={`${project.title} — A Thexify project`}
+  description={project.intro.en}
+  lang="en"
+  alternatePath={`/proyectos/${project.slug}/`}
+>
+  <CasePage project={project} lang="en" />
+</Layout>

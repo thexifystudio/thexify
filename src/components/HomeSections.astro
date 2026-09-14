@@ -1,0 +1,745 @@
+---
+import Arrow from './Arrow.astro';
+import Mark from './Mark.astro';
+import GraphicIcon from './GraphicIcon.astro';
+import ServiceVisual from './ServiceVisual.astro';
+import { Image } from 'astro:assets';
+import { pricing, type ServiceKey } from '../data/pricing';
+import { portfolio } from '../data/portfolio';
+import { site } from '../data/site';
+import '../styles/sections.css';
+import '../styles/graphics.css';
+interface Props {
+  lang?: 'es' | 'en';
+}
+const { lang = 'es' } = Astro.props;
+const en = lang === 'en';
+const contact = en ? '/en/contact/' : '/contacto/';
+const extras = en
+  ? [
+      ['mail', 'Business email', 'Your brand in every conversation.'],
+      ['brand', 'Visual identity', 'A consistent look across every touchpoint.'],
+      ['automation', 'Automations', 'Connected tools. Fewer repetitive tasks.'],
+      ['chat', 'Chatbots', 'Guide visitors and answer common questions.'],
+    ]
+  : [
+      ['mail', 'Correo empresarial', 'Tu marca en cada conversación.'],
+      ['brand', 'Identidad visual', 'Una imagen coherente en cada detalle.'],
+      ['automation', 'Automatizaciones', 'Herramientas conectadas. Menos tareas repetidas.'],
+      ['chat', 'Chatbots', 'Orienta a tus visitas y responde dudas frecuentes.'],
+    ];
+const reasonIcons = ['chat', 'document', 'code', 'key', 'search', 'support'];
+const reasonLabels = en
+  ? [
+      'Direct contact',
+      'Clear agreements',
+      'Custom development',
+      'Ownership & access',
+      'SEO foundations',
+      'Ongoing support',
+    ]
+  : [
+      'Trato directo',
+      'Acuerdos claros',
+      'Desarrollo a medida',
+      'Propiedad y accesos',
+      'Base de posicionamiento',
+      'Acompañamiento',
+    ];
+const t = en
+  ? {
+      problemLabel: 'A website with a purpose',
+      problemTitle: ['Your website should', 'work for your business.'],
+      problemIntro:
+        'Looking good is the beginning. The real job is helping people find you, understand your offer and get in touch.',
+      pains: [
+        [
+          'Visitors, but no enquiries?',
+          'We make your offer easy to understand and the next step easy to find.',
+        ],
+        [
+          'Hard to find on Google?',
+          'Search-friendly content, a clear structure and a business profile when your business is eligible.',
+        ],
+        [
+          'Outgrown your old website?',
+          'We build a visual identity that reflects the quality of the business you run today.',
+        ],
+      ],
+      changeLabel: 'What changes',
+      changeTitle: ['Clear from the first look.', 'Easy to take the next step.'],
+      changes: [
+        'People understand what you offer.',
+        'It works well on phones, too.',
+        'Contact is always easy to find.',
+        'Your customers’ questions have answers.',
+      ],
+      problemCta: 'Improve my website',
+      serviceLabel: 'Our services',
+      serviceTitle: ['What your business needs.', 'Built the way it should be.'],
+      serviceIntro:
+        'A new website or a fresh start. Choose what fits your business; we’ll help define the details.',
+      services: [
+        {
+          name: 'Website design',
+          tagline: 'Make your business stand out',
+          description:
+            'Business websites, landing pages and portfolios that present your work clearly and encourage people to get in touch.',
+          includes: ['Design tailored to your brand', 'Responsive pages', 'Clear paths to contact'],
+          cta: 'Discuss my website',
+          key: 'website' as const,
+        },
+        {
+          name: 'Websites with a dashboard',
+          tagline: 'Put you in control',
+          description:
+            'Update prices, photos and content from your own dashboard. Add the features your day-to-day work actually needs.',
+          includes: ['Content and catalog management', 'Database and custom forms', 'Access for your team'],
+          cta: 'Discuss my platform',
+          key: 'webapp' as const,
+        },
+        {
+          name: 'Shopify stores',
+          tagline: 'Turn your products into a store',
+          description:
+            'A store built around your products, with a clear catalog, a straightforward checkout and the tools to manage it.',
+          includes: [
+            'Storefront and product catalog',
+            'Payments and shipping setup',
+            'Inventory and order management',
+          ],
+          cta: 'Discuss my store',
+          key: 'shopify' as const,
+        },
+      ],
+      includedLabel: 'Included from the start',
+      includedText: 'Mobile design, SEO + GEO foundations, hosting and domain for the first year.',
+      extrasTitle: 'Want to take it further?',
+      extrasCta: 'Discuss the extras',
+      maintenance:
+        'Annual maintenance and renewal are quoted separately from year two. Shopify subscriptions and paid integrations are detailed in your proposal.',
+      whyLabel: 'Why Thexify',
+      whyTitle: ['A good website.', 'A better way to get there.'],
+      whyIntro:
+        'Clear communication, careful execution and a team that takes responsibility for the details.',
+      reasons: [
+        [
+          'You talk to the builders',
+          'A direct conversation with the people designing and developing your website.',
+        ],
+        ['Scope and price in writing', 'Pages, features, timing and costs agreed before work begins.'],
+        [
+          'Made for your business',
+          'Design and functionality shaped around your goals and the people who will use it.',
+        ],
+        [
+          'Your business, your assets',
+          'Ownership, accounts and access are clearly set out, so you know where everything lives.',
+        ],
+        [
+          'Search is part of the plan',
+          'Content, technical SEO and clear business information are considered from the start.',
+        ],
+        [
+          'Support after launch',
+          'We explain how to use your site and agree how updates and maintenance will work.',
+        ],
+      ],
+      processLabel: 'How we work',
+      processTitle: ['From our first conversation', 'to your website going live.'],
+      processIntro: 'Four steps. Clear deliverables. You always know what comes next.',
+      steps: [
+        [
+          'Let’s talk',
+          'We learn about your business, your customers and what needs to change.',
+          'A clear direction for your project',
+          'Tell us about your business',
+        ],
+        [
+          'Define the project',
+          'We agree on the pages, features, price and delivery plan.',
+          'A written proposal and scope',
+          'Review and approve the proposal',
+        ],
+        [
+          'Design, build, test',
+          'We shape the design with your content, then test it on different screens.',
+          'A preview you can review',
+          'Share content and feedback',
+        ],
+        [
+          'Launch and support',
+          'We publish, check the details and show you how everything works.',
+          'Your website and the access you need',
+          'Review the handover together',
+        ],
+      ],
+      deliverable: 'What you get',
+      clientTask: 'Your part',
+      projectsLabel: 'Our work',
+      projectsTitle: ['Different businesses.', 'Thoughtful digital solutions.'],
+      projectsIntro:
+        'Websites with a clear purpose. Here you’ll be able to explore each project, its context and what we built.',
+      viewProject: 'Explore project',
+      faqLabel: 'Before we begin',
+      faqTitle: 'A few useful answers.',
+      faqs: [
+        [
+          'How much does a website cost?',
+          'The cost depends on the pages, content and features. We send a written proposal with the scope and costs before starting.',
+        ],
+        [
+          'Can you redesign my current website?',
+          'Yes. We review what works, what needs to change and what you want to achieve, then build a clear plan for the redesign.',
+        ],
+        [
+          'Can I update the content myself?',
+          'Yes, when your project includes an admin dashboard or Shopify. If the content rarely changes, a simpler static website may be the right fit.',
+        ],
+        [
+          'What happens after launch?',
+          'Hosting and domain are included for the first year. From year two, maintenance and renewal are charged annually. Ongoing SEO and new features are scoped separately.',
+        ],
+      ],
+      ctaLabel: 'Let’s start with your idea',
+      ctaTitle: ['What do you want', 'to build next?'],
+      ctaText: 'Tell us about your business. We’ll help shape the next step.',
+      ctaButton: 'Tell us about your project',
+      email: 'Email us directly',
+    }
+  : {
+      problemLabel: 'Una web con propósito',
+      problemTitle: ['Tu web tiene que', 'trabajar por tu negocio.'],
+      problemIntro:
+        'Verse bien es el comienzo. Lo importante es que te encuentren, entiendan lo que ofreces y sepan cómo contactarte.',
+      pains: [
+        [
+          '¿Te visitan, pero no te escriben?',
+          'Ordenamos tu oferta y hacemos que dar el siguiente paso sea fácil.',
+        ],
+        [
+          '¿No te encuentran en Google?',
+          'Contenido pensado para búsquedas reales, una estructura clara y tu ficha de negocio cuando corresponda.',
+        ],
+        [
+          '¿Tu web ya no refleja lo que haces?',
+          'Creamos una presencia que esté a la altura de la calidad de tu negocio.',
+        ],
+      ],
+      changeLabel: 'Qué cambia en la práctica',
+      changeTitle: ['Se entiende a la primera.', 'Es fácil dar el siguiente paso.'],
+      changes: [
+        'Tu oferta se entiende rápidamente.',
+        'Funciona bien, también en el celular.',
+        'Contactarte siempre es sencillo.',
+        'Las dudas importantes tienen respuesta.',
+      ],
+      problemCta: 'Quiero mejorar mi web',
+      serviceLabel: 'Nuestros servicios',
+      serviceTitle: ['Lo que tu negocio necesita.', 'Bien diseñado. Bien hecho.'],
+      serviceIntro:
+        'Una web nueva o un nuevo comienzo. Elige lo que se parece a tu negocio; juntos definimos los detalles.',
+      services: [
+        {
+          name: 'Diseño y rediseño web',
+          tagline: 'Para presentar tu negocio',
+          description:
+            'Webs corporativas, landings y portafolios que muestran lo que haces y facilitan que tus clientes te escriban.',
+          includes: [
+            'Diseño adaptado a tu marca',
+            'Páginas para cualquier pantalla',
+            'Contacto claro y accesible',
+          ],
+          cta: 'Cotizar mi web',
+          key: 'website' as const,
+        },
+        {
+          name: 'Webs con panel',
+          tagline: 'Para gestionar tu contenido',
+          description:
+            'Cambia precios, fotos y contenidos desde tu propio panel. Añadimos las funciones que tu operación necesita.',
+          includes: [
+            'Gestión de contenido y catálogo',
+            'Base de datos y formularios',
+            'Accesos para tu equipo',
+          ],
+          cta: 'Cotizar mi web con panel',
+          key: 'webapp' as const,
+        },
+        {
+          name: 'Tiendas online',
+          tagline: 'Para vender tus productos',
+          description:
+            'Tu tienda en Shopify, con un catálogo claro, un proceso de compra sencillo y las herramientas para administrarla.',
+          includes: [
+            'Diseño de tienda y catálogo',
+            'Configuración de pagos y envíos',
+            'Gestión de stock y pedidos',
+          ],
+          cta: 'Cotizar mi tienda',
+          key: 'shopify' as const,
+        },
+      ],
+      includedLabel: 'Incluido desde el principio',
+      includedText: 'Diseño móvil, base SEO + GEO, hosting y dominio durante el primer año.',
+      extrasTitle: '¿Quieres ir un paso más allá?',
+      extrasCta: 'Consultar complementos',
+      maintenance:
+        'Desde el segundo año, mantenimiento y renovación se cotizan anualmente. La suscripción de Shopify y las integraciones de pago se detallan en tu propuesta.',
+      whyLabel: 'Por qué Thexify',
+      whyTitle: ['Una buena web.', 'Una mejor forma de hacerla.'],
+      whyIntro: 'Comunicación directa, trabajo bien resuelto y alguien que se ocupa de los detalles.',
+      reasons: [
+        ['Hablas con quien la construye', 'Trato directo con las personas que diseñan y desarrollan tu web.'],
+        ['Alcance y precio por escrito', 'Páginas, funciones, tiempos y costos acordados antes de empezar.'],
+        [
+          'Hecha para tu negocio',
+          'Diseño y funciones pensados para tus objetivos y para quienes van a usar la web.',
+        ],
+        [
+          'Tu negocio, tus activos',
+          'Dejamos claros la propiedad, las cuentas y los accesos para que sepas dónde está todo.',
+        ],
+        [
+          'El posicionamiento va desde el inicio',
+          'Contenido, SEO técnico e información clara de tu negocio forman parte del proyecto.',
+        ],
+        [
+          'Seguimos después del lanzamiento',
+          'Te enseñamos a usar tu web y acordamos cómo serán el soporte y el mantenimiento.',
+        ],
+      ],
+      processLabel: 'Cómo trabajamos',
+      processTitle: ['De la primera conversación', 'a tu web en línea.'],
+      processIntro: 'Cuatro pasos, entregables concretos y claridad sobre lo que sigue.',
+      steps: [
+        [
+          'Nos conocemos',
+          'Entendemos tu negocio, tus clientes y lo que necesitas mejorar.',
+          'Un rumbo claro para tu proyecto',
+          'Contarnos sobre tu negocio',
+        ],
+        [
+          'Definimos el proyecto',
+          'Acordamos páginas, funciones, precio y plan de entrega.',
+          'Propuesta escrita con el alcance',
+          'Revisar y aprobar la propuesta',
+        ],
+        [
+          'Diseñamos y construimos',
+          'Trabajamos con tu contenido y probamos la web en distintas pantallas.',
+          'Una vista previa para revisar',
+          'Compartir material y comentarios',
+        ],
+        [
+          'Lanzamos y acompañamos',
+          'Publicamos, revisamos los detalles y te enseñamos cómo funciona.',
+          'Tu web y los accesos que necesitas',
+          'Revisar juntos la entrega',
+        ],
+      ],
+      deliverable: 'Lo que recibes',
+      clientTask: 'De tu lado',
+      projectsLabel: 'Nuestros proyectos',
+      projectsTitle: ['Negocios distintos.', 'Soluciones con intención.'],
+      projectsIntro:
+        'Webs con un propósito claro. Aquí podrás conocer el contexto de cada proyecto y lo que construimos.',
+      viewProject: 'Ver proyecto',
+      faqLabel: 'Antes de empezar',
+      faqTitle: 'Respuestas que te ayudan.',
+      faqs: [
+        [
+          '¿Cuánto cuesta una página web?',
+          'Depende de las páginas, el contenido y las funciones. Antes de empezar recibirás una propuesta por escrito con el alcance y los costos.',
+        ],
+        [
+          '¿Pueden rediseñar mi web actual?',
+          'Sí. Revisamos qué funciona, qué necesita cambiar y qué quieres conseguir para plantear el rediseño.',
+        ],
+        [
+          '¿Puedo actualizar el contenido por mi cuenta?',
+          'Sí, si tu proyecto incluye un panel de administración o una tienda Shopify. Si el contenido cambia poco, un sitio estático puede ser lo indicado.',
+        ],
+        [
+          '¿Qué ocurre después del lanzamiento?',
+          'Hosting y dominio se incluyen el primer año. Desde el segundo, mantenimiento y renovación se cobran anualmente. El SEO continuo y las nuevas funciones se cotizan por separado.',
+        ],
+      ],
+      ctaLabel: 'Empecemos por tu idea',
+      ctaTitle: ['¿Qué quieres', 'construir ahora?'],
+      ctaText: 'Cuéntanos sobre tu negocio. Te ayudamos a definir el siguiente paso.',
+      ctaButton: 'Cuéntanos tu proyecto',
+      email: 'Escribir por correo',
+    };
+---
+
+<div class="home-sections">
+  <section id="enfoque" class="business-section section-pad" aria-labelledby="business-title">
+    <div class="commercial-heading" data-reveal>
+      <span class="section-kicker">01 / {t.problemLabel}</span>
+      <h2 id="business-title">
+        {t.problemTitle[0]}
+        <br />
+        <span>{t.problemTitle[1]}</span>
+      </h2>
+      <p>{t.problemIntro}</p>
+    </div>
+    <div class="business-grid">
+      <div class="pain-list">
+        {t.pains.map(([heading, description], i) => (
+          <article class="pain-item" data-reveal>
+            <span class="item-number" aria-hidden="true">
+              0{i + 1}
+            </span>
+            <div>
+              <h3>{heading}</h3>
+              <p>{description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <aside class="outcome-panel" data-reveal>
+        <div class="outcome-top">
+          <span class="section-kicker">{t.changeLabel}</span>
+          <Mark />
+        </div>
+        <h3>
+          {t.changeTitle[0]}
+          <br />
+          <span>{t.changeTitle[1]}</span>
+        </h3>
+        <ul>
+          {t.changes.map((item) => (
+            <li>
+              <span class="check-mark" aria-hidden="true">
+                ✓
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <a class="action-button action-button--ink" href={`${contact}?service=website`}>
+          {t.problemCta}
+          <Arrow />
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <section id="servicios" class="offer-section section-pad" aria-labelledby="offer-title">
+    <div class="commercial-heading" data-reveal>
+      <span class="section-kicker">02 / {t.serviceLabel}</span>
+      <h2 id="offer-title">
+        {t.serviceTitle[0]}
+        <br />
+        <span>{t.serviceTitle[1]}</span>
+      </h2>
+      <p>{t.serviceIntro}</p>
+    </div>
+    <div class="offer-grid">
+      {t.services.map((service, i) => (
+        <article class="offer-card offer-card--graphic" data-reveal>
+          <ServiceVisual kind={service.key} lang={lang} />
+          <div class="offer-index">
+            <span>0{i + 1}</span>
+            <span>{service.tagline}</span>
+          </div>
+          <h3>{service.name}</h3>
+          <p>{service.description}</p>
+          {pricing.showPrices ? (
+            <div class="offer-price">
+              <span>{en ? 'From' : 'Desde'}</span>
+              <div>
+                <strong>
+                  ${pricing.amounts[service.key as ServiceKey].toLocaleString(en ? 'en-US' : 'es-EC')}
+                </strong>
+                <span>{pricing.currency}</span>
+              </div>
+            </div>
+          ) : (
+            <div class="offer-price offer-price--quote">
+              <span>{en ? 'Investment' : 'Inversión'}</span>
+              <strong>{en ? 'Defined for your scope' : 'Definida según el alcance'}</strong>
+              <small>
+                {en
+                  ? 'You receive a clear written quote before we begin.'
+                  : 'Recibes una cotización clara antes de empezar.'}
+              </small>
+            </div>
+          )}
+          <ul>
+            {service.includes.map((item) => (
+              <li>
+                <span class="check-mark" aria-hidden="true">
+                  ✓
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a class="action-button" href={`${contact}?service=${service.key}`}>
+            {service.cta}
+            <Arrow />
+          </a>
+        </article>
+      ))}
+    </div>
+    <div class="included-strip">
+      <span class="section-kicker">{t.includedLabel}</span>
+      <p>{t.includedText}</p>
+      <span class="check-mark" aria-hidden="true">
+        ✓
+      </span>
+    </div>
+    <div class="extras-composition" data-graphic>
+      <div class="extras-intro">
+        <span class="section-kicker">{en ? 'Connected to your business' : 'Conectado a tu negocio'}</span>
+        <h3>{t.extrasTitle}</h3>
+        <p>
+          {en
+            ? 'Your website is the starting point. Connect the tools that make your day-to-day work easier.'
+            : 'Tu web es el punto de partida. Conecta las herramientas que hacen más fácil tu día a día.'}
+        </p>
+        <a class="action-button action-button--outline" href={contact}>
+          {t.extrasCta}
+          <Arrow />
+        </a>
+      </div>
+      <div class="extras-network">
+        <div class="network-source">
+          <Mark />
+          <span>{en ? 'Your website' : 'Tu web'}</span>
+          <span class="network-plus" aria-hidden="true">
+            +
+          </span>
+        </div>
+        <svg class="network-lines" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M300 0V20H150V40 M300 20H450V40" pathLength="1" data-draw />
+        </svg>
+        <div class="extras-modules">
+          {extras.map(([icon, title, description]) => (
+            <article class="extra-module" data-graphic-item>
+              <div class="module-icon">
+                <GraphicIcon name={icon} />
+              </div>
+              <h4>{title}</h4>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="renewal-note">
+      <GraphicIcon name="document" />
+      <div>
+        <strong>{en ? 'Clear costs, from the start.' : 'Costos claros, desde el inicio.'}</strong>
+        <p class="offer-footnote">{t.maintenance}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="estudio" class="reasons-section section-pad" aria-labelledby="reasons-title">
+    <div class="commercial-heading" data-reveal>
+      <span class="section-kicker">03 / {t.whyLabel}</span>
+      <h2 id="reasons-title">
+        {t.whyTitle[0]}
+        <br />
+        <span>{t.whyTitle[1]}</span>
+      </h2>
+      <p>{t.whyIntro}</p>
+    </div>
+    <div class="trust-grid">
+      {t.reasons.map(([heading, description], i) => (
+        <article class:list={['trust-card', `trust-card--${i + 1}`]} data-graphic>
+          <div class="trust-card-top">
+            <span class="trust-icon">
+              <GraphicIcon name={reasonIcons[i]} />
+            </span>
+            <span class="trust-index">
+              0{i + 1} / {reasonLabels[i]}
+            </span>
+          </div>
+          {i === 0 ? (
+            <div class="direct-diagram" aria-hidden="true">
+              <span class="direct-person" data-graphic-layer>
+                {en ? 'You' : 'Tú'}
+              </span>
+              <div class="direct-connection">
+                <svg viewBox="0 0 160 40" preserveAspectRatio="none">
+                  <path d="M0 20H160" pathLength="1" data-draw />
+                  <path d="M152 14l7 6-7 6 M8 14l-7 6 7 6" />
+                </svg>
+                <span>{en ? 'No middlemen' : 'Sin intermediarios'}</span>
+              </div>
+              <span class="direct-studio" data-graphic-layer>
+                <Mark />
+                Thexify
+              </span>
+            </div>
+          ) : i === 1 ? (
+            <div class="agreement-diagram" aria-hidden="true">
+              {(en ? ['Scope', 'Investment', 'Timeline'] : ['Alcance', 'Inversión', 'Plazos']).map(
+                (label) => (
+                  <div data-graphic-item>
+                    <GraphicIcon name="check" />
+                    <span>{label}</span>
+                  </div>
+                ),
+              )}
+              <span class="agreement-line" data-graphic-layer></span>
+            </div>
+          ) : (
+            <div class="trust-motif" aria-hidden="true">
+              {i === 2 ? (
+                <>
+                  <span data-graphic-layer>&lt;</span>
+                  <Mark />
+                  <span data-graphic-layer>/&gt;</span>
+                </>
+              ) : i === 3 ? (
+                <>
+                  <span data-graphic-layer>{en ? 'Domain' : 'Dominio'}</span>
+                  <span data-graphic-layer>{en ? 'Code' : 'Código'}</span>
+                  <span data-graphic-layer>{en ? 'Access' : 'Accesos'}</span>
+                </>
+              ) : i === 4 ? (
+                <div class="search-diagram" data-graphic-layer>
+                  <GraphicIcon name="search" />
+                  <span>{en ? 'Your business' : 'Tu negocio'}</span>
+                  <i></i>
+                </div>
+              ) : (
+                <div class="support-diagram">
+                  <span>{en ? 'Launch' : 'Lanzamiento'}</span>
+                  <svg viewBox="0 0 100 20">
+                    <path d="M0 10H100" pathLength="1" data-draw />
+                  </svg>
+                  <strong>{en ? 'We’re here' : 'Seguimos aquí'}</strong>
+                </div>
+              )}
+            </div>
+          )}
+          <h3>{heading}</h3>
+          <p>{description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="proceso" class="roadmap-section section-pad" aria-labelledby="roadmap-title">
+    <div class="commercial-heading" data-reveal>
+      <span class="section-kicker">04 / {t.processLabel}</span>
+      <h2 id="roadmap-title">
+        {t.processTitle[0]}
+        <br />
+        <span>{t.processTitle[1]}</span>
+      </h2>
+      <p>{t.processIntro}</p>
+    </div>
+    <ol class="roadmap">
+      {t.steps.map(([heading, description, result, client], i) => (
+        <li data-reveal>
+          <div class="roadmap-marker">
+            <span>0{i + 1}</span>
+            <i aria-hidden="true"></i>
+          </div>
+          <h3>{heading}</h3>
+          <p>{description}</p>
+          <div class="roadmap-result">
+            <span class="section-kicker">{t.deliverable}</span>
+            <strong>{result}</strong>
+          </div>
+          <div class="roadmap-client">
+            <span class="section-kicker">{t.clientTask}</span>
+            <p>{client}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section id="proyectos" class="portfolio-section section-pad" aria-labelledby="portfolio-title">
+    <div class="commercial-heading" data-reveal>
+      <span class="section-kicker">05 / {t.projectsLabel}</span>
+      <h2 id="portfolio-title">
+        {t.projectsTitle[0]}
+        <br />
+        <span>{t.projectsTitle[1]}</span>
+      </h2>
+      <p>{t.projectsIntro}</p>
+    </div>
+    <div class="portfolio-grid">
+      {portfolio.slice(0, 6).map((project) => (
+        <article class="portfolio-card" data-reveal>
+          <a
+            class="portfolio-image"
+            href={project.href[lang]}
+            aria-label={`${t.viewProject}: ${project.name}`}
+          >
+            <Image
+              src={project.image}
+              alt={project.imageAlt[lang]}
+              widths={[480, 720, 960]}
+              sizes="(max-width: 900px) 100vw, 50vw"
+              loading="lazy"
+            />
+            <span aria-hidden="true">
+              <Arrow />
+            </span>
+          </a>
+          <p class="section-kicker">{project.category[lang]}</p>
+          <h3>{project.name}</h3>
+          <a class="action-button action-button--outline" href={project.href[lang]}>
+            {t.viewProject}
+            <Arrow />
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="answers-section section-pad" aria-labelledby="answers-title">
+    <div class="commercial-heading">
+      <span class="section-kicker">{t.faqLabel}</span>
+      <h2 id="answers-title">{t.faqTitle}</h2>
+    </div>
+    <div class="answers-list">
+      {t.faqs.map(([question, answer]) => (
+        <details class="answer" name="questions">
+          <summary>
+            <h3>{question}</h3>
+            <span class="disclosure-symbol" aria-hidden="true">
+              +
+            </span>
+          </summary>
+          <p>{answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="closing-section section-pad" aria-labelledby="closing-title">
+    <span class="section-kicker">{t.ctaLabel}</span>
+    <div class="closing-heading">
+      <h2 id="closing-title">
+        {t.ctaTitle[0]}
+        <br />
+        <span>{t.ctaTitle[1]}</span>
+      </h2>
+      <Mark />
+    </div>
+    <div class="closing-bottom">
+      <p>{t.ctaText}</p>
+      <div class="closing-actions">
+        <a class="action-button" href={contact}>
+          {t.ctaButton}
+          <Arrow />
+        </a>
+        <a class="action-button action-button--outline" href={`mailto:${site.email}`}>
+          {t.email}
+          <Arrow />
+        </a>
+      </div>
+    </div>
+  </section>
+</div>

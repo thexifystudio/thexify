@@ -1,0 +1,427 @@
+.hero {
+  padding: 36px var(--gutter) 0;
+  overflow: hidden;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 42px;
+}
+
+.hero-eyebrow .eyebrow:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-location,
+.hero-aside p,
+.shot-caption,
+.hero-bottom {
+  color: var(--muted);
+}
+
+.hero-title {
+  position: relative;
+  z-index: 3;
+  font-size: clamp(64px, 7.55vw, 130px);
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -0.065em;
+  text-align: center;
+}
+
+.hero-title > span {
+  display: block;
+}
+
+.hero-title-last {
+  color: var(--muted);
+}
+
+.hero-star {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  margin-left: 0.3em;
+  color: var(--green);
+  vertical-align: baseline;
+}
+
+.hero-collage {
+  position: relative;
+  z-index: 2;
+  height: 440px;
+  margin-top: 20px;
+}
+
+.hero-aside {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  z-index: 4;
+  width: 21%;
+}
+
+.hero-aside p {
+  max-width: 240px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.hero-aside .pill-link {
+  gap: 16px;
+  margin-top: 24px;
+  padding: 15px 18px;
+  font-size: 12px;
+}
+
+.hero-shot {
+  position: absolute;
+  display: block;
+  border: 1px solid #ffffff18;
+  border-radius: var(--radius-control);
+  background: #19251e;
+  filter: drop-shadow(0 35px 30px #0008);
+  transition: filter 0.25s;
+}
+
+.hero-shot:hover {
+  filter: drop-shadow(0 35px 32px #000b) brightness(1.08);
+}
+
+.hero-shot--one {
+  top: 16px;
+  left: 25%;
+  z-index: 2;
+  width: 48%;
+  transform: rotate(-7deg);
+}
+
+.hero-shot--two {
+  top: 133px;
+  left: 62%;
+  z-index: 3;
+  width: 29%;
+  transform: rotate(9deg);
+}
+
+.hero-shot img {
+  width: 100%;
+  border-radius: 0 0 var(--radius-control) var(--radius-control);
+}
+
+.browser-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--radius-control) var(--radius-control) 0 0;
+  background: #1c211e;
+  color: #c4cbc4;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.browser-chrome > svg {
+  width: 11px;
+  height: 11px;
+}
+
+.browser-chrome--light {
+  background: #e0e0d9;
+  color: #494c48;
+}
+
+.browser-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.browser-dots i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+.shot-caption {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.collage-cross {
+  position: absolute;
+  top: 330px;
+  left: 20%;
+  color: #81867b;
+  font-size: 28px;
+  font-weight: 200;
+}
+
+.hero-work-link {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  gap: 14px;
+  font-size: 13px;
+}
+
+.hero-wordmark {
+  position: relative;
+  z-index: 1;
+  margin: 0 -0.5vw;
+  padding-bottom: 0.07em;
+  color: var(--paper);
+  font-size: clamp(130px, 24.7vw, 460px);
+  font-weight: 700;
+  line-height: 0.84;
+  letter-spacing: -0.095em;
+  user-select: none;
+}
+
+.hero-wordmark > span {
+  position: absolute;
+  top: 0.42em;
+  right: 0.3em;
+  font-size: 0.095em;
+  letter-spacing: 0;
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.hero-bottom > a {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 44px;
+  color: var(--paper);
+}
+
+.hero-bottom > a span {
+  color: var(--green);
+  font-size: 22px;
+}
+
+.hero-bottom > span:last-child {
+  text-align: right;
+}
+
+@media (min-width: 1800px) {
+  .hero {
+    padding-inline: max(var(--gutter), calc((100vw - 1680px) / 2));
+  }
+
+  .hero-collage {
+    height: 600px;
+  }
+
+  .hero-wordmark {
+    font-size: 450px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .hero-collage {
+    height: 370px;
+  }
+
+  .hero-aside {
+    top: 30px;
+    width: 24%;
+  }
+
+  .hero-aside p {
+    font-size: 13px;
+  }
+
+  .hero-aside .pill-link {
+    gap: 10px;
+    padding: 13px 15px;
+    font-size: 12px;
+  }
+
+  .hero-shot--two {
+    top: 125px;
+  }
+
+  .hero-work-link {
+    top: 20px;
+  }
+
+  .collage-cross {
+    top: 270px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-title {
+    font-size: 8.5vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: 25px;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 34px;
+  }
+
+  .hero-eyebrow .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-location {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: clamp(38px, 10.5vw, 63px);
+    line-height: 1.1;
+    letter-spacing: -0.06em;
+    text-align: left;
+  }
+
+  .hero-star {
+    width: 0.55em;
+    height: 0.55em;
+    margin-left: 0.18em;
+  }
+
+  .hero-collage {
+    height: 440px;
+    margin-top: 24px;
+  }
+
+  .hero-aside {
+    position: relative;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .hero-aside p {
+    width: 50%;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .hero-aside .pill-link {
+    gap: 10px;
+    margin: 0;
+    padding: 13px 14px;
+    font-size: 12px;
+  }
+
+  .hero-shot--one {
+    top: 122px;
+    left: -3%;
+    width: 85%;
+  }
+
+  .hero-shot--two {
+    top: 240px;
+    left: 48%;
+    width: 55%;
+  }
+
+  .browser-chrome {
+    height: 24px;
+    padding-inline: 8px;
+    font-size: 11px;
+  }
+
+  .shot-caption {
+    bottom: -23px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-work-link {
+    top: 382px;
+    right: auto;
+    left: 0;
+    font-size: 12px;
+  }
+
+  .collage-cross {
+    top: 326px;
+    left: 28%;
+    font-size: 18px;
+  }
+
+  .hero-wordmark {
+    margin: 0;
+    padding-bottom: 0.09em;
+    font-size: 24vw;
+    letter-spacing: -0.085em;
+  }
+
+  .hero-wordmark span {
+    right: 0;
+  }
+
+  .hero-bottom {
+    gap: 12px;
+    padding: 18px 0;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-bottom > span:last-child {
+    display: none;
+  }
+
+  .hero-bottom > a {
+    gap: 12px;
+    font-size: 12px;
+    text-align: right;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero-aside {
+    align-items: flex-start;
+  }
+
+  .hero-aside p {
+    width: 46%;
+    font-size: 12px;
+  }
+
+  .hero-aside .pill-link {
+    max-width: 49%;
+  }
+
+  .browser-chrome > span:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
