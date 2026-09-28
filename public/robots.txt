@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /login/
+Disallow: /api/
 
-Sitemap: https://thexify.com/sitemap-index.xml
+Sitemap: https://thexify.com/sitemap.xml

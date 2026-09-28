@@ -1,4 +1,10 @@
 dist
 .astro
+.next
+.open-next
+.wrangler
 node_modules
+migrations
+package-lock.json
 dev.log
+worker-configuration.d.ts

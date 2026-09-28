@@ -1,0 +1,4 @@
+# Copy to .dev.vars (gitignored). Read by Wrangler in `next dev` and `npm run preview`.
+NEXTJS_ENV=development
+# 32 random bytes: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+AUTH_SECRET=

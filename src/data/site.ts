@@ -1,4 +1,5 @@
-const whatsappNumber = (import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? '').replace(/\D/g, '');
+// NEXT_PUBLIC_ so the value is inlined at build time for both server and client code.
+const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '').replace(/\D/g, '');
 
 export const site = {
   name: 'Thexify',
@@ -6,8 +7,9 @@ export const site = {
   domain: 'thexify.com',
   email: 'hola@thexify.com',
   whatsappNumber,
-  // Set after the owner explicitly approves where form submissions are delivered.
-  contactEndpoint: '',
+  // Submissions are stored in D1 and read from /admin/mensajes.
+  // Set to '' to go back to the mailto-only flow.
+  contactEndpoint: '/api/mensajes/',
 } as const;
 
 export function whatsappHref(message: string) {

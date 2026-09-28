@@ -380,11 +380,46 @@
 .portfolio-image:hover > span {
   transform: translate(3px, -3px);
 }
-.portfolio-card > .section-kicker {
+/* Rubro a la izquierda, estado real del caso a la derecha. El estado se declara
+   porque no todos los proyectos están publicados: decirlo evita presentar como
+   entregado algo que todavía se está construyendo. */
+.portfolio-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: 24px;
 }
+.portfolio-meta > .section-kicker {
+  margin: 0;
+}
+.portfolio-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.portfolio-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.portfolio-status--live {
+  color: var(--green);
+}
 .portfolio-card h3 {
-  margin: 10px 0 22px;
+  margin: 10px 0 8px;
+}
+.portfolio-summary {
+  margin: 0 0 22px;
+  max-width: 42ch;
+  color: var(--muted);
 }
 .answers-section {
   display: grid;

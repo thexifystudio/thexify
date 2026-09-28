@@ -1,4 +1,4 @@
-import type { ImageMetadata } from 'astro';
+import type { StaticImageData } from 'next/image';
 import cananguenoDesktop from '../assets/canangueno-desktop.webp';
 import cananguenoMobile from '../assets/canangueno-mobile.webp';
 import sunsuDesktop from '../assets/sunsu-desktop.webp';
@@ -12,8 +12,8 @@ export interface Project {
   client: string;
   sector: Localized;
   summary: Localized;
-  image: ImageMetadata;
-  mobileImage?: ImageMetadata;
+  image: StaticImageData;
+  mobileImage?: StaticImageData;
   status: Localized;
   url?: string;
   intro: Localized;

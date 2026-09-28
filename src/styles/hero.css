@@ -37,7 +37,10 @@
   display: block;
 }
 
-.hero-title-last {
+/* La primera línea plantea, la segunda remata: el peso visual va en la de
+   abajo, que además lleva la X de marca. Atenuar la primera hace que el ojo
+   caiga en «Hazla digital.» y no al revés. */
+.hero-title > span:first-child {
   color: var(--muted);
 }
 
@@ -136,12 +139,13 @@
   color: #494c48;
 }
 
-.browser-dots {
+/* Scoped to .hero: the case page has its own .browser-dots. */
+.hero .browser-dots {
   display: flex;
   gap: 3px;
 }
 
-.browser-dots i {
+.hero .browser-dots i {
   display: block;
   width: 4px;
   height: 4px;

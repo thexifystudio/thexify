@@ -1,0 +1,45 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Cuenta Thexify Studio (thexifystudio@gmail.com). Mismo Worker que el sitio
+  // anterior: desplegar este proyecto REEMPLAZA lo que hoy corre en
+  // thexify.thexifystudio.workers.dev.
+  "name": "thexify",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-14",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "observability": {
+    "enabled": true,
+    "redact_query_string": true,
+    "logs": { "enabled": true },
+    "traces": { "enabled": true },
+  },
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "thexify" }],
+  // Optimización de next/image vía Cloudflare Images.
+  "images": { "binding": "IMAGES" },
+  // Reactivar cuando la zona thexify.com esté en la cuenta Thexify Studio.
+  // "routes": [
+  //   { "pattern": "thexify.com", "custom_domain": true },
+  //   { "pattern": "www.thexify.com", "custom_domain": true }
+  // ],
+  "d1_databases": [
+    {
+      // Base existente: tablas users, messages y projects (migrations/0000 y 0001).
+      "binding": "DB",
+      "database_name": "thexify-db",
+      "database_id": "574d8901-ed6e-42d5-a264-0dabfd3213fa",
+      "migrations_dir": "migrations",
+    },
+  ],
+  "r2_buckets": [
+    {
+      // Para lo que suba el panel (portadas, galerías). Sin uso todavía.
+      "binding": "PHOTOS",
+      "bucket_name": "thexify-photos",
+    },
+  ],
+  // AUTH_SECRET nunca va acá: npx wrangler secret put AUTH_SECRET
+}

@@ -1,0 +1,45 @@
+.not-found {
+  min-height: 68vh;
+  padding: 110px var(--gutter) 130px;
+}
+
+.not-found > .eyebrow {
+  color: var(--green);
+}
+
+.not-found h1 {
+  margin: 30px 0;
+  font-size: clamp(48px, 7vw, 105px);
+  font-weight: 550;
+  line-height: 1.02;
+  letter-spacing: -0.065em;
+}
+
+.not-found h1 span {
+  color: var(--muted);
+}
+
+.not-found .not-found-en {
+  max-width: 520px;
+  color: var(--copy);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.not-found .not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 38px;
+}
+
+@media (max-width: 560px) {
+  .not-found {
+    padding-block: 75px 95px;
+  }
+
+  .not-found .not-found-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
