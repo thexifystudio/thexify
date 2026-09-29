@@ -11,10 +11,19 @@ import bcrypt from 'bcryptjs';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const [, , email, password, name = 'Matheo Flores'] = process.argv;
+let [, , email, password, name = 'Matheo Flores'] = process.argv;
+
+// Avoid putting production credentials in shell history or process arguments.
+// Populate these temporary variables from the shell's secure-input facility.
+if (email === '--env') {
+  email = process.env.THEXIFY_ADMIN_EMAIL?.trim();
+  password = process.env.THEXIFY_ADMIN_PASSWORD;
+  name = process.env.THEXIFY_ADMIN_NAME?.trim() || name;
+}
 
 if (!email || !password) {
   console.error('Uso: npm run db:seed-admin -- <correo> <contraseña> [nombre]');
+  console.error('Seguro: usa variables temporales y ejecuta `node scripts/seed-admin.mjs --env`.');
   process.exit(1);
 }
 if (password.length < 12) {

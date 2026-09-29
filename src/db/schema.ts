@@ -1,3 +1,4 @@
+import { sql } from 'drizzle-orm';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 /*
@@ -13,7 +14,9 @@ export const users = sqliteTable('users', {
   passwordHash: text('password_hash').notNull(),
   name: text('name').notNull(),
   role: text('role').default('admin').notNull(),
-  createdAt: text('created_at').default('CURRENT_TIMESTAMP').notNull(),
+  createdAt: text('created_at')
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
 
 /** Contact form submissions, read from /admin/mensajes. */
@@ -29,7 +32,9 @@ export const messages = sqliteTable('messages', {
   message: text('message').notNull(),
   /** nuevo | leido | archivado */
   status: text('status').default('nuevo').notNull(),
-  createdAt: text('created_at').default('CURRENT_TIMESTAMP').notNull(),
+  createdAt: text('created_at')
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
 
 /**
@@ -61,7 +66,9 @@ export const projects = sqliteTable('projects', {
   featured: integer('featured').default(0).notNull(),
   published: integer('published').default(1).notNull(),
   sortOrder: integer('sort_order').default(0).notNull(),
-  createdAt: text('created_at').default('CURRENT_TIMESTAMP').notNull(),
+  createdAt: text('created_at')
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
 
 export type User = typeof users.$inferSelect;

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { CasePage } from '@/components/CasePage';
 import { SiteFrame } from '@/components/SiteFrame';
 import { projects } from '@/data/projects';
-import { pageMetadata } from '@/lib/metadata';
+import { jsonLd, pageMetadata, projectImage, projectSchema } from '@/lib/metadata';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Params) {
     lang: 'en',
     path: `/en/work/${project.slug}/`,
     alternatePath: `/proyectos/${project.slug}/`,
+    image: projectImage(project.image, `${project.client} website, designed by Thexify`),
   });
 }
 
@@ -27,9 +28,14 @@ export default async function WorkPage({ params }: Params) {
   const { slug } = await params;
   const project = projects.find((entry) => entry.slug === slug);
   if (!project) notFound();
+  const path = `/en/work/${project.slug}/`;
 
   return (
     <SiteFrame lang="en" alternatePath={`/proyectos/${project.slug}/`}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(projectSchema(project, 'en', path)) }}
+      />
       <CasePage project={project} lang="en" />
     </SiteFrame>
   );

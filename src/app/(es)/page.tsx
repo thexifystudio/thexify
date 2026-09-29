@@ -3,7 +3,7 @@ import { SiteFrame } from '@/components/SiteFrame';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
-  title: 'Thexify — Diseño web que deja huella',
+  title: 'Thexify — Diseño y desarrollo web en Quito, Ecuador',
   lang: 'es',
   path: '/',
   alternatePath: '/en/',

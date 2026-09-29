@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { GraphicIcon } from '@/components/GraphicIcon';
 import { Mark } from '@/components/Mark';
 
@@ -14,11 +15,21 @@ const sections = [
 export function AdminShell({ email, children }: { email: string; children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [logoutError, setLogoutError] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
 
   async function logout() {
-    await fetch('/api/auth/logout/', { method: 'POST' });
-    router.replace('/login/');
-    router.refresh();
+    setLogoutError(false);
+    setLoggingOut(true);
+    try {
+      const response = await fetch('/api/auth/logout/', { method: 'POST' });
+      if (!response.ok) throw new Error(`Logout failed with ${response.status}`);
+      router.replace('/login/');
+      router.refresh();
+    } catch {
+      setLogoutError(true);
+      setLoggingOut(false);
+    }
   }
 
   return (
@@ -49,9 +60,14 @@ export function AdminShell({ email, children }: { email: string; children: React
           <span className="email" title={email}>
             {email}
           </span>
-          <button type="button" onClick={logout}>
+          {logoutError && (
+            <span className="admin-action-error" role="alert">
+              No se pudo cerrar la sesión. Inténtalo otra vez.
+            </span>
+          )}
+          <button type="button" onClick={logout} disabled={loggingOut}>
             <GraphicIcon name="logout" />
-            Cerrar sesión
+            {loggingOut ? 'Cerrando…' : 'Cerrar sesión'}
           </button>
         </div>
       </aside>

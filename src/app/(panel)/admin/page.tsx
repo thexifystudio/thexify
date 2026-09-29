@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { desc } from 'drizzle-orm';
+import { count, desc, eq } from 'drizzle-orm';
 import { messages } from '@/db/schema';
 import { getDb } from '@/lib/db';
 import { formatDate } from '@/lib/format';
@@ -7,14 +7,24 @@ import { formatDate } from '@/lib/format';
 async function loadSummary() {
   try {
     const db = await getDb();
-    const all = await db.select().from(messages).orderBy(desc(messages.id)).all();
+    const [[total], [unread], latest] = await Promise.all([
+      db.select({ value: count() }).from(messages).all(),
+      db.select({ value: count() }).from(messages).where(eq(messages.status, 'nuevo')).all(),
+      db.select().from(messages).orderBy(desc(messages.id)).limit(5).all(),
+    ]);
     return {
       ok: true as const,
-      total: all.length,
-      unread: all.filter((message) => message.status === 'nuevo').length,
-      latest: all.slice(0, 5),
+      total: total?.value ?? 0,
+      unread: unread?.value ?? 0,
+      latest,
     };
-  } catch {
+  } catch (error) {
+    console.error(
+      JSON.stringify({
+        event: 'admin_summary_load_failed',
+        error: error instanceof Error ? error.message : String(error),
+      }),
+    );
     return { ok: false as const };
   }
 }

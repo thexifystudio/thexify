@@ -1,7 +1,7 @@
 import { SiteMotion } from '@/components/SiteMotion';
 import { manrope } from '@/lib/fonts';
 import type { Lang } from '@/lib/i18n';
-import { organizationSchema } from '@/lib/metadata';
+import { jsonLd, siteSchema } from '@/lib/metadata';
 import '@/styles/global.css';
 
 /**
@@ -14,7 +14,7 @@ export function SiteDocument({ lang, children }: { lang: Lang; children: React.R
       <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema(lang)) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(siteSchema(lang)) }}
         />
         {children}
         <SiteMotion />

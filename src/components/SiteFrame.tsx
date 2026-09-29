@@ -62,6 +62,8 @@ export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
             aria-controls="mobile-menu"
             aria-expanded="false"
             aria-label={en ? 'Open navigation menu' : 'Abrir menú de navegación'}
+            data-open-label={en ? 'Open navigation menu' : 'Abrir menú de navegación'}
+            data-close-label={en ? 'Close navigation menu' : 'Cerrar menú de navegación'}
           >
             <span></span>
             <span></span>

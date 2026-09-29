@@ -81,6 +81,7 @@ export function SiteMotion() {
       menuOpen = false;
       menuPanel.hidden = true;
       menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', menuToggle.dataset.openLabel ?? 'Open menu');
       document.body.style.overflow = savedBodyOverflow;
       document.documentElement.style.overflow = savedRootOverflow;
       inertStates.forEach((wasInert, element) => {
@@ -99,6 +100,7 @@ export function SiteMotion() {
       menuOpen = true;
       menuPanel.hidden = false;
       menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.setAttribute('aria-label', menuToggle.dataset.closeLabel ?? 'Close menu');
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
       document.querySelectorAll<HTMLElement>('main, body > footer').forEach((element) => {
@@ -111,6 +113,7 @@ export function SiteMotion() {
     if (menuToggle && menuPanel) {
       menuPanel.hidden = true;
       menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', menuToggle.dataset.openLabel ?? 'Open menu');
       menuToggle.addEventListener('click', () => (menuOpen ? closeMenu() : openMenu()), {
         signal: pageEvents.signal,
       });

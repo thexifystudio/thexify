@@ -1,8 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  // Cuenta Thexify Studio (thexifystudio@gmail.com). Mismo Worker que el sitio
-  // anterior: desplegar este proyecto REEMPLAZA lo que hoy corre en
-  // thexify.thexifystudio.workers.dev.
+  // Cuenta Thexify Studio (thexifystudio@gmail.com). Worker de producción de thexify.com.
   "name": "thexify",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-09-14",
@@ -20,17 +18,16 @@
   "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "thexify" }],
   // Optimización de next/image vía Cloudflare Images.
   "images": { "binding": "IMAGES" },
-  // Reactivar cuando la zona thexify.com esté en la cuenta Thexify Studio.
-  // "routes": [
-  //   { "pattern": "thexify.com", "custom_domain": true },
-  //   { "pattern": "www.thexify.com", "custom_domain": true }
-  // ],
+  "routes": [
+    { "pattern": "thexify.com", "custom_domain": true },
+    { "pattern": "www.thexify.com", "custom_domain": true }
+  ],
   "d1_databases": [
     {
-      // Base existente: tablas users, messages y projects (migrations/0000 y 0001).
+      // Base existente: tablas users, messages y projects (migrations/0000 a 0002).
       "binding": "DB",
       "database_name": "thexify-db",
-      "database_id": "574d8901-ed6e-42d5-a264-0dabfd3213fa",
+      "database_id": "233e2515-6463-4d9a-a21d-6359e67b5235",
       "migrations_dir": "migrations",
     },
   ],
@@ -41,5 +38,21 @@
       "bucket_name": "thexify-photos",
     },
   ],
+  // Límite por IP en el edge: 5 intentos de login y 5 mensajes por minuto.
+  "ratelimits": [
+    {
+      "name": "LOGIN_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 5, "period": 60 },
+    },
+    {
+      "name": "CONTACT_RATE_LIMITER",
+      "namespace_id": "1002",
+      "simple": { "limit": 5, "period": 60 },
+    },
+  ],
+  // Sólo thexify.com: workers.dev sería una copia duplicada del sitio para Google.
+  "workers_dev": false,
+  "preview_urls": false,
   // AUTH_SECRET nunca va acá: npx wrangler secret put AUTH_SECRET
 }

@@ -30,9 +30,9 @@ src/components           componentes del sitio (portados 1:1 desde Astro)
 src/styles               CSS propio; los estilos por página van con prefijo (.case-page, .contact-page…)
 src/data                 textos de casos, portafolio, precios y datos del sitio
 src/db/schema.ts         esquema Drizzle (= base thexify-db existente)
-src/lib                  auth, sesión, D1, metadatos, fuente
-src/middleware.ts        portero de /admin (sólo mira la cookie; la firma se valida en layout y API)
-migrations/              migraciones D1 (0000 y 0001 ya aplicadas en remoto)
+src/lib                  auth, sesión, D1, metadatos + JSON-LD, rate limit, lectura segura de JSON
+src/middleware.ts        http:// y www. → https://thexify.com (301) y portero de /admin
+migrations/              migraciones D1 (0000 a 0002 ya aplicadas en remoto)
 ```
 
 ## Desarrollo local
@@ -62,17 +62,37 @@ Verificación: `npm run cf-typecheck`, `npm run typecheck`, `npm run lint`, `npm
 
 ## Producción (cuenta Thexify Studio)
 
-`wrangler.jsonc` usa el Worker `thexify`, la D1 `thexify-db` y el bucket R2 `thexify-photos` que ya
-existen en la cuenta `thexifystudio@gmail.com`. **Desplegar este proyecto reemplaza el sitio
-anterior** que hoy corre en `thexify.thexifystudio.workers.dev`.
+`wrangler.jsonc` usa el Worker `thexify`, la D1 `thexify-db` (`233e2515…`) y el bucket R2
+`thexify-photos` de la cuenta `thexifystudio@gmail.com`. El Worker sirve `thexify.com` y
+`www.thexify.com` como dominios propios; `workers.dev` está apagado para no duplicar el sitio.
 
-1. `npx wrangler secret put AUTH_SECRET` (si no está cargado ya: el Worker es el mismo).
-2. Sembrar el admin remoto: mismo script, aplicando con `--remote`.
+1. `npx wrangler secret put AUTH_SECRET` (mínimo 32 caracteres; si falta, el login responde 500).
+2. Sembrar el admin remoto sin dejar la contraseña en el historial: variables temporales
+   `THEXIFY_ADMIN_EMAIL` / `THEXIFY_ADMIN_PASSWORD` y `node scripts/seed-admin.mjs --env`,
+   luego aplicar `seed-admin.sql` con `--remote`.
 3. `npm run db:migrate:remote` sólo si se agregan migraciones nuevas.
 4. `npm run deploy`.
-5. Dominio: descomentar `routes` en `wrangler.jsonc` cuando la zona `thexify.com` esté en esta cuenta.
-6. Seguridad por dominio (dashboard): rate limiting a `POST /api/auth/login/` y `/api/mensajes/`,
-   regla WAF contra `x-middleware-subrequest`, Bot Fight Mode, SSL Full (strict).
+
+### Seguridad
+
+En el código (no depende del dashboard):
+
+- Headers en todas las respuestas (`next.config.ts` + `public/_headers` para archivos estáticos):
+  CSP, HSTS, `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP.
+  La CSP permite scripts inline porque las páginas son estáticas (sin nonce); todo origen externo
+  está bloqueado. Si se agrega un servicio de terceros (analytics, chat, mapas), hay que sumarlo a la CSP.
+- Rate limiting en el edge (`ratelimits` en `wrangler.jsonc`): 5 logins y 5 mensajes por minuto e IP.
+- Login: verificación de origen, cuerpo JSON limitado, comparación con hash señuelo para no revelar
+  qué correos existen, JWT con emisor/audiencia, cookie `__Host-` HttpOnly Secure SameSite=Lax.
+- `/admin`, `/login` y `/api` van con `no-store` y `X-Robots-Tag: noindex`.
+
+Pendiente en el dashboard de Cloudflare (zona `thexify.com`):
+
+- SSL/TLS → Edge Certificates → **Always Use HTTPS** activado (el middleware ya redirige las
+  páginas; esto cubre también los archivos estáticos).
+- Security → **Bot Fight Mode** activado.
+- Regla WAF que bloquee peticiones con el header `x-middleware-subrequest` (defensa extra; el
+  layout de `/admin` ya valida el JWT por su cuenta).
 
 Si `opennextjs-cloudflare build` falla con `No loader is configured for ".map" files`,
 borrar `.next` y `.open-next` y reintentar.

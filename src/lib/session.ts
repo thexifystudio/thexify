@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { SESSION_COOKIE, getTokenFromRequest, verifyToken } from '@/lib/auth';
+import { SESSION_COOKIES, getTokenFromRequest, verifyToken } from '@/lib/auth';
 import { getEnv } from '@/lib/db';
 
 /**
@@ -19,7 +19,8 @@ export async function getSession(request: Request) {
 /** Server Components (the /admin layout). */
 export async function getServerSession() {
   try {
-    const token = (await cookies()).get(SESSION_COOKIE)?.value;
+    const cookieStore = await cookies();
+    const token = SESSION_COOKIES.map((name) => cookieStore.get(name)?.value).find(Boolean);
     if (!token) return null;
     const env = await getEnv();
     if (!env.AUTH_SECRET) return null;
@@ -30,5 +31,5 @@ export async function getServerSession() {
 }
 
 export function unauthorized() {
-  return Response.json({ error: 'No autorizado' }, { status: 401 });
+  return Response.json({ error: 'No autorizado' }, { status: 401, headers: { 'Cache-Control': 'no-store' } });
 }

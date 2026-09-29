@@ -218,8 +218,17 @@
   transition: color 0.2s;
 }
 .admin-foot a:hover,
-.admin-foot button:hover {
+.admin-foot button:hover:not(:disabled) {
   color: var(--green);
+}
+.admin-foot button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+.admin-action-error {
+  color: #ff9c91;
+  font-size: 12px;
+  line-height: 1.45;
 }
 .admin-foot .email {
   overflow: hidden;

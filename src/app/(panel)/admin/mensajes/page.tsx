@@ -8,7 +8,13 @@ export default async function MessagesPage() {
   try {
     const db = await getDb();
     rows = await db.select().from(messages).orderBy(desc(messages.id)).all();
-  } catch {
+  } catch (error) {
+    console.error(
+      JSON.stringify({
+        event: 'admin_messages_load_failed',
+        error: error instanceof Error ? error.message : String(error),
+      }),
+    );
     rows = null;
   }
 
