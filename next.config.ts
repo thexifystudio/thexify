@@ -55,5 +55,6 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 
 // Gives `next dev` access to the Cloudflare bindings (D1, R2, secrets from .dev.vars).
+// Only in dev: it starts a local workerd, which builds do not need.
 import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
-void initOpenNextCloudflareForDev();
+if (isDev) void initOpenNextCloudflareForDev();

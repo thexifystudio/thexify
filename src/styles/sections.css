@@ -716,3 +716,56 @@
     font-size: 13px;
   }
 }
+
+/* "Somos Thexify": how the studio works with AI, closing the #estudio section. */
+.home-sections .studio-ai {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 6vw;
+  margin-top: 72px;
+  padding-top: 56px;
+  border-top: 1px solid var(--line);
+}
+.home-sections .studio-ai h3 {
+  font-size: clamp(30px, 3.2vw, 48px);
+  line-height: 1.1;
+  font-weight: 550;
+  letter-spacing: -1.6px;
+}
+.home-sections .studio-ai h3 span {
+  color: var(--copy);
+}
+.home-sections .studio-ai-copy {
+  max-width: 640px;
+}
+.home-sections .studio-ai-copy > p:first-child {
+  font-size: 18px;
+  line-height: 1.75;
+}
+.home-sections .studio-ai-note {
+  display: flex;
+  gap: 14px;
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  color: var(--paper);
+}
+.home-sections .studio-ai-note > span {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 12px;
+  border-radius: 50%;
+  background: var(--green);
+}
+@media (max-width: 900px) {
+  .home-sections .studio-ai {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 48px;
+    padding-top: 40px;
+  }
+  .home-sections .studio-ai-copy > p:first-child {
+    font-size: 16px;
+  }
+}

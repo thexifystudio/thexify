@@ -1,7 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import type { Lang } from '@/lib/i18n';
+import { paths, type Lang } from '@/lib/i18n';
 
 interface Props {
   lang: Lang;
@@ -28,6 +29,7 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         prepare: 'Send enquiry',
         sending: 'Sending…',
         privacy: 'Your details are used only to reply to this enquiry.',
+        privacyLink: 'Privacy policy',
         ready: 'Thanks. Your enquiry has been sent and we’ll reply as soon as possible.',
         error: 'We couldn’t send your enquiry. Please try again or write to us directly.',
         open: 'Write by email',
@@ -45,6 +47,7 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         prepare: 'Enviar consulta',
         sending: 'Enviando…',
         privacy: 'Usaremos tus datos únicamente para responder esta consulta.',
+        privacyLink: 'Política de privacidad',
         ready: 'Gracias. Recibimos tu consulta y te responderemos lo antes posible.',
         error: 'No pudimos enviar tu consulta. Inténtalo otra vez o escríbenos directamente.',
         open: 'Escribir por correo',
@@ -194,7 +197,9 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
           <span data-submit-label>{sending ? text.sending : text.prepare}</span>
           <span aria-hidden="true">↗</span>
         </button>
-        <p>{text.privacy}</p>
+        <p>
+          {text.privacy} <Link href={paths.privacy(lang)}>{text.privacyLink}</Link>
+        </p>
       </div>
       <div
         ref={resultRef}

@@ -113,6 +113,7 @@ export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Thexify Studio</span>
           <span>Quito, Ecuador · {en ? 'Working everywhere' : 'Creamos sin fronteras'}</span>
+          <Link href={paths.privacy(lang)}>{en ? 'Privacy policy' : 'Política de privacidad'}</Link>
           <a href={`mailto:${site.email}`}>
             {site.email} <span aria-hidden="true">↗</span>
           </a>

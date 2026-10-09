@@ -18,14 +18,18 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
     ? [
         ['mail', 'Business email', 'Your brand in every conversation.'],
         ['brand', 'Visual identity', 'A consistent look across every touchpoint.'],
-        ['automation', 'Automations', 'Connected tools. Fewer repetitive tasks.'],
-        ['chat', 'Chatbots', 'Guide visitors and answer common questions.'],
+        ['automation', 'Automations', 'Connected tools and Claude by Anthropic. Fewer repetitive tasks.'],
+        ['chat', 'Chatbots', 'Powered by Claude by Anthropic. Guide visitors and answer common questions.'],
       ]
     : [
         ['mail', 'Correo empresarial', 'Tu marca en cada conversación.'],
         ['brand', 'Identidad visual', 'Una imagen coherente en cada detalle.'],
-        ['automation', 'Automatizaciones', 'Herramientas conectadas. Menos tareas repetidas.'],
-        ['chat', 'Chatbots', 'Orienta a tus visitas y responde dudas frecuentes.'],
+        [
+          'automation',
+          'Automatizaciones',
+          'Herramientas conectadas con Claude de Anthropic. Menos tareas repetidas.',
+        ],
+        ['chat', 'Chatbots', 'Con Claude de Anthropic: orienta a tus visitas y responde dudas frecuentes.'],
       ];
   const t = en
     ? {
@@ -125,6 +129,12 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
             text: 'Domain, code and accounts in your name. We show you how to manage it and where everything lives.',
           },
         ],
+        studio: {
+          title: 'We are Thexify',
+          subtitle: 'A modern studio that builds with AI.',
+          text: 'We use artificial intelligence, mainly Claude by Anthropic, at every stage of a project: to research, to write and review code, and to test your website before it goes live. That lets us deliver faster and spend more time understanding your business.',
+          note: 'AI speeds up the work. We decide on and review the design, the content and the final quality.',
+        },
         processLabel: 'How we work',
         processTitle: ['Four steps.', 'We finish when it works.'],
         processIntro:
@@ -294,6 +304,12 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
             text: 'Dominio, código y cuentas son tuyos. Te enseñamos a manejarla y dónde está cada cosa.',
           },
         ],
+        studio: {
+          title: 'Somos Thexify',
+          subtitle: 'Un estudio moderno que construye con IA.',
+          text: 'Usamos inteligencia artificial, principalmente Claude de Anthropic, en cada etapa del proyecto: para investigar, escribir y revisar código y probar tu web antes de publicarla. Así entregamos más rápido y dedicamos más tiempo a entender tu negocio.',
+          note: 'La IA acelera el trabajo. El diseño, el contenido y la calidad final los decidimos y revisamos nosotros.',
+        },
         processLabel: 'Cómo trabajamos',
         processTitle: ['Cuatro pasos.', 'Terminamos cuando funciona.'],
         processIntro:
@@ -598,6 +614,20 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
               <p>{reason.text}</p>
             </article>
           ))}
+        </div>
+        <div className="studio-ai" data-reveal>
+          <h3>
+            {t.studio.title}
+            <br />
+            <span>{t.studio.subtitle}</span>
+          </h3>
+          <div className="studio-ai-copy">
+            <p>{t.studio.text}</p>
+            <p className="studio-ai-note">
+              <span aria-hidden="true"></span>
+              {t.studio.note}
+            </p>
+          </div>
         </div>
       </section>
 

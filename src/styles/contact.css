@@ -221,6 +221,16 @@
   color: var(--muted);
   margin: 0;
 }
+.contact-page .form-submit > p a {
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+.contact-page .form-submit > p a:hover {
+  color: var(--green);
+}
 .contact-page .email-result {
   margin-top: 28px;
   border-left: 2px solid var(--green);

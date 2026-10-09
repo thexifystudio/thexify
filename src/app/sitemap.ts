@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pairs: [string, string][] = [
     ['/', '/en/'],
     ['/contacto/', '/en/contact/'],
+    ['/privacidad/', '/en/privacy/'],
     ...projects.map((project): [string, string] => [
       `/proyectos/${project.slug}/`,
       `/en/work/${project.slug}/`,
