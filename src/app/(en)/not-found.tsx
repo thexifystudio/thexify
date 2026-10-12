@@ -2,7 +2,7 @@ import { NotFound } from '@/components/NotFound';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
-  title: 'Página no encontrada / Page not found — Thexify',
+  title: 'Page not found — Thexify',
   path: '/404/',
   lang: 'en',
   errorPage: true,

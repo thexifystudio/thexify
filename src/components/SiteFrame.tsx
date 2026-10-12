@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Arrow } from '@/components/Arrow';
 import { BrandSymbol } from '@/components/BrandSymbol';
 import { Icon } from '@/components/Icon';
-import { site, whatsappHref } from '@/data/site';
+import { site } from '@/data/site';
 import { paths, type Lang } from '@/lib/i18n';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   /** Same page in the other language (language switch). */
   alternatePath?: string;
   /** Marks the matching navigation entry as the current page. */
-  current?: 'webs';
+  current?: 'webs' | 'contact';
   children: React.ReactNode;
 }
 
@@ -19,23 +19,19 @@ interface Props {
  * Rendered by each page, not by the layout, because only the page knows its
  * alternate-language URL.
  */
-export function SiteFrame({ lang = 'es', alternatePath, current, children }: Props) {
+export function SiteFrame({ lang = 'en', alternatePath, current, children }: Props) {
   const en = lang === 'en';
   const home = paths.home(lang);
   const contact = paths.contact(lang);
   const webs = paths.webs(lang);
+  // Websites are a second line of business: linked from the footer, not the header.
   const nav = [
-    { href: `${home}#soluciones`, label: en ? 'Solutions' : 'Soluciones' },
-    { href: webs, label: en ? 'Websites' : 'Webs', current: current === 'webs' },
-    { href: `${home}#proceso`, label: en ? 'Process' : 'Proceso' },
-    { href: `${home}#proyectos`, label: en ? 'Work' : 'Proyectos' },
+    { href: `${home}#solutions`, label: en ? 'What we build' : 'Qué construimos' },
+    { href: `${home}#about`, label: en ? 'About us' : 'Nosotros' },
+    { href: `${home}#process`, label: en ? 'Process' : 'Proceso' },
+    { href: `${home}#faq`, label: 'FAQ' },
   ];
-  const alternate = alternatePath ?? (en ? '/' : '/en/');
-  const whatsapp = whatsappHref(
-    en
-      ? 'Hello Thexify, I would like to discuss a project.'
-      : 'Hola Thexify, quisiera conversar sobre un proyecto.',
-  );
+  const alternate = alternatePath ?? paths.home(en ? 'es' : 'en');
 
   return (
     <>
@@ -45,11 +41,11 @@ export function SiteFrame({ lang = 'es', alternatePath, current, children }: Pro
       <header className="site-header">
         <Link className="brand" href={home} aria-label={en ? 'Thexify, home' : 'Thexify, inicio'}>
           <BrandSymbol />
-          <span>thexify</span>
+          <span>Thexify</span>
         </Link>
         <nav className="desktop-nav" aria-label={en ? 'Main navigation' : 'Navegación principal'}>
           {nav.map((item) => (
-            <Link key={item.href} href={item.href} aria-current={item.current ? 'page' : undefined}>
+            <Link key={item.href} href={item.href}>
               {item.label}
             </Link>
           ))}
@@ -64,8 +60,8 @@ export function SiteFrame({ lang = 'es', alternatePath, current, children }: Pro
             <Icon name="globe" />
             {en ? 'ES' : 'EN'}
           </Link>
-          <Link className="header-cta" href={contact}>
-            {en ? 'Get a quote' : 'Cotizar'}
+          <Link className="header-cta" href={contact} aria-current={current === 'contact' ? 'page' : undefined}>
+            {en ? 'Contact us' : 'Contáctanos'}
           </Link>
           <button
             className="menu-toggle"
@@ -88,12 +84,12 @@ export function SiteFrame({ lang = 'es', alternatePath, current, children }: Pro
           aria-label={en ? 'Mobile navigation' : 'Navegación móvil'}
         >
           {nav.map((item) => (
-            <Link key={item.href} href={item.href} aria-current={item.current ? 'page' : undefined}>
+            <Link key={item.href} href={item.href}>
               {item.label}
             </Link>
           ))}
           <Link href={contact}>
-            {en ? 'Start a project' : 'Empezar un proyecto'} <Arrow />
+            {en ? 'Contact us' : 'Contáctanos'} <Arrow />
           </Link>
           <span className="eyebrow">Quito, Ecuador · {en ? 'Working everywhere' : 'Sin fronteras'}</span>
         </nav>
@@ -115,40 +111,29 @@ export function SiteFrame({ lang = 'es', alternatePath, current, children }: Pro
         <div className="footer-top">
           <Link className="brand" href={home}>
             <BrandSymbol />
-            <span>thexify</span>
+            <span>Thexify</span>
           </Link>
           <p>
-            {en ? 'Thoughtfully designed. Precisely built.' : 'Diseño con intención. Código con precisión.'}
+            {en
+              ? 'A startup building AI-powered software with Claude.'
+              : 'Una startup que construye software con IA usando Claude.'}
           </p>
           <Link className="text-link" href={contact}>
             {en ? 'Start a conversation' : 'Empecemos a hablar'} <Arrow />
           </Link>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Thexify Studio</span>
+          <span>© {new Date().getFullYear()} Thexify</span>
           <span>Quito, Ecuador · {en ? 'Working everywhere' : 'Creamos sin fronteras'}</span>
+          <Link href={webs} aria-current={current === 'webs' ? 'page' : undefined}>
+            {en ? 'Websites' : 'Webs'}
+          </Link>
           <Link href={paths.privacy(lang)}>{en ? 'Privacy policy' : 'Política de privacidad'}</Link>
           <a href={`mailto:${site.email}`}>
             {site.email} <span aria-hidden="true">↗</span>
           </a>
         </div>
       </footer>
-      {whatsapp && (
-        <a
-          className="whatsapp-fab"
-          href={whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={
-            en
-              ? 'Talk to Thexify on WhatsApp (opens in a new tab)'
-              : 'Hablar con Thexify por WhatsApp (abre en una pestaña nueva)'
-          }
-        >
-          <span aria-hidden="true">WA</span>
-          <strong>{en ? 'WhatsApp' : 'Escríbenos'}</strong>
-        </a>
-      )}
     </>
   );
 }

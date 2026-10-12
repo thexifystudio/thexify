@@ -7,13 +7,13 @@ export const metadata = pageMetadata({
   description:
     'Qué datos recoge el formulario de contacto de Thexify, para qué se usan, cuánto tiempo se guardan y cómo ejercer tus derechos según la LOPDP del Ecuador.',
   lang: 'es',
-  path: '/privacidad/',
-  alternatePath: '/en/privacy/',
+  path: '/es/privacidad/',
+  alternatePath: '/privacy/',
 });
 
 export default function PrivacidadPage() {
   return (
-    <SiteFrame lang="es" alternatePath="/en/privacy/">
+    <SiteFrame lang="es" alternatePath="/privacy/">
       <PrivacyPage lang="es" />
     </SiteFrame>
   );

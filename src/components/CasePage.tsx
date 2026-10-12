@@ -4,12 +4,12 @@ import { projects, type Project } from '@/data/projects';
 import { paths, type Lang } from '@/lib/i18n';
 import '@/styles/case.css';
 
-export function CasePage({ project, lang = 'es' }: { project: Project; lang?: Lang }) {
+export function CasePage({ project, lang = 'en' }: { project: Project; lang?: Lang }) {
   const en = lang === 'en';
   const next = projects[(projects.findIndex((entry) => entry.slug === project.slug) + 1) % projects.length];
   const workRoot = paths.work(lang);
   const contactPath = paths.contact(lang);
-  const homeWorkPath = en ? '/en/#proyectos' : '/#proyectos';
+  const homeWorkPath = `${paths.webs(lang)}#proyectos`;
 
   return (
     <article className={`case-page case-${project.slug}`}>

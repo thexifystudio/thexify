@@ -7,13 +7,13 @@ export const metadata = pageMetadata({
   description:
     'What data the Thexify contact form collects, what it is used for, how long it is kept and how to exercise your rights under Ecuador’s LOPDP.',
   lang: 'en',
-  path: '/en/privacy/',
-  alternatePath: '/privacidad/',
+  path: '/privacy/',
+  alternatePath: '/es/privacidad/',
 });
 
 export default function EnglishPrivacyPage() {
   return (
-    <SiteFrame lang="en" alternatePath="/privacidad/">
+    <SiteFrame lang="en" alternatePath="/es/privacidad/">
       <PrivacyPage lang="en" />
     </SiteFrame>
   );

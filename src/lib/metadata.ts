@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from 'next';
 import type { StaticImageData } from 'next/image';
 import type { Project } from '@/data/projects';
 import { site } from '@/data/site';
-import type { Lang } from '@/lib/i18n';
+import { paths, type Lang } from '@/lib/i18n';
 
 const defaultDescription =
-  'Software con IA para tu negocio: productos SaaS, plataformas web y soluciones con inteligencia artificial, además de webs y tiendas Shopify. Desde Quito, para el mundo.';
+  'Thexify is a startup that builds AI-powered software with Claude by Anthropic: SaaS products, internal tools and AI assistants that do real work.';
 
 export const siteViewport: Viewport = { themeColor: '#101110' };
 
@@ -29,9 +29,9 @@ interface PageMeta {
 export function pageMetadata({
   title,
   description = defaultDescription,
-  lang = 'es',
+  lang = 'en',
   path,
-  alternatePath = lang === 'es' ? '/en/' : '/',
+  alternatePath = lang === 'es' ? '/' : '/es/',
   image,
   errorPage = false,
 }: PageMeta): Metadata {
@@ -43,8 +43,8 @@ export function pageMetadata({
     width: 1200,
     height: 630,
     alt: en
-      ? 'Thexify — Thoughtfully designed. Precisely built.'
-      : 'Thexify — Diseño con intención. Código con precisión.',
+      ? 'Thexify — AI software that does real work.'
+      : 'Thexify — Software con IA que hace trabajo real.',
   };
 
   return {
@@ -55,7 +55,7 @@ export function pageMetadata({
     robots: errorPage ? { index: false, follow: true } : { index: true, follow: true, 'max-image-preview': 'large' },
     alternates: errorPage
       ? undefined
-      : { canonical: path, languages: { es: esPath, en: enPath, 'x-default': esPath } },
+      : { canonical: path, languages: { es: esPath, en: enPath, 'x-default': enPath } },
     icons: {
       icon: [
         { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -105,20 +105,21 @@ export function siteSchema(lang: Lang) {
         logo: absolute('/icon-512.png'),
         image: absolute('/og.png'),
         description: en
-          ? 'Software studio in Quito, Ecuador that designs and builds SaaS products, web platforms and AI solutions with Claude by Anthropic, plus websites and Shopify stores.'
-          : 'Estudio de software en Quito, Ecuador que diseña y construye productos SaaS, plataformas web y soluciones con IA con Claude de Anthropic, además de webs y tiendas Shopify.',
+          ? 'Startup from Quito, Ecuador that builds AI-powered software with Claude by Anthropic: SaaS products, internal tools and AI assistants.'
+          : 'Startup de Quito, Ecuador que construye software con IA usando Claude de Anthropic: productos SaaS, herramientas internas y asistentes con IA.',
         email: site.email,
+        foundingDate: '2025-10',
         areaServed: ['Ecuador', 'Latin America', 'United States'],
         address: { '@type': 'PostalAddress', addressLocality: 'Quito', addressCountry: 'EC' },
         knowsLanguage: ['es', 'en'],
         serviceType: en
-          ? ['Software development', 'SaaS development', 'AI solutions', 'Web design', 'Shopify stores']
-          : ['Desarrollo de software', 'Desarrollo de SaaS', 'Soluciones con IA', 'Diseño web', 'Tiendas Shopify'],
+          ? ['Software development', 'SaaS development', 'AI solutions', 'AI assistants', 'Workflow automation']
+          : ['Desarrollo de software', 'Desarrollo de SaaS', 'Soluciones con IA', 'Asistentes con IA', 'Automatización de procesos'],
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'sales',
           email: site.email,
-          url: absolute(en ? '/en/contact/' : '/contacto/'),
+          url: absolute(paths.contact(lang)),
           availableLanguage: ['es', 'en'],
         },
       },
@@ -127,7 +128,7 @@ export function siteSchema(lang: Lang) {
         '@id': WEBSITE_ID,
         name: site.name,
         url: site.url,
-        inLanguage: ['es', 'en'],
+        inLanguage: ['en', 'es'],
         publisher: { '@id': ORGANIZATION_ID },
       },
     ],
@@ -158,7 +159,7 @@ export function projectSchema(project: Project, lang: Lang, path: string) {
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: en ? 'Home' : 'Inicio', item: absolute(en ? '/en/' : '/') },
+          { '@type': 'ListItem', position: 1, name: en ? 'Home' : 'Inicio', item: absolute(paths.home(lang)) },
           { '@type': 'ListItem', position: 2, name: project.title, item: url },
         ],
       },

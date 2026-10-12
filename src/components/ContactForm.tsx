@@ -9,12 +9,11 @@ interface Props {
   email: string;
   /** Where submissions are POSTed. Empty: open the visitor's mail app instead. */
   endpoint: string;
-  whatsapp: string | null;
 }
 
-const services = ['software', 'ai', 'website', 'webapp', 'shopify'];
+const services = ['software', 'ai', 'automation', 'website'];
 
-export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
+export function ContactForm({ lang, email, endpoint }: Props) {
   const en = lang === 'en';
   const text = en
     ? {
@@ -25,7 +24,7 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         service: 'What do you have in mind?',
         description: 'Tell us a little about your project',
         placeholder:
-          'What do you do, what would you like to build, and what should your website help you achieve?',
+          'What does your business do, what would you like to build, and what problem should it solve?',
         prepare: 'Send enquiry',
         sending: 'Sending…',
         privacy: 'Your details are used only to reply to this enquiry.',
@@ -33,7 +32,6 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         ready: 'Thanks. Your enquiry has been sent and we’ll reply as soon as possible.',
         error: 'We couldn’t send your enquiry. Please try again or write to us directly.',
         open: 'Write by email',
-        whatsapp: 'Talk on WhatsApp',
         nojs: 'To start a conversation, email us directly with a few details about your project.',
       }
     : {
@@ -43,7 +41,7 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         optional: '(opcional)',
         service: '¿Qué tienes en mente?',
         description: 'Cuéntanos un poco sobre tu proyecto',
-        placeholder: '¿A qué te dedicas, qué te gustaría construir y qué quieres conseguir con tu web?',
+        placeholder: '¿A qué se dedica tu negocio, qué te gustaría construir y qué problema debería resolver?',
         prepare: 'Enviar consulta',
         sending: 'Enviando…',
         privacy: 'Usaremos tus datos únicamente para responder esta consulta.',
@@ -51,7 +49,6 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         ready: 'Gracias. Recibimos tu consulta y te responderemos lo antes posible.',
         error: 'No pudimos enviar tu consulta. Inténtalo otra vez o escríbenos directamente.',
         open: 'Escribir por correo',
-        whatsapp: 'Hablar por WhatsApp',
         nojs: 'Para empezar la conversación, escríbenos directamente con unos detalles de tu proyecto.',
       };
 
@@ -63,7 +60,7 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
   const [fallbackHref, setFallbackHref] = useState(`mailto:${email}`);
 
   useEffect(() => {
-    // ?service=webapp (from the quote buttons) preselects the service.
+    // ?service=ai (from the service links) preselects the service.
     const selected = new URLSearchParams(window.location.search).get('service');
     if (serviceRef.current && selected && services.includes(selected)) serviceRef.current.value = selected;
     if (startedAtRef.current) startedAtRef.current.value = String(Date.now());
@@ -167,12 +164,9 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         <select ref={serviceRef} name="service" defaultValue="unsure">
           <option value="unsure">{en ? 'Let’s figure it out together' : 'Lo definimos juntos'}</option>
           <option value="software">{en ? 'A SaaS product or platform' : 'Un producto SaaS o plataforma'}</option>
-          <option value="ai">{en ? 'An AI solution' : 'Una solución con IA'}</option>
-          <option value="website">{en ? 'A website' : 'Un sitio web'}</option>
-          <option value="webapp">
-            {en ? 'A web app or admin dashboard' : 'Una web con panel o sistema'}
-          </option>
-          <option value="shopify">{en ? 'A Shopify store' : 'Una tienda Shopify'}</option>
+          <option value="ai">{en ? 'An AI assistant or agent' : 'Un asistente o agente con IA'}</option>
+          <option value="automation">{en ? 'Automating a process' : 'Automatizar un proceso'}</option>
+          <option value="website">{en ? 'A website or online store' : 'Una web o tienda online'}</option>
         </select>
         <span className="select-chevron" aria-hidden="true">
           ⌄
@@ -219,12 +213,6 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
             {text.open}
             <span aria-hidden="true"> ↗</span>
           </a>
-          {whatsapp && (
-            <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-              {text.whatsapp}
-              <span aria-hidden="true"> ↗</span>
-            </a>
-          )}
         </div>
       </div>
       <noscript>

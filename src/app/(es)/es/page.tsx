@@ -7,13 +7,13 @@ export const metadata = pageMetadata({
   description:
     'Diseñamos y construimos productos SaaS, plataformas web y soluciones con inteligencia artificial con Claude de Anthropic. Desde Quito, para negocios y emprendedores de todo el mundo.',
   lang: 'es',
-  path: '/',
-  alternatePath: '/en/',
+  path: '/es/',
+  alternatePath: '/',
 });
 
 export default function HomePage() {
   return (
-    <SiteFrame lang="es" alternatePath="/en/">
+    <SiteFrame lang="es" alternatePath="/">
       <Home lang="es" />
     </SiteFrame>
   );

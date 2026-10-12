@@ -17,9 +17,9 @@ function hashTarget(hash: string) {
 
 /** Root layout a path belongs to. Next does a full load between root layouts. */
 function rootOf(pathname: string) {
-  if (pathname === '/en' || pathname.startsWith('/en/')) return 'en';
+  if (pathname === '/es' || pathname.startsWith('/es/')) return 'es';
   if (pathname.startsWith('/admin') || pathname.startsWith('/login')) return 'panel';
-  return 'es';
+  return 'en';
 }
 
 /**

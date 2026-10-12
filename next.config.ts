@@ -33,11 +33,24 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  // Same public URLs as the Astro build: /contacto/, /en/work/<slug>/, ...
+  // English at the root, Spanish under /es/; every URL ends with a slash.
   trailingSlash: true,
   // Same WebP quality the Astro image pipeline used.
   images: { qualities: [80] },
   poweredByHeader: false,
+  // Until October 2026 Spanish lived at the root and English under /en/.
+  // Old links and indexed pages land on the same page at its new address.
+  async redirects() {
+    const moved: [string, string][] = [
+      ['/en', '/'],
+      ['/en/:path*', '/:path*/'],
+      ['/contacto', '/es/contacto/'],
+      ['/privacidad', '/es/privacidad/'],
+      ['/webs', '/es/webs/'],
+      ['/proyectos/:slug', '/es/proyectos/:slug/'],
+    ];
+    return moved.map(([source, destination]) => ({ source, destination, permanent: true }));
+  },
   async headers() {
     return [
       { source: '/:path*', headers: securityHeaders },

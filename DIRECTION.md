@@ -1,6 +1,6 @@
 # Thexify — dirección visual
 
-Brief: el texto adjunto del 12 de septiembre de 2026. No se adjuntaron imágenes de referencia; esta dirección interpreta el brief y las decisiones de marca del vault. La oferta vigente para esta versión tiene tres servicios: sitios web, sitios con panel y tiendas Shopify. Los precios todavía no están aprobados y no se publican cifras inventadas.
+Brief: el texto adjunto del 12 de septiembre de 2026. No se adjuntaron imágenes de referencia; esta dirección interpreta el brief y las decisiones de marca del vault. La oferta vigente para esta versión tiene tres servicios: sitios web, sitios con panel y tiendas online. Los precios todavía no están aprobados y no se publican cifras inventadas.
 
 La fuente maestra de identidad es `Empresa/Thexify/Identidad Visual.md` dentro del vault. El símbolo oficial es la X asimétrica de dos direcciones, el asterisco es únicamente un gesto editorial y nunca se añade al logotipo horizontal.
 
@@ -19,7 +19,7 @@ La fuente maestra de identidad es `Empresa/Thexify/Identidad Visual.md` dentro d
 
 Next.js 15.5 (App Router) + TypeScript + CSS propio, sin Tailwind. Migrado desde Astro el 14 de septiembre de 2026 conservando el mismo marcado y CSS; el sitio público sigue prerenderizado como estático. GSAP/ScrollTrigger se usa para el encuadre del hero, los proyectos y transiciones puntuales; el scroll permanece nativo. Los cambios de página usan `next/link` dentro de una View Transition (el mismo fundido que daba el ClientRouter de Astro). Los listeners y animaciones se limpian al navegar. El HTML es visible sin JavaScript y `prefers-reduced-motion` evita scrub, transformaciones grandes y transiciones de página.
 
-Home en español e inglés, casos estáticos, contacto guardado en D1 y leído desde `/admin/mensajes`, con fallback directo por correo y WhatsApp. Configuración y contenido desacoplados de los componentes. SEO semántico, canonical, hreflang, sitemap y metadatos por página. No promesas de ranking, tráfico ni citas de IA.
+Home en español e inglés, casos estáticos, contacto guardado en D1 y leído desde `/admin/mensajes`, con fallback directo por correo. Configuración y contenido desacoplados de los componentes. SEO semántico, canonical, hreflang, sitemap y metadatos por página. No promesas de ranking, tráfico ni citas de IA.
 
 ## Recursos visuales
 

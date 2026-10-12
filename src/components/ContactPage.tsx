@@ -1,36 +1,29 @@
 import { ContactForm } from '@/components/ContactForm';
-import { site, whatsappHref } from '@/data/site';
+import { site } from '@/data/site';
 import type { Lang } from '@/lib/i18n';
 import '@/styles/contact.css';
 
-export function ContactPage({ lang = 'es' }: { lang?: Lang }) {
+export function ContactPage({ lang = 'en' }: { lang?: Lang }) {
   const en = lang === 'en';
   const email = site.email;
-  const whatsapp = whatsappHref(
-    en
-      ? 'Hello Thexify, I would like to discuss a project.'
-      : 'Hola Thexify, quisiera conversar sobre un proyecto.',
-  );
   const text = en
     ? {
         eyebrow: 'A good project starts with a conversation',
         title: 'Let’s make',
         accent: 'it happen.',
         intro:
-          'A new business, a website that needs a fresh start, or an idea you can’t stop thinking about. Tell us what’s next.',
+          'A product you want to launch, a process that eats your team’s hours, or an idea you can’t stop thinking about. Tell us what’s next.',
         direct: 'Prefer to write directly?',
         note: 'A few details are enough to start. We’ll talk through the scope, timing and a proposal for your project.',
-        whatsapp: 'Talk on WhatsApp',
       }
     : {
         eyebrow: 'Un buen proyecto empieza con una conversación',
         title: 'Hagamos',
         accent: 'que pase.',
         intro:
-          'Un negocio que empieza, una web que necesita un cambio o una idea que no te deja de dar vueltas. Cuéntanos qué viene.',
+          'Un producto que quieres lanzar, un proceso que le roba horas a tu equipo o una idea que no te deja de dar vueltas. Cuéntanos qué viene.',
         direct: '¿Prefieres escribir directamente?',
         note: 'Con unos detalles podemos empezar. Conversamos sobre el alcance, los tiempos y una propuesta para tu proyecto.',
-        whatsapp: 'Hablar por WhatsApp',
       };
 
   return (
@@ -58,16 +51,10 @@ export function ContactPage({ lang = 'es' }: { lang?: Lang }) {
               {email}
               <span aria-hidden="true"> ↗</span>
             </a>
-            {whatsapp && (
-              <a className="contact-whatsapp" href={whatsapp} target="_blank" rel="noopener noreferrer">
-                {text.whatsapp}
-                <span aria-hidden="true"> ↗</span>
-              </a>
-            )}
           </div>
           <p className="contact-note">{text.note}</p>
         </aside>
-        <ContactForm lang={lang} email={email} endpoint={site.contactEndpoint} whatsapp={whatsapp} />
+        <ContactForm lang={lang} email={email} endpoint={site.contactEndpoint} />
       </div>
     </section>
   );

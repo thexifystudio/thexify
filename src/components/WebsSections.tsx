@@ -11,7 +11,7 @@ import { paths, type Lang } from '@/lib/i18n';
 import '@/styles/sections.css';
 import '@/styles/graphics.css';
 
-export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
+export function WebsSections({ lang = 'en' }: { lang?: Lang }) {
   const en = lang === 'en';
   const contact = paths.contact(lang);
   const extras = en
@@ -84,7 +84,7 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
             key: 'webapp' as const,
           },
           {
-            name: 'Shopify stores',
+            name: 'Online stores',
             tagline: 'Turn your products into a store',
             description:
               'A store built around your products, with a clear catalog, a straightforward checkout and the tools to manage it.',
@@ -94,7 +94,7 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
               'Inventory and order management',
             ],
             cta: 'Discuss my store',
-            key: 'shopify' as const,
+            key: 'store' as const,
           },
         ],
         includedLabel: 'Included from the start',
@@ -102,7 +102,7 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
         extrasTitle: 'Want to take it further?',
         extrasCta: 'Discuss the extras',
         maintenance:
-          'Annual maintenance and renewal are quoted separately from year two. Shopify subscriptions and paid integrations are detailed in your proposal.',
+          'Annual maintenance and renewal are quoted separately from year two. Store platform fees and paid integrations are detailed in your proposal.',
         processLabel: 'How we work',
         processTitle: ['Four steps.', 'We finish when it works.'],
         processIntro:
@@ -148,7 +148,7 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
           ],
           [
             'Can I update the content myself?',
-            'Yes, when your project includes an admin dashboard or Shopify. If the content rarely changes, a simpler static website may be the right fit.',
+            'Yes, when your project includes an admin dashboard or an online store. If the content rarely changes, a simpler static website may be the right fit.',
           ],
           [
             'What happens after launch?',
@@ -224,14 +224,14 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
             name: 'Tiendas online',
             tagline: 'Para vender tus productos',
             description:
-              'Tu tienda en Shopify, con un catálogo claro, un proceso de compra sencillo y las herramientas para administrarla.',
+              'Tu tienda online, con un catálogo claro, un proceso de compra sencillo y las herramientas para administrarla.',
             includes: [
               'Diseño de tienda y catálogo',
               'Configuración de pagos y envíos',
               'Gestión de stock y pedidos',
             ],
             cta: 'Cotizar mi tienda',
-            key: 'shopify' as const,
+            key: 'store' as const,
           },
         ],
         includedLabel: 'Incluido desde el principio',
@@ -239,7 +239,7 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
         extrasTitle: '¿Quieres ir un paso más allá?',
         extrasCta: 'Consultar complementos',
         maintenance:
-          'Desde el segundo año, mantenimiento y renovación se cotizan anualmente. La suscripción de Shopify y las integraciones de pago se detallan en tu propuesta.',
+          'Desde el segundo año, mantenimiento y renovación se cotizan anualmente. Las comisiones de la plataforma de la tienda y las integraciones de pago se detallan en tu propuesta.',
         processLabel: 'Cómo trabajamos',
         processTitle: ['Cuatro pasos.', 'Terminamos cuando funciona.'],
         processIntro:
@@ -285,7 +285,7 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
           ],
           [
             '¿Puedo actualizar el contenido por mi cuenta?',
-            'Sí, si tu proyecto incluye un panel de administración o una tienda Shopify. Si el contenido cambia poco, un sitio estático puede ser lo indicado.',
+            'Sí, si tu proyecto incluye un panel de administración o una tienda online. Si el contenido cambia poco, un sitio estático puede ser lo indicado.',
           ],
           [
             '¿Qué ocurre después del lanzamiento?',
@@ -404,7 +404,7 @@ export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
                   </li>
                 ))}
               </ul>
-              <Link className="action-button" href={`${contact}?service=${service.key}`}>
+              <Link className="action-button" href={`${contact}?service=website`}>
                 {service.cta}
                 <Arrow />
               </Link>

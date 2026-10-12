@@ -22,7 +22,7 @@ export default async function MessagesPage() {
     <div>
       <span className="kicker">Formulario de contacto</span>
       <h1>Mensajes</h1>
-      <p className="lead">Todo lo que llega desde /contacto y /en/contact.</p>
+      <p className="lead">Todo lo que llega desde /contact y /es/contacto.</p>
       {rows === null ? (
         <p className="empty">
           La base de datos todavía no responde. Revisa que las migraciones estén aplicadas.

@@ -5,15 +5,15 @@ import { pageMetadata } from '@/lib/metadata';
 export const metadata = pageMetadata({
   title: 'Cuéntanos tu proyecto — Thexify',
   description:
-    'Hablemos de tu próxima web, aplicación o tienda Shopify. Cuéntanos tu idea y construyamos una presencia digital a la altura de tu negocio.',
+    'Cuéntanos qué quieres construir: un producto SaaS, un asistente con IA o una automatización. Te respondemos con los siguientes pasos.',
   lang: 'es',
-  path: '/contacto/',
-  alternatePath: '/en/contact/',
+  path: '/es/contacto/',
+  alternatePath: '/contact/',
 });
 
 export default function ContactoPage() {
   return (
-    <SiteFrame lang="es" alternatePath="/en/contact/">
+    <SiteFrame lang="es" alternatePath="/contact/" current="contact">
       <ContactPage lang="es" />
     </SiteFrame>
   );

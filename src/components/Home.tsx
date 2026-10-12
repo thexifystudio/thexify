@@ -1,45 +1,38 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Arrow } from '@/components/Arrow';
 import { Commitments } from '@/components/Commitments';
+import { ContactForm } from '@/components/ContactForm';
 import { Icon, type IconName } from '@/components/Icon';
-import { Projects } from '@/components/Projects';
 import { AssistantCard, AutomationCard, MiniChat, MiniDashboard, OrdersCard } from '@/components/home/DemoUI';
 import beams from '@/assets/home/beams.webp';
-import cananguenoMobile from '@/assets/canangueno-mobile.webp';
 import { site } from '@/data/site';
 import { paths, type Lang } from '@/lib/i18n';
 import '@/styles/sections.css';
+import '@/styles/contact.css';
 import '@/styles/home.css';
 
 const copy = {
   es: {
-    title: ['Software', 'con IA para', 'tu negocio.'],
-    lede: 'Diseñamos y construimos productos SaaS, plataformas web y soluciones con inteligencia artificial. De la idea al lanzamiento, rápido y bien hecho.',
-    cta: 'Cuéntanos tu idea',
-    seeSolutions: 'Ver soluciones',
+    title: ['Software que', 'hace trabajo', 'real, con IA.'],
+    lede: 'Thexify es una startup que construye productos SaaS, herramientas internas y asistentes con IA sobre Claude de Anthropic. Partimos de cómo trabaja tu equipo y entregamos software que usa cada día.',
+    cta: 'Empezar un proyecto',
+    seeSolutions: 'Ver lo que construimos',
     builtWith: 'Construido con Claude de Anthropic',
     visual:
       'Ejemplos de lo que construimos: un panel de pedidos, una automatización que registra clientes y envía avisos, y un asistente con Claude que responde a un cliente.',
-    solutionsTitle: ['Lo que construimos.', 'Software a la medida de tu negocio.'],
+    solutionsTitle: ['Lo que construimos.', 'Dos cosas, bien hechas.'],
     solutionsIntro:
-      'Productos y sistemas hechos para tu operación, con inteligencia artificial donde de verdad ahorra tiempo.',
+      'No hacemos de todo. Construimos productos de software e inteligencia artificial que le quitan trabajo real a tu equipo.',
     tiles: {
       saas: {
-        name: 'Productos SaaS y plataformas',
-        text: 'Productos web con usuarios, panel de gestión y la lógica de tu negocio.',
-        cta: 'Cotizar mi plataforma',
+        name: 'Productos SaaS y herramientas internas',
+        text: 'Portales para clientes, paneles de gestión y las herramientas con las que opera tu equipo: usuarios, roles, pagos y reportes.',
+        cta: 'Hablemos de tu producto',
       },
       ai: {
-        name: 'Soluciones con IA',
-        text: 'Chatbots, automatizaciones y asistentes con Claude de Anthropic.',
-        cta: 'Cotizar una solución con IA',
-      },
-      web: {
-        name: 'Webs y tiendas',
-        text: 'Webs, landings y tiendas Shopify para presentar y vender.',
-        cta: 'Ver webs',
-        caption: 'Canangueno Lodge · en desarrollo',
+        name: 'Asistentes con IA y automatizaciones',
+        text: 'Asistentes con Claude que atienden clientes, agendan citas, leen documentos y mueven datos entre tus herramientas.',
+        cta: 'Hablemos de una solución con IA',
       },
     },
     paths: [
@@ -48,7 +41,7 @@ const copy = {
         title: '¿Tu negocio ya está en marcha?',
         text: 'Ordenamos tu operación con un sistema propio, automatizaciones e IA conectados a cómo ya trabajas.',
         cta: 'Hablemos de tu operación',
-        service: 'ai',
+        service: 'automation',
       },
       {
         icon: 'rocket',
@@ -58,24 +51,33 @@ const copy = {
         service: 'software',
       },
     ],
-    studio: {
-      title: 'Somos Thexify',
-      subtitle: 'Un estudio moderno que construye con IA.',
-      text: 'Usamos inteligencia artificial, principalmente Claude de Anthropic, en cada etapa del proyecto: para investigar, escribir y revisar código y probar tu web antes de publicarla. Así entregamos más rápido y dedicamos más tiempo a entender tu negocio.',
-      note: 'La IA acelera el trabajo. El diseño, el contenido y la calidad final los decidimos y revisamos nosotros.',
-      flowTitle: 'Así trabajamos con Claude',
-      stages: [
-        ['search', 'Investigar'],
-        ['code', 'Escribir código'],
-        ['check', 'Revisar código'],
-        ['flask', 'Probar antes de publicar'],
+    about: {
+      title: 'Sobre Thexify',
+      subtitle: 'Una startup que construye software con IA.',
+      text: [
+        'Thexify nació en Quito, Ecuador, en octubre de 2025. Somos un equipo pequeño y técnico con una apuesta: trabajando con Claude, pocas personas pueden diseñar, construir y lanzar software que antes necesitaba un equipo mucho más grande.',
+        'Construimos productos SaaS para emprendedores, y herramientas internas y asistentes con IA para negocios que ya no dan abasto con hojas de cálculo y copiar y pegar. Claude es parte de cómo construimos y de lo que entregamos.',
       ],
-      final: 'Diseño, contenido y calidad final',
+      note: 'La IA acelera el trabajo. Las personas decidimos qué se construye y aprobamos cada entrega.',
+      facts: [
+        ['Fundada', 'Octubre de 2025'],
+        ['Sede', 'Quito, Ecuador'],
+        ['Construimos con', 'Claude de Anthropic'],
+        ['Idiomas', 'Español e inglés'],
+      ],
+      flowTitle: 'Así construimos con Claude',
+      stages: [
+        ['search', 'Entender el problema'],
+        ['code', 'Escribir el código'],
+        ['check', 'Revisar cada cambio'],
+        ['flask', 'Probar antes de lanzar'],
+      ],
+      final: 'Decisiones y calidad final',
       team: 'Equipo Thexify',
     },
     processTitle: ['Cuatro pasos.', 'Terminamos cuando funciona.'],
     processIntro:
-      'Empezamos por entender tu negocio y no cerramos al publicar: te acompañamos hasta que el sistema funciona en tu día a día.',
+      'Empezamos por entender tu negocio y no cerramos al lanzar: te acompañamos hasta que el sistema funciona en tu día a día.',
     steps: [
       [
         'Media hora de conversación',
@@ -97,7 +99,7 @@ const copy = {
       ],
       [
         'Lanzamiento y acompañamiento',
-        'Publicamos, te enseñamos a usarlo y ajustamos lo que haga falta.',
+        'Lanzamos, te enseñamos a usarlo y ajustamos lo que haga falta.',
         'Tu sistema en marcha y los accesos a tu nombre',
         'Usarlo y decirnos qué ajustar',
       ],
@@ -117,45 +119,38 @@ const copy = {
       ],
       [
         '¿Pueden sumar IA a lo que ya uso?',
-        'Sí, cuando tus herramientas permiten integrarse: formularios, correo, hojas de cálculo, tu web o tu sistema actual. Lo revisamos en la primera conversación.',
+        'Sí, cuando tus herramientas permiten integrarse: formularios, correo, hojas de cálculo o tu sistema actual. Lo revisamos en la primera conversación.',
       ],
       [
-        '¿También hacen páginas web?',
-        'Sí. Webs, landings y tiendas Shopify tienen su propia página, con todo lo que incluyen.',
+        '¿Dónde están y con quién trabajan?',
+        'En Quito, Ecuador. Trabajamos en remoto con emprendedores y negocios de Latinoamérica y Estados Unidos, en español y en inglés.',
       ],
     ],
-    faqWebs: 'Ver webs y tiendas',
-    ctaTitle: ['¿Qué quieres', 'construir ahora?'],
-    ctaText: 'Cuéntanos sobre tu negocio o tu producto. Te ayudamos a definir el siguiente paso.',
-    ctaButton: 'Cuéntanos tu proyecto',
-    email: 'Escribir por correo',
+    contactTitle: ['¿Qué quieres', 'construir ahora?'],
+    contactText:
+      'Cuéntanos sobre tu negocio o tu producto. Leemos cada mensaje y te respondemos con los siguientes pasos.',
+    email: '¿Prefieres escribir por correo?',
   },
   en: {
-    title: ['AI-powered', 'software for', 'your business.'],
-    lede: 'We design and build SaaS products, web platforms and AI solutions. From idea to launch, fast and done right.',
-    cta: 'Tell us your idea',
-    seeSolutions: 'See solutions',
+    title: ['AI software', 'that does', 'real work.'],
+    lede: 'Thexify is a startup building SaaS products, internal tools and AI assistants on Claude by Anthropic. We start from how your team actually works and ship software it uses every day.',
+    cta: 'Start a project',
+    seeSolutions: 'See what we build',
     builtWith: 'Built with Claude by Anthropic',
     visual:
       'Examples of what we build: an orders dashboard, an automation that records new customers and sends notifications, and a Claude assistant answering a customer.',
-    solutionsTitle: ['What we build.', 'Software shaped around your business.'],
-    solutionsIntro: 'Products and systems made for the way you work, with AI where it genuinely saves time.',
+    solutionsTitle: ['What we build.', 'Two things, done properly.'],
+    solutionsIntro: 'We do not do everything. We build software products and AI that take real work off your team.',
     tiles: {
       saas: {
-        name: 'SaaS products and platforms',
-        text: 'Web products with users, an admin panel and your business logic.',
-        cta: 'Discuss my platform',
+        name: 'SaaS products and internal tools',
+        text: 'Customer portals, admin panels and the tools your team runs on, with users, roles, payments and reports.',
+        cta: 'Discuss a product',
       },
       ai: {
-        name: 'AI solutions',
-        text: 'Chatbots, automations and assistants built on Claude by Anthropic.',
+        name: 'AI assistants and automations',
+        text: 'Assistants on Claude that answer customers, book appointments, read documents and move data between your tools.',
         cta: 'Discuss an AI solution',
-      },
-      web: {
-        name: 'Websites and stores',
-        text: 'Websites, landing pages and Shopify stores to present and sell.',
-        cta: 'See websites',
-        caption: 'Canangueno Lodge · in development',
       },
     },
     paths: [
@@ -164,7 +159,7 @@ const copy = {
         title: 'Already running a business?',
         text: 'We organize your operation with your own system, automations and AI connected to how you already work.',
         cta: 'Talk about your operation',
-        service: 'ai',
+        service: 'automation',
       },
       {
         icon: 'rocket',
@@ -174,19 +169,28 @@ const copy = {
         service: 'software',
       },
     ],
-    studio: {
-      title: 'We are Thexify',
-      subtitle: 'A modern studio that builds with AI.',
-      text: 'We use artificial intelligence, mainly Claude by Anthropic, at every stage of a project: to research, to write and review code, and to test your website before it goes live. That lets us deliver faster and spend more time understanding your business.',
-      note: 'AI speeds up the work. We decide on and review the design, the content and the final quality.',
-      flowTitle: 'How we work with Claude',
+    about: {
+      title: 'About Thexify',
+      subtitle: 'A startup that builds software with AI.',
+      text: [
+        'Thexify started in Quito, Ecuador, in October 2025. We are a small, technical team with one bet: working with Claude, a few people can now design, build and launch software that used to need a much larger team.',
+        'We build SaaS products for founders, and internal tools and AI assistants for businesses that have outgrown spreadsheets and copy-paste. Claude is part of how we build and part of what we ship.',
+      ],
+      note: 'AI speeds up the work. People decide what gets built and sign off on every release.',
+      facts: [
+        ['Founded', 'October 2025'],
+        ['Based in', 'Quito, Ecuador'],
+        ['Built with', 'Claude by Anthropic'],
+        ['Languages', 'English and Spanish'],
+      ],
+      flowTitle: 'How we build with Claude',
       stages: [
-        ['search', 'Research'],
-        ['code', 'Write code'],
-        ['check', 'Review code'],
+        ['search', 'Understand the problem'],
+        ['code', 'Write the code'],
+        ['check', 'Review every change'],
         ['flask', 'Test before launch'],
       ],
-      final: 'Design, content and final quality',
+      final: 'Decisions and final quality',
       team: 'Thexify team',
     },
     processTitle: ['Four steps.', 'We finish when it works.'],
@@ -233,25 +237,22 @@ const copy = {
       ],
       [
         'Can you add AI to the tools I already use?',
-        'Yes, when your tools allow integrations: forms, email, spreadsheets, your website or your current system. We review it in the first conversation.',
+        'Yes, when your tools allow integrations: forms, email, spreadsheets or your current system. We review it in the first conversation.',
       ],
       [
-        'Do you also build websites?',
-        'Yes. Websites, landing pages and Shopify stores have their own page, with everything they include.',
+        'Where are you based, and who do you work with?',
+        'In Quito, Ecuador. We work remotely with founders and businesses across Latin America and the United States, in English and Spanish.',
       ],
     ],
-    faqWebs: 'See websites and stores',
-    ctaTitle: ['What do you want', 'to build next?'],
-    ctaText: 'Tell us about your business or your product. We will help you shape the next step.',
-    ctaButton: 'Tell us about your project',
-    email: 'Email us directly',
+    contactTitle: ['What do you want', 'to build next?'],
+    contactText: 'Tell us about your business or your product. We read every message and reply with clear next steps.',
+    email: 'Prefer email?',
   },
 } as const;
 
-export function Home({ lang = 'es' }: { lang?: Lang }) {
+export function Home({ lang = 'en' }: { lang?: Lang }) {
   const t = copy[lang];
   const contact = paths.contact(lang);
-  const webs = paths.webs(lang);
 
   return (
     <div className="home">
@@ -264,11 +265,11 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
           </h1>
           <p className="hx-lede">{t.lede}</p>
           <div className="hx-actions">
-            <Link className="hx-button" href={contact}>
+            <a className="hx-button" href="#contact">
               {t.cta}
               <Icon name="arrowRight" />
-            </Link>
-            <a className="hx-link" href="#soluciones">
+            </a>
+            <a className="hx-link" href="#solutions">
               {t.seeSolutions}
             </a>
           </div>
@@ -276,35 +277,35 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
         </div>
         <div className="hx-visual">
           <div className="hx-beams-box">
-          <Image
-            className="hx-beams"
-            src={beams}
-            alt=""
-            fill
-            priority
-            sizes="(max-width: 900px) 100vw, 60vw"
-            quality={80}
-          />
+            <Image
+              className="hx-beams"
+              src={beams}
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 60vw"
+              quality={80}
+            />
           </div>
           <p className="sr-only">{t.visual}</p>
           <div className="hx-stack" aria-hidden="true" data-hero-stack>
             <div className="hx-stack-tilt" data-hero-tilt>
-            <div className="hx-card hx-card--orders" data-hero-card>
-              <OrdersCard lang={lang} />
-            </div>
-            <div className="hx-card hx-card--automation" data-hero-card>
-              <AutomationCard lang={lang} />
-            </div>
-            <div className="hx-card hx-card--assistant" data-hero-card>
-              <AssistantCard lang={lang} />
-            </div>
+              <div className="hx-card hx-card--orders" data-hero-card>
+                <OrdersCard lang={lang} />
+              </div>
+              <div className="hx-card hx-card--automation" data-hero-card>
+                <AutomationCard lang={lang} />
+              </div>
+              <div className="hx-card hx-card--assistant" data-hero-card>
+                <AssistantCard lang={lang} />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <div className="home-sections">
-        <section id="soluciones" className="hx-solutions section-pad" aria-labelledby="solutions-title">
+        <section id="solutions" className="hx-solutions section-pad" aria-labelledby="solutions-title">
           <div className="commercial-heading" data-reveal>
             <h2 id="solutions-title">
               {t.solutionsTitle[0]}
@@ -342,23 +343,6 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
                 <Icon name="arrowRight" />
               </Link>
             </article>
-
-            <article className="hx-tile hx-tile--web" data-reveal>
-              <div className="hx-tile-head">
-                <h3>{t.tiles.web.name}</h3>
-                <p>{t.tiles.web.text}</p>
-              </div>
-              <div className="hx-tile-phone" aria-hidden="true">
-                <span className="hx-phone">
-                  <Image src={cananguenoMobile} alt="" sizes="(max-width: 900px) 60vw, 16vw" quality={80} />
-                </span>
-                <span className="hx-phone-caption">{t.tiles.web.caption}</span>
-              </div>
-              <Link className="hx-tile-link" href={webs}>
-                {t.tiles.web.cta}
-                <Icon name="arrowRight" />
-              </Link>
-            </article>
           </div>
 
           <div className="hx-paths">
@@ -385,23 +369,33 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
           </div>
         </section>
 
-        <section id="estudio" className="hx-studio section-pad" aria-labelledby="studio-title">
+        <section id="about" className="hx-studio section-pad" aria-labelledby="about-title">
           <div className="hx-studio-copy" data-reveal>
-            <h2 id="studio-title">
-              {t.studio.title}
+            <h2 id="about-title">
+              {t.about.title}
               <br />
-              <span>{t.studio.subtitle}</span>
+              <span>{t.about.subtitle}</span>
             </h2>
-            <p>{t.studio.text}</p>
+            {t.about.text.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            <dl className="hx-facts">
+              {t.about.facts.map(([label, value]) => (
+                <div key={label}>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
             <p className="hx-studio-note">
               <span aria-hidden="true"></span>
-              {t.studio.note}
+              {t.about.note}
             </p>
           </div>
           <div className="hx-flow" data-graphic>
-            <h3 className="hx-flow-title">{t.studio.flowTitle}</h3>
+            <h3 className="hx-flow-title">{t.about.flowTitle}</h3>
             <ol>
-              {t.studio.stages.map(([icon, label]) => (
+              {t.about.stages.map(([icon, label]) => (
                 <li key={label} data-graphic-item>
                   <span className="hx-flow-icon">
                     <Icon name={icon as IconName} />
@@ -417,8 +411,8 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
                 <span className="hx-flow-icon">
                   <Icon name="user" />
                 </span>
-                <span>{t.studio.final}</span>
-                <em>{t.studio.team}</em>
+                <span>{t.about.final}</span>
+                <em>{t.about.team}</em>
               </li>
             </ol>
           </div>
@@ -426,7 +420,7 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
 
         <Commitments lang={lang} />
 
-        <section id="proceso" className="roadmap-section section-pad" aria-labelledby="roadmap-title">
+        <section id="process" className="roadmap-section section-pad" aria-labelledby="roadmap-title">
           <div className="commercial-heading" data-reveal>
             <h2 id="roadmap-title">
               {t.processTitle[0]}
@@ -457,14 +451,12 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
           </ol>
         </section>
 
-        <Projects lang={lang} />
-
-        <section className="answers-section section-pad" aria-labelledby="answers-title">
+        <section id="faq" className="answers-section section-pad" aria-labelledby="answers-title">
           <div className="commercial-heading">
             <h2 id="answers-title">{t.faqTitle}</h2>
           </div>
           <div className="answers-list">
-            {t.faqs.map(([question, answer], i) => (
+            {t.faqs.map(([question, answer]) => (
               <details key={question} className="answer" name="questions">
                 <summary>
                   <h3>{question}</h3>
@@ -472,44 +464,28 @@ export function Home({ lang = 'es' }: { lang?: Lang }) {
                     +
                   </span>
                 </summary>
-                <p>
-                  {answer}
-                  {i === t.faqs.length - 1 && (
-                    <>
-                      {' '}
-                      <Link href={webs}>{t.faqWebs}</Link>
-                    </>
-                  )}
-                </p>
+                <p>{answer}</p>
               </details>
             ))}
           </div>
         </section>
 
-        <section className="closing-section section-pad hx-closing" aria-labelledby="closing-title">
+        <section id="contact" className="section-pad hx-contact" aria-labelledby="contact-title">
           <div className="hx-closing-light" aria-hidden="true">
             <Image src={beams} alt="" fill sizes="70vw" quality={80} />
           </div>
-          <div className="closing-heading">
-            <h2 id="closing-title">
-              {t.ctaTitle[0]}
+          <div className="hx-contact-intro">
+            <h2 id="contact-title">
+              {t.contactTitle[0]}
               <br />
-              <span>{t.ctaTitle[1]}</span>
+              <span>{t.contactTitle[1]}</span>
             </h2>
+            <p>{t.contactText}</p>
+            <p className="hx-contact-direct">
+              {t.email} <a href={`mailto:${site.email}`}>{site.email}</a>
+            </p>
           </div>
-          <div className="closing-bottom">
-            <p>{t.ctaText}</p>
-            <div className="closing-actions">
-              <Link className="action-button" href={contact}>
-                {t.ctaButton}
-                <Arrow />
-              </Link>
-              <a className="action-button action-button--outline" href={`mailto:${site.email}`}>
-                {t.email}
-                <Arrow />
-              </a>
-            </div>
-          </div>
+          <ContactForm lang={lang} email={site.email} endpoint={site.contactEndpoint} />
         </section>
       </div>
     </div>

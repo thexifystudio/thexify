@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-// Unknown /en/* URLs: render (en)/not-found.tsx inside the English layout.
+// Unknown /es/* URLs: render (es)/not-found.tsx inside the Spanish layout.
 export default function Missing() {
   notFound();
 }

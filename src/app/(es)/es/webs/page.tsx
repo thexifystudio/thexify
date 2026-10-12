@@ -5,15 +5,15 @@ import { pageMetadata } from '@/lib/metadata';
 export const metadata = pageMetadata({
   title: 'Diseño de páginas web en Quito, Ecuador — Thexify',
   description:
-    'Webs, landings y tiendas Shopify para negocios. Diseño a la medida, pensado para el celular y para Google, con hosting y dominio el primer año.',
+    'Webs, landings y tiendas online para negocios. Diseño a la medida, pensado para el celular y para Google, con hosting y dominio el primer año.',
   lang: 'es',
-  path: '/webs/',
-  alternatePath: '/en/websites/',
+  path: '/es/webs/',
+  alternatePath: '/websites/',
 });
 
 export default function WebsRoute() {
   return (
-    <SiteFrame lang="es" alternatePath="/en/websites/" current="webs">
+    <SiteFrame lang="es" alternatePath="/websites/" current="webs">
       <WebsPage lang="es" />
     </SiteFrame>
   );

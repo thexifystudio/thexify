@@ -4,21 +4,21 @@ import { site } from '@/data/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pairs: [string, string][] = [
-    ['/', '/en/'],
-    ['/webs/', '/en/websites/'],
-    ['/contacto/', '/en/contact/'],
-    ['/privacidad/', '/en/privacy/'],
+    ['/', '/es/'],
+    ['/contact/', '/es/contacto/'],
+    ['/websites/', '/es/webs/'],
+    ['/privacy/', '/es/privacidad/'],
     ...projects.map((project): [string, string] => [
-      `/proyectos/${project.slug}/`,
-      `/en/work/${project.slug}/`,
+      `/work/${project.slug}/`,
+      `/es/proyectos/${project.slug}/`,
     ]),
   ];
 
-  return pairs.flatMap(([es, en]) => {
-    const languages = { es: `${site.url}${es}`, en: `${site.url}${en}` };
+  return pairs.flatMap(([en, es]) => {
+    const languages = { en: `${site.url}${en}`, es: `${site.url}${es}`, 'x-default': `${site.url}${en}` };
     return [
-      { url: `${site.url}${es}`, alternates: { languages } },
       { url: `${site.url}${en}`, alternates: { languages } },
+      { url: `${site.url}${es}`, alternates: { languages } },
     ];
   });
 }

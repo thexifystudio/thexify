@@ -11,23 +11,24 @@ web
 - **Operating businesses** (owners of small and mid-sized companies in Ecuador, Latin America and the US) that need their own software system, want to automate repetitive work or add AI to their operation.
 - **Founders and early-stage startups** that want to launch a SaaS product or web platform.
 - Both audiences are primary on the homepage; each needs its own clear path.
-- **Second line:** businesses that need a website or a Shopify store, served by a dedicated page (`/webs/`, `/en/websites/`).
-- Languages: Spanish (neutral Latin American, close to Ecuador, using `tú`) and English (adapted, never a literal translation).
+- **Second line:** businesses that need a website or an online store, served by a dedicated page (`/websites/`, `/es/webs/`) linked only from the footer. Websites never appear on the homepage. Shopify is never named on the site.
+- Languages: English (default, at the root) and Spanish (under `/es/`, neutral Latin American, close to Ecuador, using `tú`; adapted, never a literal translation).
 
 ## Product Purpose
 
-Thexify designs and builds software with AI: SaaS products and web platforms, AI solutions built on Claude (chatbots, automations, assistants), and, as a second line, websites and online stores. Success means a visitor understands what Thexify builds, trusts a small team to deliver it, and starts a conversation (contact form, email or WhatsApp).
+Thexify is a startup that builds software with AI: SaaS products and internal tools, and AI assistants and automations built on Claude. Websites and online stores are a second line kept off the homepage. Success means a visitor understands what Thexify builds, trusts a small team to deliver it, and starts a conversation (contact form or email; no WhatsApp, no phone number on the site).
 
 ## Positioning
 
-- A small studio that builds with Claude (Anthropic) at every stage: research, writing and reviewing code, and testing before launch. AI speeds up the work; design, content and final quality are decided and reviewed by people. This wording was supplied by the founder and is binding.
+- A startup (not an agency or studio) that builds software with Claude (Anthropic) at every stage: understanding the problem, writing and reviewing code, and testing before launch. AI speeds up the work; people decide what gets built and sign off on every release.
+- Avoid the generic AI-template look: concrete copy, specific facts (founded October 2025, Quito), sample data with a local feel, no placeholder names like Acme.
 - Commitments already published: a written proposal with scope, dates and investment before any work starts; direct contact with whoever builds; code, domain, data and accounts in the client's name.
 - Thexify is applying to the Claude Startups program, so the site must describe the company truthfully and in a way that can be verified.
 
 ## Operating Context
 
-- Site: thexify.com, bilingual (`/` Spanish, `/en/` English), with case pages, contact page, privacy policy (`/privacidad/`, `/en/privacy/`) and a private admin panel.
-- Contact form stores enquiries in the database, read at `/admin/mensajes`. Public emails: `hola@thexify.com` (shown on the site; no forwarding rule yet) and `info@thexify.com` (forwards to the founder's inbox). WhatsApp button when the number is configured.
+- Site: thexify.com, bilingual (`/` English, `/es/` Spanish; old `/en/*` and root Spanish URLs redirect permanently), with case pages, contact page, privacy policy (`/privacy/`, `/es/privacidad/`) and a private admin panel. The homepage ends with the contact form; the header button says "Contact us".
+- Contact form stores enquiries in the database, read at `/admin/mensajes`. Public emails: `hola@thexify.com` (shown on the site; no forwarding rule yet) and `info@thexify.com` (forwards to the founder's inbox).
 - Based in Quito, Ecuador. Operating since October 2025 (founder's statement). Founder: Pablo Matheo Flores Loor. Whether the founder appears on the site is undecided.
 - Not legally registered yet (no RUC or company); the founder decided not to register before the next application.
 
@@ -36,7 +37,7 @@ Thexify designs and builds software with AI: SaaS products and web platforms, AI
 - Offerings:
   1. **SaaS products and platforms:** web products with users, an admin panel and the client's business logic.
   2. **AI solutions:** Claude-powered chatbots, automations and assistants.
-  3. **Websites and online stores:** design and redesign, websites with an admin panel, Shopify stores. Websites include mobile design, SEO + GEO foundations, and hosting and domain for the first year; maintenance and renewal are quoted annually from year two.
+  3. **Websites and online stores:** design and redesign, websites with an admin panel, online stores. Websites include mobile design, SEO + GEO foundations, and hosting and domain for the first year; maintenance and renewal are quoted annually from year two.
 - Prices are not approved: amounts are never published (`src/data/pricing.ts` keeps drafts with `showPrices: false`).
 - Never promise search rankings, traffic or citations in AI assistants.
 - Technical constraints: Next.js 15 on Cloudflare Workers, custom CSS (no Tailwind), public pages prerendered, a Content Security Policy that blocks every external origin (third-party scripts, fonts or embeds require updating it), pages readable without JavaScript, `prefers-reduced-motion` respected.

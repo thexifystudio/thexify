@@ -9,7 +9,7 @@ interface Section {
   after?: React.ReactNode[];
 }
 
-export function PrivacyPage({ lang = 'es' }: { lang?: Lang }) {
+export function PrivacyPage({ lang = 'en' }: { lang?: Lang }) {
   const en = lang === 'en';
   const mail = (
     <a href={`mailto:${site.privacyEmail}`}>
@@ -27,7 +27,7 @@ export function PrivacyPage({ lang = 'es' }: { lang?: Lang }) {
           {
             title: 'Who is responsible',
             body: [
-              'Thexify, a web design and development studio based in Quito, Ecuador, is responsible for processing your data.',
+              'Thexify, a software startup based in Quito, Ecuador, is responsible for processing your data.',
               <>For anything related to your data, write to us at {mail}.</>,
             ],
           },
@@ -70,7 +70,7 @@ export function PrivacyPage({ lang = 'es' }: { lang?: Lang }) {
             body: [
               'Form messages are stored in a database run by Cloudflare, Inc., which acts as our data processor. Only the Thexify team can read them, from a private, password-protected dashboard.',
               'Cloudflare’s servers may be located outside Ecuador, for example in the United States, so this involves an international data transfer. Cloudflare is contractually committed to protecting the data it processes on behalf of its customers.',
-              'If you email us directly, your message is delivered through Cloudflare and stored in Gmail (Google). If you message us on WhatsApp, that conversation is also governed by WhatsApp’s (Meta’s) policies.',
+              'If you email us directly, your message is delivered through Cloudflare and stored in Gmail (Google).',
             ],
           },
           {
@@ -125,7 +125,7 @@ export function PrivacyPage({ lang = 'es' }: { lang?: Lang }) {
           {
             title: 'Quién es responsable',
             body: [
-              'Thexify, estudio de diseño y desarrollo web con sede en Quito, Ecuador, es responsable del tratamiento de tus datos.',
+              'Thexify, startup de software con sede en Quito, Ecuador, es responsable del tratamiento de tus datos.',
               <>Para cualquier tema relacionado con tus datos, escríbenos a {mail}.</>,
             ],
           },
@@ -168,7 +168,7 @@ export function PrivacyPage({ lang = 'es' }: { lang?: Lang }) {
             body: [
               'Los mensajes del formulario se guardan en una base de datos de Cloudflare, Inc., que actúa como encargado del tratamiento. Solo el equipo de Thexify puede leerlos, desde un panel privado protegido con contraseña.',
               'Los servidores de Cloudflare pueden estar fuera del Ecuador, por ejemplo en Estados Unidos, por lo que existe una transferencia internacional de datos. Cloudflare se compromete contractualmente a proteger los datos que procesa por cuenta de sus clientes.',
-              'Si nos escribes directamente por correo, tu mensaje llega a través de Cloudflare y se guarda en Gmail (Google). Si nos escribes por WhatsApp, esa conversación se rige además por las políticas de WhatsApp (Meta).',
+              'Si nos escribes directamente por correo, tu mensaje llega a través de Cloudflare y se guarda en Gmail (Google).',
             ],
           },
           {

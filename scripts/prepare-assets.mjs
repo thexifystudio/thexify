@@ -78,11 +78,11 @@ const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
   <rect width="1200" height="630" fill="#101110"/>
   <path d="M840 -80L1250 330M970 -80L1280 230M840 720L1250 310M970 720L1280 410" stroke="#2fd79b" stroke-opacity=".13" stroke-width="58"/>
   <circle cx="75" cy="70" r="5" fill="#2fd79b"/>
-  <text x="94" y="77" fill="#dedfda" font-family="Arial, Helvetica, sans-serif" font-size="17" letter-spacing="3">ESTUDIO DIGITAL INDEPENDIENTE</text>
-  <text x="62" y="316" fill="#f4f4ec" font-family="Arial, Helvetica, sans-serif" font-size="178" font-weight="700" letter-spacing="-12">THEXIFY<tspan fill="#2fd79b">.</tspan></text>
-  <text x="72" y="414" fill="#f4f4ec" font-family="Arial, Helvetica, sans-serif" font-size="38" letter-spacing="-1">Diseño que se siente. Webs que funcionan.</text>
+  <text x="94" y="77" fill="#dedfda" font-family="Arial, Helvetica, sans-serif" font-size="17" letter-spacing="3">A STARTUP BUILDING SOFTWARE WITH AI</text>
+  <text x="62" y="316" fill="#f4f4ec" font-family="Arial, Helvetica, sans-serif" font-size="178" font-weight="700" letter-spacing="-8">Thexify<tspan fill="#2fd79b">.</tspan></text>
+  <text x="72" y="414" fill="#f4f4ec" font-family="Arial, Helvetica, sans-serif" font-size="38" letter-spacing="-1">AI software that does real work.</text>
   <path d="M72 505H1128" stroke="#f4f4ec" stroke-opacity=".18"/>
-  <text x="72" y="557" fill="#a8aca7" font-family="Arial, Helvetica, sans-serif" font-size="20">ESTRATEGIA · DISEÑO · DESARROLLO WEB</text>
+  <text x="72" y="557" fill="#a8aca7" font-family="Arial, Helvetica, sans-serif" font-size="20">SAAS PRODUCTS · AI ASSISTANTS · BUILT WITH CLAUDE</text>
   <text x="1128" y="557" fill="#2fd79b" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="20">thexify.com ↗</text>
 </svg>`;
 const ogPath = resolve(root, 'public/og.png');

@@ -43,8 +43,8 @@ export const portfolio: PortfolioEntry[] = [
       en: 'Canangueno Lodge website interface designed by Thexify',
     },
     href: {
-      es: '/proyectos/canangueno-lodge/',
-      en: '/en/work/canangueno-lodge/',
+      es: '/es/proyectos/canangueno-lodge/',
+      en: '/work/canangueno-lodge/',
     },
   },
   {
@@ -61,8 +61,8 @@ export const portfolio: PortfolioEntry[] = [
       en: 'SUNSU Cleaning website interface designed by Thexify',
     },
     href: {
-      es: '/proyectos/sunsu-cleaning/',
-      en: '/en/work/sunsu-cleaning/',
+      es: '/es/proyectos/sunsu-cleaning/',
+      en: '/work/sunsu-cleaning/',
     },
   },
 ];

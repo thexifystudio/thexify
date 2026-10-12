@@ -2,10 +2,10 @@ import { Icon, type IconName } from '@/components/Icon';
 import type { Lang } from '@/lib/i18n';
 
 /*
- * Illustrative interfaces: what Thexify builds, shown working. Generic sample
- * data on purpose (a neutral app name, placeholder companies), never presented
- * as Thexify's own customers or metrics. Every instance is aria-hidden and the
- * page gives a plain-text description next to it.
+ * Illustrative interfaces: what Thexify builds, shown working. Sample data with
+ * a concrete, local feel (people and small businesses you would meet in Quito),
+ * never presented as Thexify's own customers or metrics. Every instance is
+ * aria-hidden and the page gives a plain-text description next to it.
  */
 
 const copy = {
@@ -22,9 +22,9 @@ const copy = {
     ],
     cols: ['ID', 'Cliente', 'Fecha', 'Estado', 'Total'],
     rows: [
-      ['#1024', 'Acme S.A.', '12 oct', 'Completado', 'done', '$249.00'],
-      ['#1023', 'Pixel Studio', '11 oct', 'En proceso', 'progress', '$129.00'],
-      ['#1022', 'Nova Tech', '10 oct', 'Pendiente', 'pending', '$89.00'],
+      ['#1024', 'María Paredes', '12 oct', 'Completado', 'done', '$249.00'],
+      ['#1023', 'Andrés Vega', '11 oct', 'En proceso', 'progress', '$129.00'],
+      ['#1022', 'Lucía Cevallos', '10 oct', 'Pendiente', 'pending', '$89.00'],
     ],
     automations: 'Automatizaciones',
     nodes: [
@@ -47,10 +47,10 @@ const copy = {
     growth: 'Crecimiento de usuarios',
     latest: 'Últimos clientes',
     clients: [
-      ['Acme S.A.', 'Pro'],
-      ['Pixel Studio', 'Business'],
-      ['Nova Tech', 'Starter'],
-      ['Lumen Co.', 'Pro'],
+      ['Café Guápulo', 'Pro'],
+      ['Clínica Cumbayá', 'Business'],
+      ['Hostal La Ronda', 'Starter'],
+      ['Ferretería Norte', 'Pro'],
     ],
     active: 'Activo',
     chatQuestion: '¿Tienen turnos disponibles para mañana?',
@@ -71,9 +71,9 @@ const copy = {
     ],
     cols: ['ID', 'Customer', 'Date', 'Status', 'Total'],
     rows: [
-      ['#1024', 'Acme Inc.', 'Oct 12', 'Completed', 'done', '$249.00'],
-      ['#1023', 'Pixel Studio', 'Oct 11', 'In progress', 'progress', '$129.00'],
-      ['#1022', 'Nova Tech', 'Oct 10', 'Pending', 'pending', '$89.00'],
+      ['#1024', 'María Paredes', 'Oct 12', 'Completed', 'done', '$249.00'],
+      ['#1023', 'Andrés Vega', 'Oct 11', 'In progress', 'progress', '$129.00'],
+      ['#1022', 'Lucía Cevallos', 'Oct 10', 'Pending', 'pending', '$89.00'],
     ],
     automations: 'Automations',
     nodes: [
@@ -95,10 +95,10 @@ const copy = {
     growth: 'User growth',
     latest: 'Latest customers',
     clients: [
-      ['Acme S.A.', 'Pro'],
-      ['Pixel Studio', 'Business'],
-      ['Nova Tech', 'Starter'],
-      ['Lumen Co.', 'Pro'],
+      ['Café Guápulo', 'Pro'],
+      ['Clínica Cumbayá', 'Business'],
+      ['Hostal La Ronda', 'Starter'],
+      ['Ferretería Norte', 'Pro'],
     ],
     active: 'Active',
     chatQuestion: 'Do you have any appointments tomorrow?',

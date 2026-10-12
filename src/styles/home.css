@@ -644,7 +644,7 @@
 }
 .hx-bento {
   display: grid;
-  grid-template-columns: minmax(0, 1.95fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
   gap: 20px;
 }
 .hx-tile {
@@ -832,45 +832,6 @@
   background: var(--green);
   box-shadow: 0 0 0 3px rgba(47, 215, 155, 0.18);
 }
-.hx-tile-phone {
-  flex: 1;
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-.hx-phone {
-  position: relative;
-  flex: 1;
-  width: min(100%, 230px);
-  min-height: 0;
-  overflow: hidden;
-  border: 6px solid #1c2320;
-  border-radius: 28px;
-  background: #0d1210;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 26px 50px -24px rgba(0, 0, 0, 0.9);
-}
-.hx-phone img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 82%;
-  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.hx-tile--web:hover .hx-phone img {
-  transform: scale(1.03);
-}
-.hx-phone-caption {
-  font-size: 12px;
-  font-weight: 650;
-  color: var(--copy);
-}
-
 .hx-paths {
   margin-top: 20px;
   display: grid;
@@ -944,7 +905,7 @@
 .hx-studio {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: center;
+  align-items: start;
   gap: 6vw;
 }
 .home-sections .hx-studio-copy > p {
@@ -953,11 +914,36 @@
   font-size: 18px;
   line-height: 1.75;
 }
+.hx-facts {
+  margin: 32px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.hx-facts > div {
+  padding: 18px 16px 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.hx-facts > div:nth-child(even) {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+.hx-facts dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.hx-facts dd {
+  margin: 6px 0 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
 .home-sections .hx-studio-note {
   display: flex;
+  margin-top: 28px;
   gap: 14px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
   color: var(--paper);
 }
 .hx-studio-note > span {
@@ -1116,37 +1102,69 @@
 .home .portfolio-section {
   background: transparent;
 }
-.home .hx-closing {
+.hx-contact {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 7vw;
   border-top: 1px solid rgba(130, 160, 150, 0.2);
-  background: transparent;
 }
 .hx-closing-light {
   position: absolute;
-  inset: 0 0 36% 54%;
+  inset: 0 52% 30% 0;
   z-index: -1;
+  opacity: 0.55;
   -webkit-mask-image:
-    linear-gradient(90deg, transparent 0, #000 40%),
-    linear-gradient(180deg, transparent 0, #000 20%, #000 80%, transparent 100%);
+    linear-gradient(270deg, transparent 0, #000 45%),
+    linear-gradient(180deg, transparent 0, #000 20%, #000 75%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(90deg, transparent 0, #000 40%),
-    linear-gradient(180deg, transparent 0, #000 20%, #000 80%, transparent 100%);
+    linear-gradient(270deg, transparent 0, #000 45%),
+    linear-gradient(180deg, transparent 0, #000 20%, #000 75%, transparent 100%);
   mask-composite: intersect;
 }
 .hx-closing-light img {
   object-fit: cover;
 }
-.home .closing-heading h2 span {
+.home-sections .hx-contact h2 {
+  font-size: clamp(36px, 3.9vw, 64px);
+  line-height: 1.02;
+}
+.home-sections .hx-contact h2 span {
   color: var(--copy);
 }
-.home .closing-bottom {
-  border-top-color: var(--line);
-}
-.home .closing-bottom > p {
+.home-sections .hx-contact-intro > p {
+  max-width: 440px;
+  margin-top: 26px;
+  font-size: 18px;
+  line-height: 1.7;
   color: var(--copy);
+}
+.home-sections .hx-contact-intro > .hx-contact-direct {
+  margin-top: 34px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+}
+.hx-contact-direct a {
+  display: inline-block;
+  color: var(--paper);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-underline-offset: 5px;
+}
+.hx-contact-direct a:hover {
+  color: var(--green);
+}
+.hx-contact .project-form {
+  padding: clamp(24px, 2.6vw, 40px);
+  border: 1px solid var(--hx-edge);
+  border-radius: 18px;
+  background: var(--hx-glass);
+  box-shadow: 0 30px 60px -36px rgba(0, 0, 0, 0.85);
 }
 
 .home .answers-section p a {
@@ -1163,10 +1181,7 @@
 }
 @media (max-width: 1100px) {
   .hx-bento {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .hx-tile--saas {
-    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr);
   }
   .hx-tile {
     min-height: 0;
@@ -1231,8 +1246,12 @@
   }
   .hx-bento,
   .hx-paths,
-  .hx-studio {
+  .hx-studio,
+  .hx-contact {
     grid-template-columns: minmax(0, 1fr);
+  }
+  .hx-contact {
+    gap: 40px;
   }
   .hx-tile {
     padding: 24px;
@@ -1245,10 +1264,6 @@
   }
   .hx-tile-ui > .mini-ui {
     min-height: 280px;
-  }
-  .hx-phone {
-    flex: none;
-    height: 440px;
   }
   .hx-closing-light {
     display: none;
@@ -1287,8 +1302,7 @@
   .hx-button svg,
   .hx-tile-link svg,
   .hx-path,
-  .hx-path-cta svg,
-  .hx-phone img {
+  .hx-path-cta svg {
     transition: none;
   }
 }

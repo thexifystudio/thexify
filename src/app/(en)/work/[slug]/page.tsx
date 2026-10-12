@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: Params) {
     title: `${project.title} — A Thexify project`,
     description: project.intro.en,
     lang: 'en',
-    path: `/en/work/${project.slug}/`,
-    alternatePath: `/proyectos/${project.slug}/`,
+    path: `/work/${project.slug}/`,
+    alternatePath: `/es/proyectos/${project.slug}/`,
     image: projectImage(project.image, `${project.client} website, designed by Thexify`),
   });
 }
@@ -28,10 +28,10 @@ export default async function WorkPage({ params }: Params) {
   const { slug } = await params;
   const project = projects.find((entry) => entry.slug === slug);
   if (!project) notFound();
-  const path = `/en/work/${project.slug}/`;
+  const path = `/work/${project.slug}/`;
 
   return (
-    <SiteFrame lang="en" alternatePath={`/proyectos/${project.slug}/`}>
+    <SiteFrame lang="en" alternatePath={`/es/proyectos/${project.slug}/`}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd(projectSchema(project, 'en', path)) }}

@@ -8,7 +8,7 @@ import sunsuSmall from '@/assets/sunsu-small.webp';
 import { paths, type Lang } from '@/lib/i18n';
 import '@/styles/hero.css';
 
-export function WebsPage({ lang = 'es' }: { lang?: Lang }) {
+export function WebsPage({ lang = 'en' }: { lang?: Lang }) {
   const en = lang === 'en';
   const contact = paths.contact(lang);
   const workPath = paths.work(lang);
