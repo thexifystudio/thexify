@@ -247,6 +247,8 @@ export function SiteMotion() {
 
     const buildMotion = () => {
       disposeMotion?.();
+      const heroEvents = new AbortController();
+      const tilt = document.querySelector<HTMLElement>('[data-hero-tilt]');
 
       const context = gsap.context(() => {
         // Content is visible in HTML and remains readable even before a trigger fires.
@@ -301,6 +303,45 @@ export function SiteMotion() {
           });
         }
 
+        // Homepage hero: the interface stack leans toward the pointer and drifts on scroll.
+        const softwareHero = document.querySelector<HTMLElement>('.hx-hero');
+        if (desktopPointer.matches && softwareHero && tilt) {
+          let frame = 0;
+          softwareHero.addEventListener(
+            'pointermove',
+            (event) => {
+              cancelAnimationFrame(frame);
+              frame = requestAnimationFrame(() => {
+                const rect = softwareHero.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width - 0.5;
+                const y = (event.clientY - rect.top) / rect.height - 0.5;
+                tilt.style.setProperty('--hx-tilt-y', `${(x * 7).toFixed(2)}deg`);
+                tilt.style.setProperty('--hx-tilt-x', `${(-y * 5).toFixed(2)}deg`);
+              });
+            },
+            { signal: heroEvents.signal },
+          );
+          softwareHero.addEventListener(
+            'pointerleave',
+            () => {
+              cancelAnimationFrame(frame);
+              tilt.style.removeProperty('--hx-tilt-x');
+              tilt.style.removeProperty('--hx-tilt-y');
+            },
+            { signal: heroEvents.signal },
+          );
+          gsap.to(tilt, {
+            '--hx-drift': '-56px',
+            ease: 'none',
+            scrollTrigger: { trigger: softwareHero, start: 'top top', end: 'bottom top', scrub: 0.8 },
+          });
+          gsap.to('.hx-beams-box', {
+            opacity: 0.35,
+            ease: 'none',
+            scrollTrigger: { trigger: softwareHero, start: 'top top', end: 'bottom top', scrub: 0.8 },
+          });
+        }
+
         if (desktopPointer.matches) {
           const collage = document.querySelector<HTMLElement>('.hero-collage');
           if (collage) {
@@ -331,6 +372,9 @@ export function SiteMotion() {
       }, document.body);
 
       disposeMotion = () => {
+        heroEvents.abort();
+        tilt?.style.removeProperty('--hx-tilt-x');
+        tilt?.style.removeProperty('--hx-tilt-y');
         context.revert();
       };
       refresh();

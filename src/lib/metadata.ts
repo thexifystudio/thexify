@@ -5,7 +5,7 @@ import { site } from '@/data/site';
 import type { Lang } from '@/lib/i18n';
 
 const defaultDescription =
-  'Diseño y desarrollo web en Quito para negocios que quieren dar el siguiente paso. Sitios web, plataformas con panel y tiendas Shopify. Desde Quito, para el mundo.';
+  'Software con IA para tu negocio: productos SaaS, plataformas web y soluciones con inteligencia artificial, además de webs y tiendas Shopify. Desde Quito, para el mundo.';
 
 export const siteViewport: Viewport = { themeColor: '#101110' };
 
@@ -105,15 +105,15 @@ export function siteSchema(lang: Lang) {
         logo: absolute('/icon-512.png'),
         image: absolute('/og.png'),
         description: en
-          ? 'Independent web design and development studio in Quito, Ecuador. Websites, admin platforms and Shopify stores for businesses.'
-          : 'Estudio independiente de diseño y desarrollo web en Quito, Ecuador. Sitios web, plataformas con panel y tiendas Shopify para negocios.',
+          ? 'Software studio in Quito, Ecuador that designs and builds SaaS products, web platforms and AI solutions with Claude by Anthropic, plus websites and Shopify stores.'
+          : 'Estudio de software en Quito, Ecuador que diseña y construye productos SaaS, plataformas web y soluciones con IA con Claude de Anthropic, además de webs y tiendas Shopify.',
         email: site.email,
         areaServed: ['Ecuador', 'Latin America', 'United States'],
         address: { '@type': 'PostalAddress', addressLocality: 'Quito', addressCountry: 'EC' },
         knowsLanguage: ['es', 'en'],
         serviceType: en
-          ? ['Web design', 'Web development', 'Shopify stores']
-          : ['Diseño web', 'Desarrollo web', 'Tiendas Shopify'],
+          ? ['Software development', 'SaaS development', 'AI solutions', 'Web design', 'Shopify stores']
+          : ['Desarrollo de software', 'Desarrollo de SaaS', 'Soluciones con IA', 'Diseño web', 'Tiendas Shopify'],
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'sales',

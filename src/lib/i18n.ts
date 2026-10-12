@@ -5,4 +5,5 @@ export const paths = {
   contact: (lang: Lang) => (lang === 'en' ? '/en/contact/' : '/contacto/'),
   work: (lang: Lang) => (lang === 'en' ? '/en/work/' : '/proyectos/'),
   privacy: (lang: Lang) => (lang === 'en' ? '/en/privacy/' : '/privacidad/'),
+  webs: (lang: Lang) => (lang === 'en' ? '/en/websites/' : '/webs/'),
 };

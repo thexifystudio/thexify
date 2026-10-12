@@ -1,0 +1,117 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "nested-cards",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/003-te-buscaron/slides.html"
+        ],
+        "createdAt": "2026-09-29T22:48:51.093Z",
+        "reason": "Agent judgment, not user-confirmed: intentional device mockup (phone frame > screen > UI rows) in an ad carousel; reviewed rendered slides 1-6"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/003-te-buscaron/slides.html"
+        ],
+        "createdAt": "2026-09-29T22:48:51.321Z",
+        "reason": "Agent judgment, not user-confirmed: rendered slides 1-6 inspected, all bordered/colored containers (search bar, dashed placeholder, action buttons, tags, contact pills) have 12px+ padding; flagged element not identified by the hook"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides.html"
+        ],
+        "createdAt": "2026-09-30T01:14:42.066Z",
+        "reason": "Agent judgment, not user-confirmed: overflow hidden on .s is the fixed 1080x1350 poster canvas; absolute pieces (tapes, cutouts, halftone) are meant to bleed off the edge; no menus or tooltips exist"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides.html"
+        ],
+        "createdAt": "2026-09-30T01:15:11.770Z",
+        "reason": "Agent judgment, not user-confirmed: remaining hits are 1-2 line Anton poster headlines set solid on purpose; body subtitle raised to 1.35"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides.html"
+        ],
+        "createdAt": "2026-09-30T01:15:12.011Z",
+        "reason": "Agent judgment, not user-confirmed: uppercase only on short headlines and one-word labels, never on paragraphs"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides.html"
+        ],
+        "createdAt": "2026-09-30T01:15:12.237Z",
+        "reason": "Agent judgment, not user-confirmed: the mint slab hugs the headline glyphs on purpose, like a printed ink block"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides.html"
+        ],
+        "createdAt": "2026-09-30T01:15:12.478Z",
+        "reason": "Agent judgment, not user-confirmed: radial-gradient here draws a halftone dot pattern, not a glow, and is not on a dark page"
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides-v4-tiktok.html"
+        ],
+        "createdAt": "2026-09-30T22:44:58.635Z",
+        "reason": "Agent judgment, not user-confirmed: overflow hidden is the fixed 1080x1920 poster canvas and the half-screen image crops; nothing needs to escape it (no menus or tooltips)"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides-v3-agencia.html"
+        ],
+        "createdAt": "2026-09-30T22:45:19.996Z",
+        "reason": "Agent judgment, not user-confirmed: uppercase only on one-word chips (ANTES/DESPUES) and a short concept caption, never on paragraphs"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides-v3-agencia.html"
+        ],
+        "createdAt": "2026-09-30T22:45:20.238Z",
+        "reason": "Agent judgment, not user-confirmed: the mint highlight block hugs the headline glyphs on purpose, like a marker swipe"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides-v4-tiktok.html"
+        ],
+        "createdAt": "2026-09-30T22:45:20.499Z",
+        "reason": "Agent judgment, not user-confirmed: uppercase only on one-word chips (ANTES/DESPUES) and a short concept caption, never on paragraphs"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "marketing/tiktok/004-mismo-negocio-otra-web/slides-v4-tiktok.html"
+        ],
+        "createdAt": "2026-09-30T22:45:20.744Z",
+        "reason": "Agent judgment, not user-confirmed: the mint highlight block hugs the headline glyphs on purpose, like a marker swipe"
+      }
+    ]
+  },
+  "buildPath": "comp"
+}

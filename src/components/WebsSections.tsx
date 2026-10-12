@@ -1,17 +1,17 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Arrow } from '@/components/Arrow';
+import { Commitments } from '@/components/Commitments';
 import { GraphicIcon } from '@/components/GraphicIcon';
 import { Mark } from '@/components/Mark';
+import { Projects } from '@/components/Projects';
 import { ServiceVisual } from '@/components/ServiceVisual';
-import { portfolio } from '@/data/portfolio';
 import { pricing, type ServiceKey } from '@/data/pricing';
 import { site } from '@/data/site';
 import { paths, type Lang } from '@/lib/i18n';
 import '@/styles/sections.css';
 import '@/styles/graphics.css';
 
-export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
+export function WebsSections({ lang = 'es' }: { lang?: Lang }) {
   const en = lang === 'en';
   const contact = paths.contact(lang);
   const extras = en
@@ -103,38 +103,6 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
         extrasCta: 'Discuss the extras',
         maintenance:
           'Annual maintenance and renewal are quoted separately from year two. Shopify subscriptions and paid integrations are detailed in your proposal.',
-        whyLabel: 'Our commitments',
-        whyTitle: ['Three commitments.', 'One for each stage.'],
-        whyIntro: 'One before we start, one while we build, one for after your site is live.',
-        reasons: [
-          {
-            index: '01',
-            stage: 'Before we start',
-            visual: 'proposal' as const,
-            title: 'You approve everything first',
-            text: 'A written proposal with the scope, delivery dates and investment. If it does not convince you, it ends there and you have paid nothing.',
-          },
-          {
-            index: '02',
-            stage: 'While we build',
-            visual: 'conversation' as const,
-            title: 'You talk to the people building it',
-            text: 'A direct line to whoever designs and develops your site. No account managers repeating what you already said.',
-          },
-          {
-            index: '03',
-            stage: 'After launch',
-            visual: 'handover' as const,
-            title: 'It stays yours',
-            text: 'Domain, code and accounts in your name. We show you how to manage it and where everything lives.',
-          },
-        ],
-        studio: {
-          title: 'We are Thexify',
-          subtitle: 'A modern studio that builds with AI.',
-          text: 'We use artificial intelligence, mainly Claude by Anthropic, at every stage of a project: to research, to write and review code, and to test your website before it goes live. That lets us deliver faster and spend more time understanding your business.',
-          note: 'AI speeds up the work. We decide on and review the design, the content and the final quality.',
-        },
         processLabel: 'How we work',
         processTitle: ['Four steps.', 'We finish when it works.'],
         processIntro:
@@ -167,11 +135,6 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
         ],
         deliverable: 'What you get',
         clientTask: 'Your part',
-        projectsLabel: 'Our work',
-        projectsTitle: ['Every case, in full.', 'What they needed and what we built.'],
-        projectsIntro:
-          'We would rather tell a few projects completely —the context, the decisions and what we delivered— than fill a grid with logos. Each card says where the project stands.',
-        viewProject: 'Explore project',
         faqLabel: 'Before we begin',
         faqTitle: 'A few useful answers.',
         faqs: [
@@ -277,39 +240,6 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
         extrasCta: 'Consultar complementos',
         maintenance:
           'Desde el segundo año, mantenimiento y renovación se cotizan anualmente. La suscripción de Shopify y las integraciones de pago se detallan en tu propuesta.',
-        whyLabel: 'Nuestros compromisos',
-        whyTitle: ['Tres compromisos.', 'Uno para cada etapa.'],
-        whyIntro:
-          'Uno antes de empezar, uno mientras construimos y uno para cuando tu web ya esté publicada.',
-        reasons: [
-          {
-            index: '01',
-            stage: 'Antes de empezar',
-            visual: 'proposal' as const,
-            title: 'Apruebas todo antes de que arranquemos',
-            text: 'Una propuesta escrita con alcance, fechas e inversión. Si no te convence, ahí termina y no pagaste nada.',
-          },
-          {
-            index: '02',
-            stage: 'Mientras construimos',
-            visual: 'conversation' as const,
-            title: 'Hablas con quienes la construyen',
-            text: 'Trato directo con quien diseña y programa tu web. Sin intermediarios que repitan lo que ya dijiste.',
-          },
-          {
-            index: '03',
-            stage: 'Después de publicar',
-            visual: 'handover' as const,
-            title: 'Queda a tu nombre',
-            text: 'Dominio, código y cuentas son tuyos. Te enseñamos a manejarla y dónde está cada cosa.',
-          },
-        ],
-        studio: {
-          title: 'Somos Thexify',
-          subtitle: 'Un estudio moderno que construye con IA.',
-          text: 'Usamos inteligencia artificial, principalmente Claude de Anthropic, en cada etapa del proyecto: para investigar, escribir y revisar código y probar tu web antes de publicarla. Así entregamos más rápido y dedicamos más tiempo a entender tu negocio.',
-          note: 'La IA acelera el trabajo. El diseño, el contenido y la calidad final los decidimos y revisamos nosotros.',
-        },
         processLabel: 'Cómo trabajamos',
         processTitle: ['Cuatro pasos.', 'Terminamos cuando funciona.'],
         processIntro:
@@ -342,11 +272,6 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
         ],
         deliverable: 'Lo que recibes',
         clientTask: 'De tu lado',
-        projectsLabel: 'Nuestros proyectos',
-        projectsTitle: ['Cada caso, completo.', 'Qué necesitaban y qué construimos.'],
-        projectsIntro:
-          'Preferimos contar pocos proyectos enteros —el contexto, las decisiones y qué entregamos— antes que llenar una grilla de logos. Cada tarjeta dice en qué punto está.',
-        viewProject: 'Ver proyecto',
         faqLabel: 'Antes de empezar',
         faqTitle: 'Respuestas que te ayudan.',
         faqs: [
@@ -542,94 +467,7 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
         </div>
       </section>
 
-      <section id="estudio" className="reasons-section section-pad" aria-labelledby="reasons-title">
-        <div className="commercial-heading" data-reveal>
-          <span className="section-kicker">03 / {t.whyLabel}</span>
-          <h2 id="reasons-title">
-            {t.whyTitle[0]}
-            <br />
-            <span>{t.whyTitle[1]}</span>
-          </h2>
-          <p>{t.whyIntro}</p>
-        </div>
-        <div className="trust-grid">
-          {t.reasons.map((reason, i) => (
-            <article key={reason.title} className={`trust-card trust-card--${i + 1}`} data-graphic>
-              <div className="trust-card-top">
-                <span className="trust-index">{reason.index}</span>
-                <span className="trust-card-label">{reason.stage}</span>
-              </div>
-              {reason.visual === 'conversation' ? (
-                <div className="conversation-visual" aria-hidden="true">
-                  <div className="conversation-person">
-                    <span>{en ? 'You' : 'Tú'}</span>
-                    <i></i>
-                  </div>
-                  <div className="conversation-messages">
-                    <span>{en ? 'I have an idea for my website' : 'Tengo una idea para mi web'}</span>
-                    <span>
-                      {en ? "Let's define the best way forward." : 'Definamos la mejor forma de hacerla.'}
-                    </span>
-                  </div>
-                </div>
-              ) : reason.visual === 'proposal' ? (
-                <div className="proposal-visual" aria-hidden="true">
-                  <div className="proposal-title">
-                    <GraphicIcon name="document" />
-                    <span>{en ? 'Project proposal' : 'Propuesta del proyecto'}</span>
-                  </div>
-                  {(en
-                    ? ['Scope', 'Delivery dates', 'Investment']
-                    : ['Alcance', 'Fechas de entrega', 'Inversión']
-                  ).map((label) => (
-                    <div key={label}>
-                      <GraphicIcon name="check" />
-                      <span>{label}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="handover-visual" aria-hidden="true">
-                  <div className="handover-browser">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <span></span>
-                    <strong></strong>
-                  </div>
-                  <div className="handover-items">
-                    {(en
-                      ? ['Tested site', 'Published', 'Your accounts']
-                      : ['Web probada', 'Publicada', 'Tus accesos']
-                    ).map((label) => (
-                      <span key={label}>
-                        <GraphicIcon name="check" />
-                        {label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-              <h3>{reason.title}</h3>
-              <p>{reason.text}</p>
-            </article>
-          ))}
-        </div>
-        <div className="studio-ai" data-reveal>
-          <h3>
-            {t.studio.title}
-            <br />
-            <span>{t.studio.subtitle}</span>
-          </h3>
-          <div className="studio-ai-copy">
-            <p>{t.studio.text}</p>
-            <p className="studio-ai-note">
-              <span aria-hidden="true"></span>
-              {t.studio.note}
-            </p>
-          </div>
-        </div>
-      </section>
+      <Commitments lang={lang} kicker="03" />
 
       <section id="proceso" className="roadmap-section section-pad" aria-labelledby="roadmap-title">
         <div className="commercial-heading" data-reveal>
@@ -663,58 +501,7 @@ export function HomeSections({ lang = 'es' }: { lang?: Lang }) {
         </ol>
       </section>
 
-      <section id="proyectos" className="portfolio-section section-pad" aria-labelledby="portfolio-title">
-        <div className="commercial-heading" data-reveal>
-          <span className="section-kicker">05 / {t.projectsLabel}</span>
-          <h2 id="portfolio-title">
-            {t.projectsTitle[0]}
-            <br />
-            <span>{t.projectsTitle[1]}</span>
-          </h2>
-          <p>{t.projectsIntro}</p>
-        </div>
-        <div className="portfolio-grid">
-          {portfolio.slice(0, 6).map((project) => (
-            <article key={project.slug} className="portfolio-card" data-reveal>
-              <Link
-                className="portfolio-image"
-                href={project.href[lang]}
-                aria-label={`${t.viewProject}: ${project.name}`}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.imageAlt[lang]}
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  quality={80}
-                />
-                <span aria-hidden="true">
-                  <Arrow />
-                </span>
-              </Link>
-              <div className="portfolio-meta">
-                <p className="section-kicker">{project.category[lang]}</p>
-                <span
-                  className={`portfolio-status${project.live ? ' portfolio-status--live' : ''}`}
-                >
-                  {project.live
-                    ? en
-                      ? 'Live'
-                      : 'En línea'
-                    : en
-                      ? 'In development'
-                      : 'En desarrollo'}
-                </span>
-              </div>
-              <h3>{project.name}</h3>
-              <p className="portfolio-summary">{project.summary[lang]}</p>
-              <Link className="action-button action-button--outline" href={project.href[lang]}>
-                {t.viewProject}
-                <Arrow />
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
+      <Projects lang={lang} kicker="05" />
 
       <section className="answers-section section-pad" aria-labelledby="answers-title">
         <div className="commercial-heading">

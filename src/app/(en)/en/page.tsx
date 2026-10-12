@@ -3,9 +3,9 @@ import { SiteFrame } from '@/components/SiteFrame';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata({
-  title: 'Thexify — Web design & development studio in Quito, Ecuador',
+  title: 'Thexify — Software, SaaS and AI solutions in Quito, Ecuador',
   description:
-    'Independent web design and development studio. Websites worth remembering: business sites, web platforms with an admin panel and Shopify stores. Based in Quito, working everywhere.',
+    'We design and build SaaS products, web platforms and AI solutions with Claude by Anthropic. Based in Quito, working with businesses and founders everywhere.',
   lang: 'en',
   path: '/en/',
   alternatePath: '/',

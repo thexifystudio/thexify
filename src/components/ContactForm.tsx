@@ -12,7 +12,7 @@ interface Props {
   whatsapp: string | null;
 }
 
-const services = ['website', 'webapp', 'shopify'];
+const services = ['software', 'ai', 'website', 'webapp', 'shopify'];
 
 export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
   const en = lang === 'en';
@@ -166,6 +166,8 @@ export function ContactForm({ lang, email, endpoint, whatsapp }: Props) {
         <span>{text.service}</span>
         <select ref={serviceRef} name="service" defaultValue="unsure">
           <option value="unsure">{en ? 'Let’s figure it out together' : 'Lo definimos juntos'}</option>
+          <option value="software">{en ? 'A SaaS product or platform' : 'Un producto SaaS o plataforma'}</option>
+          <option value="ai">{en ? 'An AI solution' : 'Una solución con IA'}</option>
           <option value="website">{en ? 'A website' : 'Un sitio web'}</option>
           <option value="webapp">
             {en ? 'A web app or admin dashboard' : 'Una web con panel o sistema'}

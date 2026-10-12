@@ -950,6 +950,7 @@
   border: 1px solid #9aaa91;
   border-radius: 8px;
   background: #edf4e6;
+  color: #1d3a24;
 }
 .proposal-title,
 .proposal-visual > div:not(.proposal-title) {

@@ -1,11 +1,13 @@
 # Thexify
 
-> Estudio independiente de diseño y desarrollo web en Quito, Ecuador. Sitios para empresas y profesionales, sitios con panel de administración y tiendas Shopify. Trabajamos en español e inglés.
+> Estudio de software en Quito, Ecuador. Diseña y construye productos SaaS, plataformas web y soluciones con inteligencia artificial (chatbots, automatizaciones y asistentes) con Claude de Anthropic. También hace webs, landings y tiendas Shopify. Trabaja en español e inglés.
 
-- [Inicio](https://thexify.com/): servicios, proyectos y proceso.
-- [English](https://thexify.com/en/): web design and development studio.
+- [Inicio](https://thexify.com/): software con IA, soluciones, proceso y proyectos.
+- [English](https://thexify.com/en/): AI-powered software, SaaS products and AI solutions.
+- [Webs y tiendas](https://thexify.com/webs/): diseño web, webs con panel y tiendas Shopify.
 - [Canangueno Lodge](https://thexify.com/proyectos/canangueno-lodge/): rediseño web turístico bilingüe en desarrollo.
 - [SUNSU Cleaning Services](https://thexify.com/proyectos/sunsu-cleaning/): web de servicios de limpieza en Quito.
 - [Contacto](https://thexify.com/contacto/): formulario, correo o WhatsApp.
+- [Privacidad](https://thexify.com/privacidad/): tratamiento de los datos del formulario.
 
 Correo de empresa: hola@thexify.com. Los precios y plazos se definen según el alcance. No se garantizan posiciones en buscadores, ventas ni citas en asistentes de IA.

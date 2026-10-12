@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Arrow } from '@/components/Arrow';
-import { Mark } from '@/components/Mark';
+import { BrandSymbol } from '@/components/BrandSymbol';
+import { Icon } from '@/components/Icon';
 import { site, whatsappHref } from '@/data/site';
 import { paths, type Lang } from '@/lib/i18n';
 
@@ -8,6 +9,8 @@ interface Props {
   lang?: Lang;
   /** Same page in the other language (language switch). */
   alternatePath?: string;
+  /** Marks the matching navigation entry as the current page. */
+  current?: 'webs';
   children: React.ReactNode;
 }
 
@@ -16,10 +19,17 @@ interface Props {
  * Rendered by each page, not by the layout, because only the page knows its
  * alternate-language URL.
  */
-export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
+export function SiteFrame({ lang = 'es', alternatePath, current, children }: Props) {
   const en = lang === 'en';
   const home = paths.home(lang);
   const contact = paths.contact(lang);
+  const webs = paths.webs(lang);
+  const nav = [
+    { href: `${home}#soluciones`, label: en ? 'Solutions' : 'Soluciones' },
+    { href: webs, label: en ? 'Websites' : 'Webs', current: current === 'webs' },
+    { href: `${home}#proceso`, label: en ? 'Process' : 'Proceso' },
+    { href: `${home}#proyectos`, label: en ? 'Work' : 'Proyectos' },
+  ];
   const alternate = alternatePath ?? (en ? '/' : '/en/');
   const whatsapp = whatsappHref(
     en
@@ -34,14 +44,15 @@ export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
       </a>
       <header className="site-header">
         <Link className="brand" href={home} aria-label={en ? 'Thexify, home' : 'Thexify, inicio'}>
-          <Mark />
+          <BrandSymbol />
           <span>thexify</span>
         </Link>
         <nav className="desktop-nav" aria-label={en ? 'Main navigation' : 'Navegación principal'}>
-          <Link href={`${home}#servicios`}>{en ? 'Services' : 'Servicios'}</Link>
-          <Link href={`${home}#estudio`}>{en ? 'Why Thexify' : 'Por qué Thexify'}</Link>
-          <Link href={`${home}#proceso`}>{en ? 'Process' : 'Proceso'}</Link>
-          <Link href={`${home}#proyectos`}>{en ? 'Work' : 'Proyectos'}</Link>
+          {nav.map((item) => (
+            <Link key={item.href} href={item.href} aria-current={item.current ? 'page' : undefined}>
+              {item.label}
+            </Link>
+          ))}
         </nav>
         <div className="header-actions">
           <Link
@@ -50,11 +61,11 @@ export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
             lang={en ? 'es' : 'en'}
             aria-label={en ? 'Cambiar a español' : 'Switch to English'}
           >
+            <Icon name="globe" />
             {en ? 'ES' : 'EN'}
           </Link>
           <Link className="header-cta" href={contact}>
-            {en ? 'Let’s talk' : 'Cotizar'}
-            <Arrow />
+            {en ? 'Get a quote' : 'Cotizar'}
           </Link>
           <button
             className="menu-toggle"
@@ -76,10 +87,11 @@ export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
           hidden
           aria-label={en ? 'Mobile navigation' : 'Navegación móvil'}
         >
-          <Link href={`${home}#servicios`}>{en ? 'Services' : 'Servicios'}</Link>
-          <Link href={`${home}#estudio`}>{en ? 'Why Thexify' : 'Por qué Thexify'}</Link>
-          <Link href={`${home}#proceso`}>{en ? 'Process' : 'Proceso'}</Link>
-          <Link href={`${home}#proyectos`}>{en ? 'Work' : 'Proyectos'}</Link>
+          {nav.map((item) => (
+            <Link key={item.href} href={item.href} aria-current={item.current ? 'page' : undefined}>
+              {item.label}
+            </Link>
+          ))}
           <Link href={contact}>
             {en ? 'Start a project' : 'Empezar un proyecto'} <Arrow />
           </Link>
@@ -88,9 +100,11 @@ export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
       </header>
       <noscript>
         <nav className="no-script-nav" aria-label={en ? 'Section navigation' : 'Navegación por secciones'}>
-          <a href={`${home}#proyectos`}>{en ? 'Work' : 'Proyectos'}</a>
-          <a href={`${home}#estudio`}>{en ? 'Studio' : 'Estudio'}</a>
-          <a href={`${home}#servicios`}>{en ? 'Services' : 'Servicios'}</a>
+          {nav.map((item) => (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
+          ))}
         </nav>
         <style>{'.menu-toggle{display:none !important}'}</style>
       </noscript>
@@ -100,7 +114,7 @@ export function SiteFrame({ lang = 'es', alternatePath, children }: Props) {
       <footer className="site-footer">
         <div className="footer-top">
           <Link className="brand" href={home}>
-            <Mark />
+            <BrandSymbol />
             <span>thexify</span>
           </Link>
           <p>

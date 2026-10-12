@@ -11,6 +11,7 @@
   --radius-control: 6px;
   --radius-pill: 999px;
   --gutter: clamp(22px, 4.4vw, 88px);
+  --header-h: clamp(64px, 5.2vw, 84px);
   color-scheme: dark;
   /* --ff-sans is set on <html> by next/font (src/lib/fonts.ts). */
   font-family: var(--ff-sans), sans-serif;
@@ -115,7 +116,7 @@ main:focus {
   transform: none;
 }
 .site-header {
-  height: 100px;
+  height: var(--header-h);
   padding: 0 var(--gutter);
   display: flex;
   align-items: center;
@@ -124,30 +125,33 @@ main:focus {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid var(--line);
-  background: rgba(16, 17, 16, 0.9);
+  border-bottom: 1px solid rgba(238, 239, 235, 0.1);
+  background: rgba(9, 10, 9, 0.84);
   backdrop-filter: blur(18px);
 }
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: clamp(9px, 0.82vw, 14px);
   min-height: 44px;
-  font-size: 28px;
+  font-size: clamp(24px, 2.08vw, 34px);
   line-height: 1;
-  letter-spacing: -1.5px;
+  letter-spacing: -0.035em;
   font-weight: 750;
 }
 .brand > svg {
-  width: 32px;
-  height: 32px;
+  width: clamp(32px, 2.83vw, 46px);
+  height: clamp(32px, 2.83vw, 46px);
   color: var(--green);
 }
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 26px;
-  font-size: 14px;
+  gap: clamp(24px, 2.98vw, 48px);
+  margin-left: clamp(8px, 5vw, 108px);
+  margin-right: auto;
+  font-size: clamp(13px, 1.04vw, 16px);
+  color: #b5b9bf;
 }
 .desktop-nav a {
   min-height: 44px;
@@ -155,6 +159,11 @@ main:focus {
   align-items: center;
   gap: 5px;
   position: relative;
+  transition: color 0.2s;
+}
+.desktop-nav a:hover,
+.desktop-nav a[aria-current='page'] {
+  color: var(--paper);
 }
 .desktop-nav a::after {
   content: '';
@@ -180,37 +189,44 @@ main:focus {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 26px;
-  font-size: 12px;
+  gap: clamp(14px, 1.64vw, 28px);
+  font-size: clamp(13px, 1.04vw, 16px);
 }
 .language-switch {
-  min-width: 30px;
+  min-width: 44px;
   min-height: 44px;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #b5b9bf;
+  transition: color 0.2s;
+}
+.language-switch:hover {
+  color: var(--paper);
+}
+.language-switch svg {
+  width: 16px;
+  height: 16px;
 }
 .header-cta {
-  border: 1px solid #65755f;
   border-radius: var(--radius-pill);
-  min-height: 44px;
-  padding: 0 22px;
+  min-height: clamp(38px, 3.05vw, 48px);
+  padding: 0 clamp(18px, 1.93vw, 30px);
   display: flex;
   align-items: center;
-  gap: 16px;
   white-space: nowrap;
-  font-size: 13px;
-  font-weight: 650;
+  background: var(--green);
+  color: var(--ink);
+  font-size: clamp(14px, 1.12vw, 17px);
+  font-weight: 700;
   transition:
     background 0.2s,
-    color 0.2s;
-}
-.header-cta svg {
-  width: 15px;
-  height: 15px;
+    box-shadow 0.2s;
 }
 .header-cta:hover {
-  background: var(--paper);
-  color: var(--ink);
+  background: #5fe3b4;
+  box-shadow: 0 6px 20px -6px rgba(47, 215, 155, 0.55);
 }
 .status-dot {
   width: 7px;

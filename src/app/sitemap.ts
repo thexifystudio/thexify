@@ -5,6 +5,7 @@ import { site } from '@/data/site';
 export default function sitemap(): MetadataRoute.Sitemap {
   const pairs: [string, string][] = [
     ['/', '/en/'],
+    ['/webs/', '/en/websites/'],
     ['/contacto/', '/en/contact/'],
     ['/privacidad/', '/en/privacy/'],
     ...projects.map((project): [string, string] => [
